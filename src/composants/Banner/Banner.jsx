@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import logo_smilelab from "/image/logo_smilelab_bg.svg"
 import smile from "/image/smile.jpg"
-import prev from "/image/arrow-prev.svg";
-import next from "/image/arrow-next.svg";
+import prev from "/image/arrow-prev-white.svg";
+import next from "/image/arrow-next-white.svg";
+import shop from "/image/shop.svg"
+import arrowRigth from "/image/arrow-right.svg";
 import './Banner.css';
 
 function Carrousel({ slides }) {
@@ -32,7 +34,14 @@ function Carrousel({ slides }) {
 
       <div className="left-section">
             <img src={logo_smilelab} alt="logo_smilelab"/>
-            <span>Smile <span className="lab">lab</span> </span>
+            <span className='logo-text'>Smile <span className="lab">lab</span> </span>
+            <p className='title'>le laboratoire d’orthodontie où l’artisanat rencontre l’innovation.</p>
+            <a href="#">
+                <img src={shop} alt="shop" width={15} />
+                <span>Commander un appareil </span>
+                <img className='arrow-right' src={arrowRigth} alt="arrow" width={15} />
+
+            </a>
       </div>
 
       <div className="banner-slides" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
@@ -53,9 +62,9 @@ function Carrousel({ slides }) {
 function Banner() {
 
     const slides = [
-        { image: smile, alt: 'Image 1', title: 'Slide 1' },
-        { image: smile, alt: 'Image 2', title: 'Slide 2' },
-        { image: smile, alt: 'Image 3', title: 'Slide 3' },
+        { image: smile, alt: 'Image 1', title: 'Orthodontie' },
+        { image: smile, alt: 'Image 2', title: 'Impression cda-Cam' },
+        { image: smile, alt: 'Image 3', title: 'Stomatologie' },
     ]
       
     return(

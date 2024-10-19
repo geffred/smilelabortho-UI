@@ -5,13 +5,27 @@ import "./NavBar.css"
 import user from "/image/user.svg"
 import menu from "/image/menu.svg"
 import { useState } from "react"
+import { useEffect } from "react"
 
 function NavBar(){
 
-    
+        const [scrolling, setScrolling] = useState(false);
+      
+        const handleScroll = () => {
+          setScrolling(window.scrollY > 100); 
+        };
+      
+        useEffect(() => {
+          window.addEventListener('scroll', handleScroll);
+      
+         
+          return () => {
+            window.removeEventListener('scroll', handleScroll);
+          };
+        }, []);  
 
     return (
-        <nav className="navBar">
+        <nav className="navBar" style={scrolling?{background:"rgba(0, 0, 0, 0.8)"}:null}>
             <div className="left-section">
                 <img src={logo_smilelab} alt="logo_smilelab"/>
                 <span>Smile <span className="lab">lab</span> </span>

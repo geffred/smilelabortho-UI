@@ -1,0 +1,61 @@
+.apropos{
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    gap: 20px;
+    border-radius: 5px;
+    position: relative;
+    border: 1px solid #0098FF;
+    max-width: 1200px;
+    padding: 10px;
+    transition: all .85s ease;
+}
+
+
+.important{
+     color: #0098FF;
+}
+
+
+.apropos .b-1 img{
+    max-width: 150px;
+}
+
+.apropos .b-2 p{
+    font-size: 1.2em;
+    font-family: calibri;
+    text-align: center;
+    padding: 50px 10px;
+}
+
+.hide{
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.show{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+@media screen and (max-width:1500px) {
+    .apropos {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0px;
+        margin: 20px 20px;
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+    .apropos .b-1 img{
+        max-width: 100px;
+    }
+
+    .apropos .b-2 p{
+        font-size: .9em;
+        padding: 5px;
+    }
+    
+}

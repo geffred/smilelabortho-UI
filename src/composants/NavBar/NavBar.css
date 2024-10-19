@@ -5,10 +5,11 @@
     width: 100%;
     position: fixed;
     justify-content: space-between;
-    background:linear-gradient(-45deg ,  rgba(0, 0, 0, 0.874) ,  rgba(0, 0, 0, 0.884));
+    background:rgba(0, 0, 0, 0.5);
     padding: 10px;
     color: rgb(255, 255, 255);
     align-items: center;
+    transition: all .5s ease;
 }
 
 .navBar .lab{
@@ -25,6 +26,7 @@
     font-size: 2em;
     width: 20%; 
     cursor: pointer; 
+    gap: 10px;
     
 }
 
@@ -166,3 +168,30 @@
     visibility: visible;
 }
 
+
+
+@media screen and (max-width:1500px) {
+    .navBar .center-section{
+        display: none;
+    }
+
+    
+.navBar .left-section{
+    gap: 10px;
+    font-size: 1.5em;
+    width: 50%; 
+}
+
+.navBar .left-section img{
+    max-width: 40px;
+}
+}
+
+@media screen and (max-width:1500px) {
+    .navBar{
+        position: relative;
+        background: rgb(29, 29, 29);
+    }
+
+    
+}
