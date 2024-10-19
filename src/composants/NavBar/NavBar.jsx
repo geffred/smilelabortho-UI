@@ -6,6 +6,7 @@ import user from "/image/user.svg"
 import menu from "/image/menu.svg"
 import { useState } from "react"
 import { useEffect } from "react"
+import { NavLink } from "react-router-dom"
 
 function NavBar(){
 
@@ -33,27 +34,27 @@ function NavBar(){
 
             <div className="center-section">
                 <ul>
-                    <li><a href="#">Acceuil</a></li>
+                    <li><NavLink to="/">Acceuil</NavLink></li>
                     <li>
-                         <a href="#service">
+                         <NavLink to="/services">
                             <span>Services</span>
                             <img src={arrow} alt="arrow" width={15} />
-                        </a>
+                        </NavLink>
                          
                     </li>
                     <li>
-                         <a href="#service">
+                         <NavLink to="/appareils">
                             <span>Appareils</span>
                             <img src={arrow} alt="arrow" width={15} />
-                        </a>
+                        </NavLink>
                          
                     </li>
-                    <li><a href="#">Contact</a></li>
+                    <li><NavLink to="/contact">Contact</NavLink></li>
                     <li>
-                       <a href="#" className="shop">
-                            <img src={shop} alt="Boutique" />
+                       <NavLink to="/shop" className="shop">
+                            <img src={shop} alt="shop" />
                             <span>Shop</span>
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </div>
