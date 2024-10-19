@@ -1,0 +1,168 @@
+.navBar{
+    position: relative;
+    display: flex;
+    z-index: 10;
+    width: 100%;
+    position: fixed;
+    justify-content: space-between;
+    background:linear-gradient(-45deg ,  rgba(0, 0, 0, 0.874) ,  rgba(0, 0, 0, 0.884));
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    align-items: center;
+}
+
+.navBar .lab{
+    color: #0098FF;
+}
+
+.navBar .left-section{
+
+    display: flex;
+    align-items: center;
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2em;
+    width: 20%; 
+    cursor: pointer; 
+    
+}
+
+.navBar .left-section img{
+    max-width: 50px;
+}
+
+.navBar .center-section ul{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    font-family: calibri;
+    font-size: 1.1em;
+    border: 1px solid rgba(255, 255, 255, 0.21);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.525);
+    background: #228dff27;
+    top: 50%;
+}
+
+.navBar .center-section ul a{
+    text-decoration: none;
+    color: white;
+    background: #0098FF;
+    padding: 10px 25px;
+    border-radius: 5px;
+    transition: all .2s ease;
+    
+}
+
+.navBar .center-section ul a:hover{
+    background:rgb(14, 14, 14);
+    padding: 10px 50px;
+}
+
+.navBar .center-section a{
+    display: flex;
+    align-items: center;
+}
+.navBar .center-section .shop img{
+    max-width: 20px;
+}
+
+.navBar .right-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
+    background: #0098FF;
+    position: relative;
+    transition: all .2s ease;
+   
+   
+}
+
+.navBar .right-section:hover ul{
+    display: flex !important;
+}
+
+.navBar .right-section:hover{
+    background: rgb(20, 20, 20);
+    border: .5px solid rgba(255, 255, 255, 0.393);
+}
+
+.navBar .right-section ul:hover{
+    display: flex !important;
+} 
+
+.navBar .right-section ul{
+    display: none !important;
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    top: 140%;
+    right: 0%;
+    z-index: 5;
+    list-style: none;
+    width: 150px;
+    padding: 15px 5px;
+    background:#228dff27;
+    box-sizing:content-box !important;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.251);
+}
+
+
+
+/*bordure de delimitation du curseur*/
+.navBar .right-section ul::before{
+    content: "";
+    position: absolute;
+    width: 160px;
+    height: 150px;
+    top: -35%;
+    right: 0px;
+    z-index: -10;
+}
+
+.navBar .right-section ul li a{
+    text-decoration: none;
+    font-family: calibri;
+    color: white;
+}
+
+.navBar .right-section ul li{
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #0098FF;
+    font-size: 1em;
+    transition: all 0.2s ease;
+  
+   
+}
+
+.navBar .right-section ul li:hover{
+    background:rgb(14, 14, 14);
+    padding: 10px 25px;
+    
+}
+
+.show{
+    visibility: visible;
+}
+
