@@ -1,0 +1,110 @@
+.stepCard{
+    position: relative;
+    width:300px;
+    min-height: 280px;
+    box-shadow: 0px 0px 10px rgba(215, 215, 215, 0.199);
+    border: 1px solid var(--color-primary-glass);
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    font-family: calibri;
+    background: rgba(255, 255, 255, 0.769);
+    padding-top: 2%;
+    padding: 60px 10px 30px 10px;
+   
+}
+
+.stepCard::after{
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    top:-20px;
+    left: 50%;
+    transform: translateX(-50%) rotateZ(45deg);
+    background: var(--color-primary) ;
+    border-radius: 5px;
+}
+
+
+
+
+.stepCard p{
+    margin: 0px;
+    text-align: center;
+    width: 80%;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.stepCard h1{
+    position: absolute;
+    z-index: 3;
+    top:-50px;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%) scale(.6);
+    color: white;
+   
+   
+
+}
+
+.stepCard h2{
+    font-size: 1.2em;
+    color: var(--color-primary);
+    border-radius: 5px;
+    color: var(--color-primary);
+    text-align: center;
+    margin: 0px;
+  
+}
+
+.important{
+    color: var(--color-primary);
+}
+
+@media screen and (max-width:1500px) {
+
+    .stepCard{
+        position: relative;
+        width:160px;
+        min-height: 160px;
+        padding: 30px 5px 30px 5px;
+        gap: 2px;
+    }
+
+    .stepCard img{
+        width: 40px;
+    }
+
+    .stepCard p{
+        font-size: .8em;
+        padding: 0px 2px;
+        font-size: .75em;
+
+    }
+
+    .stepCard h2{
+        font-size: .9em;
+        margin: 0px;
+    }
+
+    .stepCard::after{
+        width: 30px;
+        height: 30px;
+        top:-15px;
+       
+    }
+
+    .stepCard h1{
+        transform: translateX(-50%) translateY(50%) scale(.5);
+        top:-50px;
+        left: 50%;
+    }
+    
+}

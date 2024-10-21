@@ -3,3 +3,7 @@
     margin: 0px;
     box-sizing: border-box;
 }
+:root{
+    --color-primary: #0098FF;
+    --color-primary-glass:  #228dff27;
+}

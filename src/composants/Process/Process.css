@@ -1,0 +1,149 @@
+.process{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 5px;
+    text-align: center;
+    transition: all 1s ease;
+}
+
+.process-content{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.process-titre{
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto 50px auto;
+    padding: 10px 20px 0px 20px;
+    transform: all 1s ease;
+    transition: all .85s ease;
+}
+
+.process-titre{
+    font-family: calibri;
+}
+
+.process-titre p{
+    text-align: center;
+}
+
+.process-hide{
+    opacity: 0;
+    transform: translateY(100px);
+    z-index: -5;
+
+}
+
+.process-show{
+    opacity: 1;
+    transform: translateY(0px);
+    z-index: -5;
+}
+
+
+.process-resume{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px 0px 20px 0px;
+    width: 100%;
+    transition: all 1s ease;
+}
+
+.process-resume .process-2{
+    width: 100%;
+}
+
+.process-resume .process-1{
+    padding:20px;
+    font-family: calibri;
+    font-size: 1.1em;
+    text-align: justify;
+    padding: 0px 50px;
+    max-width: 50%;
+    border: 1px solid bl;
+    position: relative;
+}
+
+.process-resume .process-1 img{
+    position: absolute;
+    z-index: -5;
+    left: -30%;
+    top: -50%;
+    height: auto;
+    width: 80%;
+}
+
+.process-resume .process-1 p{
+    position: relative;
+    margin: 0px;
+    background: rgba(255, 255, 255, 0.861);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.process-resume .process-2 img{
+   
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0px 10px 10px 0px;
+}
+
+@media screen and (max-width:1500px){
+    .process-resume{
+        flex-direction: column-reverse;
+    }
+
+    .process-resume .process-1{
+
+        max-width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.057);
+        border-radius: 0px 0px 10px 10px;
+        padding: 0px;
+        font-size: 1em;
+
+    }
+
+    .process-resume .process-2 img{
+   
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .process-resume .process-1 img{
+        position: absolute;
+        z-index: -1;
+        left: 50%;
+        top: -105%;
+        transform: translateX(-50%);
+        height: auto;
+        width: 80%;
+    }
+
+    .process-titre h1{
+        font-size: 2em;
+    }
+
+    .process-titre{
+        font-size: .95em;
+    }
+
+    .process-content .disjoncteur{
+        position: absolute;
+        top: 0px;
+        right: -500px;
+        transform: rotate(-90deg)  scale(.5);
+    }
+    
+}

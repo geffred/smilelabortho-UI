@@ -13,7 +13,7 @@
 }
 
 .navBar .lab{
-    color: #0098FF;
+    color: var(--color-primary) ;
 }
 
 .navBar .left-section{
@@ -50,14 +50,14 @@
     border: 1px solid rgba(255, 255, 255, 0.21);
     border-radius: 10px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.525);
-    background: #228dff27;
+    background:var(--color-primary-glass);
     top: 50%;
 }
 
 .navBar .center-section ul a{
     text-decoration: none;
     color: white;
-    background: #0098FF;
+    background: var(--color-primary) ;
     padding: 10px 25px;
     border-radius: 5px;
     transition: all .2s ease;
@@ -84,7 +84,7 @@
     width: 45px;
     height: 45px;
     border-radius: 25px;
-    background: #0098FF;
+    background: var(--color-primary) ;
     position: relative;
     transition: all .2s ease;
    
@@ -151,7 +151,7 @@
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    background: #0098FF;
+    background: var(--color-primary) ;
     font-size: 1em;
     transition: all 0.2s ease;
   
