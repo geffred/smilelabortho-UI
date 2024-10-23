@@ -5,7 +5,6 @@
     width: 100%;
     position: fixed;
     justify-content: space-between;
-    background:rgba(0, 0, 0, 0.5);
     padding: 10px;
     color: rgb(255, 255, 255);
     align-items: center;
@@ -13,7 +12,7 @@
 }
 
 .navBar .lab{
-    color: var(--color-primary) ;
+    color: var(--color-primary);
 }
 
 .navBar .left-section{
@@ -27,6 +26,8 @@
     width: 20%; 
     cursor: pointer; 
     gap: 10px;
+    text-decoration: none;
+    color: white;
     
 }
 
@@ -154,13 +155,13 @@
     background: var(--color-primary) ;
     font-size: 1em;
     transition: all 0.2s ease;
-  
+    width:70%;
    
 }
 
 .navBar .right-section ul li:hover{
     background:rgb(14, 14, 14);
-    padding: 10px 25px;
+    width:80%;
     
 }
 
@@ -168,7 +169,13 @@
     visibility: visible;
 }
 
+.navBar .opt-show{
+    display: block;
+}
 
+.navBar .opt-hide{
+    display: none;
+}
 
 @media screen and (max-width:1500px) {
     .navBar .center-section{
@@ -190,7 +197,7 @@
 @media screen and (max-width:1500px) {
     .navBar{
         position: relative;
-        background: rgb(29, 29, 29);
+        background: rgb(29, 29, 29)!important;
     }
 
     

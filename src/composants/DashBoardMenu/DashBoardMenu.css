@@ -1,0 +1,58 @@
+.DashBoardMenu{
+    position: relative;
+    width:100%;
+    padding: 20px 10px;
+    border: 1px solid rgba(192, 192, 192, 0.062);
+    border-radius: 10px;
+    background:#262626 ;
+}
+
+.DashBoardMenu .line{
+    padding: 15px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    margin: 3px 0px;
+    font-size: .9em;
+    background: rgba(255, 255, 255, 0.023);
+}
+
+.DashBoardMenu .line .arrow{
+    position: absolute;
+    right: 20px;
+}
+
+.DashBoardMenu .line .icon{
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary-glass);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.DashBoardMenu span{
+    opacity: .6;
+}
+
+.DashBoardMenu .line span{
+    
+    margin-left: 10px;
+   
+}
+
+.DashBoardMenu .active{
+    background: var(--color-primary-glass);
+    opacity: 1;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.397);
+}
+
+.DashBoardMenu a:hover{
+    background: var(--color-primary-glass);
+    opacity: 1;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.397);
+}

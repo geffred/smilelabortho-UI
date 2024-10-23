@@ -1,0 +1,39 @@
+.AllCategorie{
+    width: 100%;
+    padding: 50px 0px ;
+    position: relative;
+    border-top: 2px solid var(--color-primary-glass);
+    transition: all .85s ease;
+    transform: translateY(100px);
+}
+.categorie_image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    filter: blur(10px) brightness(1.1);
+    display: none;
+}
+.AllCategorie .container{
+    max-width: 1200px !important;
+    display: flex;
+    gap: 20px;
+    padding: 30px 0px 30px 0px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+
+.categorie-show{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+@media screen and (max-width:1500px){
+    .AllCategorie .container{
+        flex-wrap: wrap;
+    }
+}
+

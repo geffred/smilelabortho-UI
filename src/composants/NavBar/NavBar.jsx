@@ -8,7 +8,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { NavLink } from "react-router-dom"
 
-function NavBar(){
+function NavBar({dashboard=false,compte=false,bg="rgba(0, 0, 0, 0.5)"}){
 
         const [scrolling, setScrolling] = useState(false);
       
@@ -26,11 +26,11 @@ function NavBar(){
         }, []);  
 
     return (
-        <nav className="navBar" style={scrolling?{background:"rgba(0, 0, 0, 0.8)"}:null}>
-            <div className="left-section">
+        <nav className="navBar" style={scrolling?{background:"rgba(0, 0, 0, 0.8)"}:{background:bg}} >
+            <NavLink to={'/'} className="left-section">
                 <img src={logo_smilelab} alt="logo_smilelab"/>
                 <span>Smile <span className="lab">lab</span> </span>
-            </div>
+            </NavLink>
 
             <div className="center-section">
                 <ul>
@@ -63,6 +63,8 @@ function NavBar(){
                 <div>
                     <img src={user} alt="user" width={25} />
                     <ul>
+                        <li className={dashboard?"opt-show":"opt-hide"}> <NavLink to={"/dashboard"}> Dashbord </NavLink> </li>
+                        <li className={compte?"opt-show":"opt-hide"}><a href="#">Compte</a></li>
                         <li><a href="#">Inscription</a></li>
                         <li><a href="#">Connexion</a></li>
                     </ul>

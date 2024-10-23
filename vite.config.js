@@ -4,4 +4,12 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy:{
+      "/api/categories/":"http://localhost:8080",
+      "/api/categories/delete/{id}":"http://localhost:8080",
+      "/api/categories/save/":"http://localhost:8080",
+      "/api/categories/edit/{id}":"http://localhost:8080"
+    }
+  }
 })

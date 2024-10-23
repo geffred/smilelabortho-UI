@@ -1,0 +1,53 @@
+.Connect{
+    display: flex;
+    width: 100%;
+    justify-content:start;
+    overflow: hidden;
+    padding: 0px;
+    gap: 50px;
+}
+
+.Connect .connect-1{
+    display: flex;
+    gap: 50px;
+    animation: carroussel 60s infinite 0s linear;
+}
+
+.partenaire h1{
+    text-align:center;
+    font-family:calibri;
+}
+
+.partenaire p{
+    text-align: center;
+    max-width: 650px;
+    margin: 0px auto 20px auto;
+}
+
+.partenaire {
+   margin-top: 50px;
+   margin-bottom: 50px;
+}
+
+@keyframes carroussel {
+    
+    0%{
+        transform: translateX(0);
+    }
+
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+.Connect .connect-1 img{
+    width: 250px;
+    height: auto;
+}
+
+@media screen and (max-width:1500px) {
+    .Connect .connect-1 img{
+        width: 150px;
+        height: auto;
+    }
+}

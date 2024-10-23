@@ -6,6 +6,7 @@ import Services from "./Pages/Services/Services"
 import Appareils from "./Pages/Appareils/Appareils"
 import Contact from "./Pages/Contact/Contact"
 import Shop from "./Pages/Shop/Shop"
+import Dashboard from "./Pages/Dashboard/Dashboard"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Appareils" element={<Appareils/>} />
         <Route path="/Shop" element={<Shop/>} />
+        <Route path="/Dashboard" element={<Dashboard/>} />
      </Routes>
     </>
   )

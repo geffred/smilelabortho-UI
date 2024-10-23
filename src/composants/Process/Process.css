@@ -73,14 +73,6 @@
     position: relative;
 }
 
-.process-resume .process-1 img{
-    position: absolute;
-    z-index: -5;
-    left: -30%;
-    top: -50%;
-    height: auto;
-    width: 80%;
-}
 
 .process-resume .process-1 p{
     position: relative;
@@ -119,16 +111,6 @@
         height: 100%;
         object-fit: cover;
         border-radius: 10px 10px 0px 0px;
-    }
-
-    .process-resume .process-1 img{
-        position: absolute;
-        z-index: -1;
-        left: 50%;
-        top: -105%;
-        transform: translateX(-50%);
-        height: auto;
-        width: 80%;
     }
 
     .process-titre h1{

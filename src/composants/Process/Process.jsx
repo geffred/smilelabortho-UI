@@ -9,8 +9,8 @@ import build from "/image/build.svg"
 import { useState } from "react";
 import { useEffect } from "react";
 import processImage from "../../assets/process.png"
-import appareil from "../../assets/appareil.jpeg";
-import disjonteur from "../../assets/disjoncteur.png";
+/*import appareil from "../../assets/appareil.jpeg";
+import disjonteur from "../../assets/disjoncteur.png";*/
 
 function Process(){
 
@@ -58,12 +58,10 @@ function Process(){
       
         const handleScroll = () => {
           setScrolling(window.scrollY > 300); 
-          console.log(window.scrollY);
         };
 
         const handleScrollResume = () => {
             setScroll(window.scrollY > 1100); 
-            console.log(window.scrollY);
           };
       
         useEffect(() => {
@@ -101,8 +99,7 @@ function Process(){
             </div>
             <div className={scroll?"process-resume process-show":"process-resume process-hide" }>
                     
-                <div className="process-1">
-                     <img src={appareil} alt="appareil" />
+                <div className="process-1">       
                  <p>
                      <span className="important">La création de votre compte</span> vous donne accès au <span className="important">formulaire de commande</span>, avec un accompagnement à chaque étape si nécessaire. Nous <span className="important">analysons les empreintes</span> pour comprendre la situation dentaire, interprétons la prescription et établissons un <span className="important">plan de conception</span> pour l’appareil. Nous utilisons des <span className="important">technologies de pointe</span> et des matériaux de qualité, avec un <span className="important">contrôle qualité rigoureux</span> pour garantir la conformité. Enfin, nous assurons la <span className="important">livraison</span> et restons disponibles pour toute question.
                 </p>
