@@ -61,7 +61,6 @@
 
 .CategorieInput form input{
     padding: 15px;
-    border-radius: 10px;
 }
 
 .CategorieInput form button{
@@ -69,7 +68,7 @@
     padding: 15px;
     width: 100%;
     background: transparent;
-    border-radius: 10px;
+    border-radius: 5px;
     color: var(--color-primary);
     cursor: pointer;
     outline: none;

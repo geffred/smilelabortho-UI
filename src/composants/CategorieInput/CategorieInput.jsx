@@ -60,7 +60,7 @@ function CategorieInput({onMutate,isDashboard =false , display, setDisplay , edi
         onSubmit={(values, { resetForm }) => {
             console.log("Form data", values);
             sendData(values);
-            reintialiser()
+            reintialiser();
             resetForm(); // Réinitialise le formulaire après la soumission
          }}
          enableReinitialize={true}
