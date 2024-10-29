@@ -9,7 +9,10 @@ export default defineConfig({
       "/api/categories/":"http://localhost:8080",
       "/api/categories/delete/{id}":"http://localhost:8080",
       "/api/categories/save/":"http://localhost:8080",
-      "/api/categories/edit/{id}":"http://localhost:8080"
+      "/api/categories/edit/{id}":"http://localhost:8080",
+      "/api/appareils/":"http://localhost:8080",
+      "/api/appareils/delete/{id}":"http://localhost:8080",
+      "/api/appareils/save/":"http://localhost:8080"
     }
   }
 })

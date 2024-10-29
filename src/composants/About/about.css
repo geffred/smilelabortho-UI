@@ -1,0 +1,106 @@
+.About{
+    position: relative;
+    max-width: 1500px;
+    min-height: 300px;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    padding: 50px;
+    font-size: 1.2em;
+    font-family: Arial, Helvetica, sans-serif;
+    margin:-40px auto 20px auto;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all .85s ease;
+}
+
+.about-show{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.about-hide{
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+
+
+.About h1,p{
+    position: relative;
+    z-index: 5;
+}
+
+.About p{
+    flex: 3;
+    max-width: 90%;
+    font-size: 1em;
+    color: rgb(201, 201, 201);
+    text-align: justify;
+}
+
+
+.About h1{
+    max-width: 80%;
+    font-size: 1.3em;
+}
+
+.About::before{
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(90deg , black,rgba(0, 0, 0, 0.568));
+}
+.About:hover p{
+    color: white;
+}
+
+.About:hover::after{
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background:var(--color-primary-glass);
+}
+.About img{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -5;
+
+}
+
+@media only screen and (max-width:1000px){
+
+    .About p{
+     
+        max-width: 100%;
+        font-size: .8em;
+       
+    }
+
+    .About h1{
+        max-width: 100%;
+        font-size: .9em;
+        text-align: center;
+       
+    }
+
+    .About{
+        padding: 30px 20px 20px 20px;
+        margin: 0px 20px 20px 20px;
+    }
+    .About p{
+        text-align: center;
+    }
+}

@@ -17,8 +17,7 @@ function Categorie({ data, dashboard = false , handleDelete , handleEdit}) {
                     <img src={trash} alt="trash" width={20} />
                 </button>
             </div>
-
-            <img src={logo} alt="logo" width={40} className='logo' />
+            
             <div className='thumb'>
                 <img src={data.thumbnail} alt="thumbnail" className='thumbnail' />
             </div>

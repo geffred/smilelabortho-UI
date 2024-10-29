@@ -3,13 +3,18 @@
     width: 100%;
     overflow: hidden;
     z-index: 0;
+    position: relative;
+   
   }
-  
+
+
+
 .banner-slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    
   }
-  
+
   .banner-slide {
     min-width: 100%;
     box-sizing: border-box;
@@ -34,7 +39,7 @@
     cursor: pointer;
     font-size: 16px;
     z-index: 100;
-    background: var(--color-primary);
+    background: transparent;
     outline: none;
     border: .5px solid transparent;
     transition: all .2s ease;
@@ -61,21 +66,32 @@
   
 
 .banner .lab{
-    color: var(--color-primary);
+    color: rgb(0, 145, 255);
 }
 .banner .left-section{
     position: absolute;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    top: 40%;
-    z-index: 1;
+    top: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 20%; 
     color: white; 
     width: 50vw;
+    z-index: 5;
 }
+
+.banner .cover{
+    position: absolute;
+    content: '';
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(-90deg, rgba(0, 0, 0, 0.932), rgba(0, 0, 0, 0.836),var(--color-primary-glass));
+    z-index: 1;
+  }
 
 .banner .left-section .logo-text {
     align-items: center;
@@ -89,9 +105,10 @@
     font-size: 1.2em;
     text-transform: capitalize;
     margin: 0px;
+   
 }
 .banner .left-section img{
-    max-width: 20%;
+    max-width: 15%;
 }
 
 .banner .left-section .arrow-right{
@@ -128,17 +145,6 @@
     border-color:var(--color-primary) ;
 }
 
-.banner-slides h2{
-    width: 100%;
-    border-radius: 0px 0px 5px 5px;
-    padding:5px ;
-    text-align: center;
-    background:var(--color-primary);
-    color: white;
-    font-family: calibri;
-    font-size: 1em;
-}
-
 
 
 @media screen and (max-width:1500px) {
@@ -155,26 +161,24 @@
         width: 80%;
         text-align: center;
     }
+ 
 
     .banner .left-section{
 
-        top: 35%;
+        top: 40%;
         width: 80%; 
         
     }
 
     .banner .left-section img{
-        max-width: 15%;
+        max-width: 10%;
     }
 
     .banner .left-section a{
-        padding: 8px 10px;
+        padding: 5px 10px;
         width: 80%;
-        font-size: .8em;
-    }
-    
-    .banner-slides h2{
         font-size: .7em;
     }
+
     
 }

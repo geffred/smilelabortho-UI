@@ -58,7 +58,6 @@ function CategorieInput({onMutate,isDashboard =false , display, setDisplay , edi
         initialValues={editData}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-            console.log("Form data", values);
             sendData(values);
             reintialiser();
             resetForm(); // Réinitialise le formulaire après la soumission

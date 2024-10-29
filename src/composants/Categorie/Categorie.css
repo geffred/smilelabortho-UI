@@ -12,6 +12,7 @@
     border: .5px solid var(--color-primary-glass);
     min-height: 300px;
     transition: all .85 ease;
+    background: white;
 }
 
 .Categorie .thumbnail{
@@ -22,7 +23,7 @@
     top: 0px;
     left: 0px;
     border-radius: 20px;
-    filter: contrast(0.7) brightness(1.3);
+    filter: contrast(.6) brightness(1.3);
     transform: scale(1);
     transition: all .85s ease;
 }
@@ -40,22 +41,6 @@
     width: 100%;
     height: 100%;
     border-radius: 20px 20px 5px 5px;
-}
-
-.Categorie::before{
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-radius: 20px 20px 5px 5px;
-    transform-origin:70% 30% ;
-    background: rgba(255, 255, 255, 0.258);
-    z-index: 1;
-    transition: all .3s ease;
-     
-
 }
 
 .Categorie::after{
@@ -103,6 +88,7 @@
 .Categorie .footerContainer{
 
     display: flex;
+    height: 70px;
     justify-content:space-between;
     align-items: center;
     position: absolute;
@@ -111,7 +97,7 @@
     width: 100%;
     background:var(--color-primary) ;
     padding: 10px 20px;
-    border-radius: 20px 20px 5px 5px;
+    border-radius: 10px 10px 5px 5px;
     z-index: 2;
    
 }

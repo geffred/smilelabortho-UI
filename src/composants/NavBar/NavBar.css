@@ -200,5 +200,23 @@
         background: rgb(29, 29, 29)!important;
     }
 
+    .right-section .user{
+        max-width: 20px;
+        transform: translateY(-1px);
+    }
+
+    .navBar .right-section{
+        width: 35px;
+        height: 35px;
+        
+    }
+
+    .navBar .left-section img{
+        max-width: 30px;
+    }
+
+    .navBar .left-section span{
+        font-size: .9em;
+    }
     
 }

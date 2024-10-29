@@ -25,6 +25,7 @@
     padding: 10px 20px 0px 20px;
     transform: all 1s ease;
     transition: all .85s ease;
+   
 }
 
 .process-titre{
@@ -33,6 +34,7 @@
 
 .process-titre p{
     text-align: center;
+    
 }
 
 .process-hide{
@@ -80,6 +82,7 @@
     background: rgba(255, 255, 255, 0.861);
     padding: 25px;
     border-radius: 10px;
+    color: rgb(49, 49, 49);
 }
 
 .process-resume .process-2 img{

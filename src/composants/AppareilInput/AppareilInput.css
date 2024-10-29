@@ -1,0 +1,106 @@
+.AppareilInput{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 50px;
+   
+}
+
+
+.AppareilInput button:first-child{
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 1px dashed var(--color-primary);
+    border-radius: 10px;
+    color: var(--color-primary);
+    cursor: pointer;
+    outline: none;
+}
+
+.categorie-disable{
+    color: rgb(81, 81, 81) !important;
+    border-color:rgb(81, 81, 81) !important;
+    opacity: .6;
+}
+
+.AppareilInput form {
+    position: relative;
+    transition: all .3s ease;
+    margin-top: -130px;
+}
+
+.AppareilInput .error{
+    color: red;
+    margin-top: 10px;
+    transform: translateY(-10px);
+    font-size: .9em;
+    opacity: .9;
+}
+
+.form-show{
+    opacity: 1;
+    margin-top:0px !important;
+}
+
+.form-hide{
+    margin-top: -100px;
+    opacity: 0;
+}
+
+.AppareilInput form img:first-child{
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    top: -25px;
+    z-index: 10;
+}
+
+.AppareilInput form input{
+    padding: 15px;
+}
+
+.AppareilInput form select{
+    padding: 15px;
+    width: 100%;
+    border-radius: 5px;
+    border-color: rgba(128, 128, 128, 0.315);
+    color: rgb(119, 119, 119);
+    outline: none;
+    margin-bottom: 0px !important;
+}
+
+.is-invalid{
+    border-color: rgb(255, 0, 0) !important;
+  
+}
+
+.AppareilInput form select:focus{
+    
+    box-shadow: 0px 0px 5px rgba(0, 140, 255, 0.699);
+}
+
+.AppareilInput form button{
+    position: relative;
+    padding: 15px;
+    width: 100%;
+    background: transparent;
+    border-radius: 5px;
+    color: var(--color-primary);
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--color-primary);
+    transition: all .85s ease;
+}
+
+.AppareilInput form button:hover{
+    border: 1px solid transparent;
+    background: var(--color-primary-glass);
+}
+
+.AppareilInput form button:active{
+    transform: scale(.9);
+}

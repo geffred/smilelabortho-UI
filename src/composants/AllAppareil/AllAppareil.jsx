@@ -1,30 +1,19 @@
-import Categorie from "../Categorie/Categorie";
-import "./AllCategorie.css"
-import useSWR, { mutate } from 'swr';
-import Spinner from "../Spinner/Spinner";
-import { useEffect } from "react";
-import { useState } from "react";
-import CategorieInput from "../CategorieInput/CategorieInput";
+import './AllAppareil.css'
+import useSWR from 'swr';
+import Spinner from '../Spinner/Spinner'
+import Appareil from '../Appareil/Appareil';
+import { mutate } from 'swr';
+import AppareilInput from '../AppareilInput/AppareilInput';
+import { useState } from 'react';
+import Categorie from '../Categorie/Categorie';
 
-function AllCategorie({ isDashboard = false , style}){
-  
+function AllAppareil(isDashboard = true ){
+
+    const url = `/api/appareils/`;
     const fetcher = (url) => fetch(url).then((res) => res.json())
-    const url = `/api/categories/`;
     const { data, error, isLoading } = useSWR(url,fetcher);
-    const [scrolling, setScrolling] = useState(false);
     const [display, setDisplay] = useState(false);
-    const [editData, setEditData] = useState({ titre: "", thumbnail: "" }); 
-
-    const handleScroll = () => {
-          setScrolling(window.scrollY > 1900); 
-    };
-
-    useEffect(() => {
-            window.addEventListener('scroll', handleScroll);
-            return () => {
-              window.removeEventListener('scroll', handleScroll);
-            };
-          }, []);
+    const [editData, setEditData] = useState({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"" }); 
 
     const handleDelete = async (id) => {        
         try {
@@ -49,36 +38,37 @@ function AllCategorie({ isDashboard = false , style}){
     async function handleEdit(data) {
         setDisplay(true);
         setEditData(data);
+        console.log("Form data", data);
       }
 
-    
     if (error) return "Une erreur s'est produite.";
     if (isLoading) return <Spinner/>;
 
-
     return(
-        <div className={scrolling?"AllCategorie categorie-show":"AllCategorie"} style={style}>
-            <CategorieInput
+        <div className='AllAppareil'>
+
+            <AppareilInput
              onMutate={()=>mutate(url)}
              isDashboard={isDashboard}
              display={display}
              setDisplay={()=>{setDisplay(!display)}}
              editData={editData}
-             reintialiser={()=>setEditData({ titre: "", thumbnail: "" })}
+             reintialiser={()=>setEditData({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"" })}
              />
 
             <div className="container">
                 {
-                    data.map((categorie)=> <Categorie
-                     key={categorie.id}
-                     data={categorie}
+                    data.map((appareil)=> <Appareil
+                     key={appareil.id}
+                     data={appareil}
                      dashboard={isDashboard}
                      handleDelete={handleDelete}
-                     handleEdit={handleEdit}/>)
+                     handleEdit={handleEdit}
+                     />)
                 }
             </div>
         </div>
     )
 }
 
-export default AllCategorie;
+export default AllAppareil;

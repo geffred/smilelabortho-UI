@@ -5,6 +5,7 @@ import { useState } from "react";
 import Display from "../../composants/Display/Display";
 import AllCategorie from "../../composants/AllCategorie/AllCategorie";
 import CategorieInput from "../../composants/CategorieInput/CategorieInput";
+import AllAppareil from "../../composants/AllAppareil/AllAppareil";
 
 function Dashboard(){
     const [active , setActive] = useState(0)
@@ -27,6 +28,10 @@ function Dashboard(){
                     <div className="col-lg-8 px-1">
                         <Display active={active} label={"Categories"}>
                             <AllCategorie isDashboard={true} style={{transform:"translateY(0px)",border:"none",paddingTop:"15px"}}/>
+                        </Display>
+
+                        <Display active={active} label={"Appareils"}>
+                            <AllAppareil isDashboard={true} style={{transform:"translateY(0px)",border:"none",paddingTop:"15px"}}/>
                         </Display>
                     </div>
                 </div>

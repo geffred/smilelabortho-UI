@@ -61,7 +61,7 @@ function NavBar({dashboard=false,compte=false,bg="rgba(0, 0, 0, 0.5)"}){
 
             <div className={"right-section"}>
                 <div>
-                    <img src={user} alt="user" width={25} />
+                    <img src={user} alt="user" width={25} className="user"  />
                     <ul>
                         <li className={dashboard?"opt-show":"opt-hide"}> <NavLink to={"/dashboard"}> Dashbord </NavLink> </li>
                         <li className={compte?"opt-show":"opt-hide"}><a href="#">Compte</a></li>
