@@ -1,21 +1,27 @@
-import './AllAppareil.css'
-import useSWR from 'swr';
-import Spinner from '../Spinner/Spinner'
+import './AllAppareil.css';
+import useSWR, { mutate } from 'swr';
+import Spinner from '../Spinner/Spinner';
 import Appareil from '../Appareil/Appareil';
-import { mutate } from 'swr';
 import AppareilInput from '../AppareilInput/AppareilInput';
+import AppareilImage from '../AllImageAppareil/AppareilImage';
 import { useState } from 'react';
-import Categorie from '../Categorie/Categorie';
 
-function AllAppareil(isDashboard = true ){
-
+function AllAppareil({ isDashboard = true }) {
     const url = `/api/appareils/`;
-    const fetcher = (url) => fetch(url).then((res) => res.json())
-    const { data, error, isLoading } = useSWR(url,fetcher);
+    const [id, setId] = useState(0);
+    const [imageActive, setImageActive] = useState(false);
     const [display, setDisplay] = useState(false);
-    const [editData, setEditData] = useState({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"" }); 
+    const [editData, setEditData] = useState({});
 
-    const handleDelete = async (id) => {        
+    const fetcher = (url) => fetch(url).then((res) => res.json());
+    const { data, error } = useSWR(url, fetcher);
+
+    const handleClick = (id) => {
+        setId(id);
+        setImageActive(!imageActive);
+    };
+
+    const handleDelete = async (id) => {
         try {
             const response = await fetch(`${url}delete/${id}`, {
                 method: 'DELETE',
@@ -25,50 +31,51 @@ function AllAppareil(isDashboard = true ){
             });
 
             if (response.ok) {
-                mutate(url)
+                mutate(url);
                 console.log('Item supprimé avec succès');
             } else {
-                console.error('Erreur lors de la suppression de l\'élément');
+                console.error("Erreur lors de la suppression de l'élément");
             }
         } catch (error) {
             console.error('Erreur réseau :', error);
         }
     };
 
-    async function handleEdit(data) {
+    const handleEdit = (data) => {
         setDisplay(true);
         setEditData(data);
-        console.log("Form data", data);
-      }
+    };
 
-    if (error) return "Une erreur s'est produite.";
-    if (isLoading) return <Spinner/>;
+    if (error) return <p>Une erreur s'est produite : {error.message}</p>;
+    if (!data) return <Spinner />;
 
-    return(
+    return (
         <div className='AllAppareil'>
-
             <AppareilInput
-             onMutate={()=>mutate(url)}
-             isDashboard={isDashboard}
-             display={display}
-             setDisplay={()=>{setDisplay(!display)}}
-             editData={editData}
-             reintialiser={()=>setEditData({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"" })}
-             />
+                onMutate={() => mutate(url)}
+                isDashboard={isDashboard}
+                display={display}
+                setDisplay={() => setDisplay((prev) => !prev)}
+                editData={editData}
+                reinitialiser={() => setEditData({})}
+            />
+
+            <AppareilImage id={id} />
 
             <div className="container">
-                {
-                    data.map((appareil)=> <Appareil
-                     key={appareil.id}
-                     data={appareil}
-                     dashboard={isDashboard}
-                     handleDelete={handleDelete}
-                     handleEdit={handleEdit}
-                     />)
-                }
+                {data.map((appareil) => (
+                    <Appareil
+                        key={appareil.id}
+                        data={appareil}
+                        dashboard={isDashboard}
+                        handleDelete={handleDelete}
+                        handleEdit={handleEdit}
+                        handleClick={handleClick}
+                    />
+                ))}
             </div>
         </div>
-    )
+    );
 }
 
 export default AllAppareil;

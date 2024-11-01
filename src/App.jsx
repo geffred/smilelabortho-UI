@@ -7,6 +7,7 @@ import Appareils from "./Pages/Appareils/Appareils"
 import Contact from "./Pages/Contact/Contact"
 import Shop from "./Pages/Shop/Shop"
 import Dashboard from "./Pages/Dashboard/Dashboard"
+import AppareilDetails from "./Pages/AppareilDetails/AppareilDetails"
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Appareils" element={<Appareils/>} />
         <Route path="/Shop" element={<Shop/>} />
         <Route path="/Dashboard" element={<Dashboard/>} />
+        <Route path="/Appareils/:id" element={<AppareilDetails/>} />
      </Routes>
     </>
   )

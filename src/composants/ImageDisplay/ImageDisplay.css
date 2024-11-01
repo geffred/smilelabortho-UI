@@ -1,0 +1,65 @@
+.ImageDisplay .first{
+    max-width: 500px;
+    height: 400px;
+    position: relative;
+    margin: 20px auto;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+  
+}
+
+
+.ImageDisplay .first img{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transform: scale(.95);
+}
+
+.ImageDisplay .second {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top:10px ;
+    flex-wrap: wrap;
+}
+
+.ImageDisplay .second .box{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border: 1px solid var(--color-primary-glass);
+    border-radius: 5px;
+}
+
+.ImageDisplay .second .box:hover{
+    border-color: var(--color-primary);
+}
+
+.ImageDisplay .second .active{
+    border-color: var(--color-primary);
+}
+
+.bg_hover{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: var(--color-primary-glass);
+    z-index: 5;
+}
+
+.ImageDisplay .second .box img{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(.9);
+}

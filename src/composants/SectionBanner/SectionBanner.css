@@ -45,3 +45,7 @@
 .SectionBanner .contenu p{
     font-size: 1.2em ;
 }
+
+.SectionBanner .contenu h1{
+    font-weight: bold;
+}

@@ -30,7 +30,7 @@
 .AppareilInput form {
     position: relative;
     transition: all .3s ease;
-    margin-top: -130px;
+    margin-top: -350px;
 }
 
 .AppareilInput .error{
@@ -71,6 +71,10 @@
     color: rgb(119, 119, 119);
     outline: none;
     margin-bottom: 0px !important;
+}
+
+.AppareilInput #description{
+    min-height:150px !important;
 }
 
 .is-invalid{

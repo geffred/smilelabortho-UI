@@ -1,11 +1,13 @@
-import Categorie from "../Categorie/Categorie";
+
 import "./AllCategorie.css"
 import useSWR, { mutate } from 'swr';
 import Spinner from "../Spinner/Spinner";
 import { useEffect } from "react";
 import { useState } from "react";
 import CategorieInput from "../CategorieInput/CategorieInput";
+import Categorie from "../Categorie/Categorie";
 
+// eslint-disable-next-line react/prop-types
 function AllCategorie({ isDashboard = false , style}){
   
     const fetcher = (url) => fetch(url).then((res) => res.json())

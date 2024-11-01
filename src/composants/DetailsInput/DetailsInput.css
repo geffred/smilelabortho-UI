@@ -1,0 +1,96 @@
+.AppareilDetails .details{
+    margin: 20px 15px 0px 15px;
+    border-radius: 5px;
+}
+
+.AppareilDetails .details h1{
+
+    font-family: calibri;
+    margin: 0px;
+    padding: 10px 0px;
+    text-transform: capitalize;
+    
+}
+
+.AppareilDetails .details p{
+    padding: 10px 20px;
+    color: white;
+    background-color:var(--color-primary) ;
+    border-radius: 5px;
+    text-align: center;
+    font-family: calibri;
+    font-weight: bold;
+    font-size: 1.2em;
+    max-width:100px ;
+}
+
+.AppareilDetails form select{
+    padding: 15px;
+    width: 100%;
+    border-radius: 5px;
+    border-color: rgba(128, 128, 128, 0.315);
+    color: rgb(119, 119, 119);
+    outline: none;
+    margin-bottom: 0px !important;
+}
+
+.is-invalid{
+    border-color: rgb(255, 0, 0) !important;
+  
+}
+
+.AppareilDetails form input{
+    padding: 15px;
+}
+
+
+.AppareilDetails form select:focus{
+    
+    box-shadow: 0px 0px 5px rgba(0, 140, 255, 0.699);
+}
+
+#quantiteDansPanier{
+    border: 1px solid var(--color-primary);
+    max-width: 80px;
+}
+
+
+
+
+
+.AppareilDetails .detailsFooter button{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    padding: 15px;
+    background: var(--color-primary);
+    text-decoration: none !important;
+    color: white;
+    border-radius: 5px;
+    font-family: calibri;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .5s ease;
+    border: 1px solid transparent;
+}
+
+a{
+    text-decoration: none !important;;
+}
+
+.AppareilDetails .detailsFooter button:hover{
+    background:transparent;
+    color: black;
+    border: 1px solid var(--color-primary);
+}
+
+.AppareilDetails .detailsFooter button img{
+    position: absolute;
+    right: 10px;
+}
+
+.AppareilDetails .detailsFooter button:last-child{
+    margin: 5px 0px;
+}

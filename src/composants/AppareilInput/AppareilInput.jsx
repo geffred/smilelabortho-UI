@@ -12,7 +12,7 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
   const fetcher = (url) => fetch(url).then((res) => res.json())
   const urlcategorie = `/api/categories/`;
   const url ='/api/appareils/save'
-  const { data, error, isLoading } = useSWR(urlcategorie,fetcher);
+  const { data } = useSWR(urlcategorie,fetcher);
 
   const validationSchema = Yup.object({
     nom: Yup.string()
@@ -25,6 +25,8 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
       .required("Le prix Unitaire est obligatoire"),
       categorie: Yup.string()
       .required("La categorie est obligatoire"),
+    description: Yup.string()
+    .min(20, "La description de l' appareil doit contenir au moins 20 caractères")
    
   });
 
@@ -118,7 +120,7 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
 
             <div className='row'>
 
-            <div className="col-lg-6">
+                <div className="col-lg-6">
                     <Field
                     type="text"
                     name="thumbnail"
@@ -143,6 +145,18 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
                     </Field>
                     <ErrorMessage name="categorie" component="div" className="error" />
                 </div>
+
+                <div className="col-lg-12">
+                    <Field
+                    as='textarea'
+                    name="description"
+                    id="description"
+                    placeholder="Description de l'appareil"
+                    className={`form-control my-2 ${touched.description && errors.description ? 'is-invalid' : ''}`}
+                    />
+                    <ErrorMessage name="description" component="div" className="error" />
+                </div>
+
             </div>
 
             <button type="submit" disabled={isSubmitting}>
