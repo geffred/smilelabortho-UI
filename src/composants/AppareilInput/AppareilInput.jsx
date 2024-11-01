@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import categorie from '../categorie/categorie';
 import useSWR from "swr";
 
-function AppareilInput({onMutate,isDashboard =false , display, setDisplay , editData , reintialiser }){
+function AppareilInput({onMutate,isDashboard =false , display, setDisplay , editData , reinitialiser }){
 
   const fetcher = (url) => fetch(url).then((res) => res.json())
   const urlcategorie = `/api/categories/`;
@@ -60,7 +60,7 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
       <button
        onClick={() => {  
         setDisplay()
-        reintialiser()
+       
        } }
        className={display ? "appareil-disable" : null}
        >
@@ -72,8 +72,7 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
             sendData(values);
-            console.log("Form data", values);
-            reintialiser();
+            reinitialiser()
             resetForm(); // Réinitialise le formulaire après la soumission
          }}
          enableReinitialize={true}
@@ -88,8 +87,9 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
               height={30}
               onClick={() => {
                 resetForm(); // Réinitialiser le formulaire
+                reinitialiser()
                 setDisplay(); // Fermer le formulaire
-                reintialiser(); // Réinitialiser les données de la appareil éditée
+                
               }}
             />
 

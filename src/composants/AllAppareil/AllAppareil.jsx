@@ -11,7 +11,7 @@ function AllAppareil({ isDashboard = true }) {
     const [id, setId] = useState(0);
     const [imageActive, setImageActive] = useState(false);
     const [display, setDisplay] = useState(false);
-    const [editData, setEditData] = useState({});
+    const [editData, setEditData] = useState({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"",description:"" });
 
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const { data, error } = useSWR(url, fetcher);
@@ -57,7 +57,7 @@ function AllAppareil({ isDashboard = true }) {
                 display={display}
                 setDisplay={() => setDisplay((prev) => !prev)}
                 editData={editData}
-                reinitialiser={() => setEditData({})}
+                reinitialiser={() => setEditData({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"",description:"" })}
             />
 
             <AppareilImage id={id} />

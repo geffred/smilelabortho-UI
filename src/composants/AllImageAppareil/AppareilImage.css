@@ -16,6 +16,11 @@
     border-radius: 5px;
 }
 
+
+.AppareilImage .cover:hover .im{
+    opacity: .8;
+}
+
 .AppareilImage .cover .cancel{
     position: absolute;
     right: 0px;
