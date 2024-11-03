@@ -9,6 +9,8 @@
     color: white;
 }
 
+
+
 .SectionBanner::after{
     content: "";
     position: absolute;
@@ -44,6 +46,7 @@
 
 .SectionBanner .contenu p{
     font-size: 1.2em ;
+    text-align: center;
 }
 
 .SectionBanner .contenu h1{

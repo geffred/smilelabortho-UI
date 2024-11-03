@@ -2,6 +2,7 @@ import { Field, Formik, Form, ErrorMessage } from "formik";
 import "./CategorieInput.css";
 import cancel from "/image/cancel.svg";
 import { useEffect, useState } from "react";
+import { HashLink } from "react-router-hash-link";
 import * as Yup from "yup";
 
 
@@ -102,9 +103,11 @@ function CategorieInput({onMutate,isDashboard =false , display, setDisplay , edi
               </div>
             </div>
 
-            <button type="submit" disabled={isSubmitting}>
-              Ajouter
-            </button>
+            
+              <button type="submit" disabled={isSubmitting}>
+                    Ajouter
+              </button>
+           
           </Form>
         )}
       </Formik>

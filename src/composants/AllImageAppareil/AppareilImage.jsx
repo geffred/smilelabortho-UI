@@ -5,8 +5,7 @@ import useSWR from 'swr';
 import { mutate } from 'swr';
 
 function AppareilImage({ id }) {
-  
-    console.log('id',id)
+    
     const url = `/api/image/appareils/${id}`;
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const { data , error} = useSWR(url, fetcher);

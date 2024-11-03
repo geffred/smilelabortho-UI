@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import CategorieInput from "../CategorieInput/CategorieInput";
 import Categorie from "../Categorie/Categorie";
+import Notification from "../Notification/Notification"; 
 
 // eslint-disable-next-line react/prop-types
 function AllCategorie({ isDashboard = false , style}){
@@ -16,6 +17,8 @@ function AllCategorie({ isDashboard = false , style}){
     const [scrolling, setScrolling] = useState(false);
     const [display, setDisplay] = useState(false);
     const [editData, setEditData] = useState({ titre: "", thumbnail: "" }); 
+    const [notification, setNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
 
     const handleScroll = () => {
           setScrolling(window.scrollY > 1900); 
@@ -28,7 +31,8 @@ function AllCategorie({ isDashboard = false , style}){
             };
           }, []);
 
-    const handleDelete = async (id) => {        
+    const handleDelete = async (id) => { 
+        setNotification(false);       
         try {
             const response = await fetch(`${url}delete/${id}`, {
                 method: 'DELETE',
@@ -39,12 +43,15 @@ function AllCategorie({ isDashboard = false , style}){
 
             if (response.ok) {
                 mutate(url)
-                console.log('Item supprimé avec succès');
+                setNotificationMessage('Catégorie supprimé avec succès');
+                setNotification(true)
             } else {
-                console.error('Erreur lors de la suppression de l\'élément');
+                setNotificationMessage('Erreur lors de la suppression de la catégorie');
+                setNotification(true)
             }
         } catch (error) {
-            console.error('Erreur réseau :', error);
+            setNotification(true)
+            setNotificationMessage('Erreur réseau');
         }
     };
 
@@ -59,7 +66,9 @@ function AllCategorie({ isDashboard = false , style}){
 
 
     return(
-        <div className={scrolling?"AllCategorie categorie-show":"AllCategorie"} style={style}>
+        <><Notification active={notification} message={notificationMessage}/>
+        <div className={scrolling?"AllCategorie categorie-show":"AllCategorie"} style={style} id="top">
+            
             <CategorieInput
              onMutate={()=>mutate(url)}
              isDashboard={isDashboard}
@@ -80,6 +89,7 @@ function AllCategorie({ isDashboard = false , style}){
                 }
             </div>
         </div>
+        </>
     )
 }
 

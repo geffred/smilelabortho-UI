@@ -63,3 +63,44 @@
     object-fit: cover;
     transform: scale(.9);
 }
+
+.ImageDisplay input{
+    width: 100%!important;
+    padding: 15px;
+}
+
+.ImageDisplay button{
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    background: var(--color-primary);
+    cursor: pointer;
+    font-size: 1.2em;
+    border: 1px solid transparent;
+    font-family: calibri;
+    outline: none;
+
+}
+.ImageDisplay button:active{
+    transform: scale(.9);
+   
+}
+.ImageDisplay button:hover{
+    background:transparent;
+    border-color:var(--color-primary) ;
+    color: var(--color-primary);
+}
+.ImageDisplay .error{
+    color: red;
+    margin-top: 10px;
+    transform: translateY(-10px);
+    font-size: .9em;
+    opacity: .9;
+}
+
+.is-invalid{
+
+    border-color: brown;
+}

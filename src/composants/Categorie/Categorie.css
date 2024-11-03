@@ -159,26 +159,20 @@
     align-items: center;
     width: 30px;
     height: 30px;
-    border-radius: 10px;
-    transition: all .5s ease;
+    border-radius: 5px;
     border: none;
     outline: none;
-}
-
-
-.Categorie .dashboard button:first-child{
-
     background: var(--color-primary);
-   
 }
 
-.Categorie .dashboard button:last-child{
-   
-    background: rgb(255, 35, 35);
-}
 
 .Categorie .dashboard button:hover{
-    background: black;
+    background: var(--color-primary-glass);
+}
+
+.Categorie .dashboard .delete:hover{
+   
+    background: rgb(255, 35, 35);
 }
 
 .Categorie .dashboard button:last-child img{

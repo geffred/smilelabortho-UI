@@ -5,6 +5,7 @@
     border: 1px solid rgba(192, 192, 192, 0.062);
     border-radius: 10px;
     background:#262626 ;
+    height: 100vh;
 }
 
 .DashBoardMenu .line{

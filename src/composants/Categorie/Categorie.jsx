@@ -1,19 +1,22 @@
 import './Categorie.css'
 import edit from "/image/edit.svg"
 import trash from "/image/trash.svg"
-import logo from '/image/logo_smilelab_bg.svg'
-import { useEffect, useState } from "react";
+import { HashLink } from 'react-router-hash-link';
+
 
 function Categorie({ data, dashboard = false , handleDelete , handleEdit}) {
 
+    
 
     return (
-        <div className="Categorie">
+        <div className="Categorie" id= {data.id}>
             <div className={dashboard ? 'dashboard' : 'dashboard hide'}>
-                <button  >
-                    <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
-                </button>
-                <button  onClick={() => handleDelete(data.id)}>
+                <HashLink smooth to="#top">
+                    <button>
+                        <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
+                    </button>
+                </HashLink>
+                <button className='delete' onClick={() => handleDelete(data.id)}>
                     <img src={trash} alt="trash" width={20} />
                 </button>
             </div>

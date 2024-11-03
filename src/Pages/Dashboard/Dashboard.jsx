@@ -22,10 +22,10 @@ function Dashboard(){
             <div className="Dashboard container-fluid">
                 
                 <div className="row">
-                    <div className="col-lg-4 col-12 px-1">
+                    <div className="col-lg-3 col-12 px-1">
                         <DashBoardMenu isActive={active} handleClick={handleClick} />
                     </div>
-                    <div className="col-lg-8 px-1">
+                    <div className="col-lg-9 px-1 content-data">
                         <Display active={active} label={"Categories"}>
                             <AllCategorie isDashboard={true} style={{transform:"translateY(0px)",border:"none",paddingTop:"15px"}}/>
                         </Display>

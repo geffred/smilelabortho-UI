@@ -127,7 +127,7 @@ a{
    
 }
 
-.Appareil .dashboard a:last-child:hover{
+.Appareil .dashboard .delete:hover{
    
     background: rgb(255, 35, 35);
 }

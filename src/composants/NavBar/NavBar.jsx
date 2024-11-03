@@ -26,7 +26,7 @@ function NavBar({dashboard=false,compte=false,bg="rgba(0, 0, 0, 0.5)"}){
         }, []);  
 
     return (
-        <nav className="navBar" style={scrolling?{background:"rgba(0, 0, 0, 0.8)"}:{background:bg}} >
+        <nav className="navBar" style={scrolling?{background:"rgba(0, 0, 0, 0.8)"}:{background:bg}} id="form" >
             <NavLink to={'/'} className="left-section">
                 <img src={logo_smilelab} alt="logo_smilelab"/>
                 <span>Smile <span className="lab">lab</span> </span>

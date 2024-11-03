@@ -1,0 +1,68 @@
+.SectionCard{
+    position: relative;
+    width: 100%;
+   
+    padding: 25px;
+    border-radius: 10px !important;
+    margin: 10px auto;
+    background:var(--color-primary);
+    font-family:calibri ;
+    text-align: start;
+    overflow: hidden;
+   
+}
+.SectionCard:hover::after{
+    background: rgba(0, 33, 61, 0.872);
+}
+
+.SectionCard img{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.SectionCard::after{
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.747);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.SectionCard a{
+    color: black;
+    height: 100%;
+    width: 100%;
+}
+
+.SectionCard a h1{
+    font-size: 2.5em;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.763);
+    position: relative;
+    z-index: 2;
+}
+
+.SectionCard a h1:after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.226);
+    border-radius: 5px;
+    margin: 10px 0px;
+    
+}
+
+.SectionCard a p{
+    color: rgba(255, 255, 255, 0.929);
+    font-size: 1.2em;
+}

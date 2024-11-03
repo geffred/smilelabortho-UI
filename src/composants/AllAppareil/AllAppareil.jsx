@@ -5,6 +5,7 @@ import Appareil from '../Appareil/Appareil';
 import AppareilInput from '../AppareilInput/AppareilInput';
 import AppareilImage from '../AllImageAppareil/AppareilImage';
 import { useState } from 'react';
+import Notification from '../Notification/Notification';
 
 function AllAppareil({ isDashboard = true }) {
     const url = `/api/appareils/`;
@@ -15,6 +16,8 @@ function AllAppareil({ isDashboard = true }) {
 
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const { data, error } = useSWR(url, fetcher);
+    const [notification, setNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
 
     const handleClick = (id) => {
         setId(id);
@@ -22,6 +25,7 @@ function AllAppareil({ isDashboard = true }) {
     };
 
     const handleDelete = async (id) => {
+        if (notification) setNotification(false);
         try {
             const response = await fetch(`${url}delete/${id}`, {
                 method: 'DELETE',
@@ -32,13 +36,17 @@ function AllAppareil({ isDashboard = true }) {
 
             if (response.ok) {
                 mutate(url);
-                console.log('Item supprimé avec succès');
+                setNotification(true)
+                setNotificationMessage('Appareil supprimé avec succès');
             } else {
-                console.error("Erreur lors de la suppression de l'élément");
+                setNotification(true)
+                setNotificationMessage('Erreur lors de la suppression de l\'Appareil');
             }
         } catch (error) {
-            console.error('Erreur réseau :', error);
+            setNotification(true)
+            setNotificationMessage('Erreur réseau lors de la suppression de l\'Appareil')
         }
+            
     };
 
     const handleEdit = (data) => {
@@ -50,7 +58,8 @@ function AllAppareil({ isDashboard = true }) {
     if (!data) return <Spinner />;
 
     return (
-        <div className='AllAppareil'>
+        <><Notification active={notification} message={notificationMessage}/>
+        <div className='AllAppareil' id='top'>
             <AppareilInput
                 onMutate={() => mutate(url)}
                 isDashboard={isDashboard}
@@ -75,6 +84,7 @@ function AllAppareil({ isDashboard = true }) {
                 ))}
             </div>
         </div>
+        </>
     );
 }
 

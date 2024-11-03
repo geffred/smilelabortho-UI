@@ -7,6 +7,7 @@ import trash from "/image/trash.svg"
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import imagepen from "/image/image-pen.svg"
+import { HashLink } from 'react-router-hash-link'
 
 // eslint-disable-next-line react/prop-types
 function Appareil({ data, dashboard = true , handleDelete , handleEdit , handleClick}){
@@ -18,13 +19,17 @@ function Appareil({ data, dashboard = true , handleDelete , handleEdit , handleC
             <div className='Appareil'>
 
                 <div className={dashboard ? 'dashboard' : 'dashboard hide'}>
-                    <a>
-                        <img src={imagepen} alt="trash" width={25} onClick={()=>handleClick(data.id)} />
-                    </a>
-                    <a>
-                        <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
-                    </a>
-                    <a>
+                    
+                        <a>
+                            <img src={imagepen} alt="picture" width={25} onClick={()=>handleClick(data.id)} />
+                        </a>
+                   
+                    
+                        <a href='#top'>
+                            <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
+                        </a>
+                 
+                    <a className='delete'>
                         <img src={trash} alt="trash" width={20} onClick={()=>handleDelete(data.id)} />
                     </a>
                 </div>

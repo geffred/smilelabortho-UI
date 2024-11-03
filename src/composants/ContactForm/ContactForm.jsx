@@ -9,11 +9,14 @@ import emailjs from 'emailjs-com';
 import { useRef } from 'react';
 import { useState } from 'react';
 import process from '../../assets/process.png'
+import Notification from '../Notification/Notification';
 
 function ContactForm() {
 
     const form = useRef();
-    const [message,setMessage] = useState(null)
+    const [notification, setNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
+
 
     const validationSchema = Yup.object({
         nom: Yup.string().required('Nom est requis'),
@@ -31,16 +34,20 @@ function ContactForm() {
       
         emailjs.sendForm('service_f2vyidp', 'template_v5lnqrt', form.current, 'M-ibIQ1aTjGbVU4OK')
           .then(() => {
-             setMessage('Message envoyé avec succès !');
+            setNotification(true);
+            setNotificationMessage('Message envoyé avec succès !');
           }, () => {
-              setMessage('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+            setNotification(true);
+            setNotificationMessage('Erreur lors de l\'envoi du message. Veuillez réessayer.');
           });
           setTimeout(() => {
-            setMessage(null); // Réinitialise le message après 5 secondes
-          },7000)
+            setNotification(false); 
+          },1000)
       };
 
     return (
+        <>
+        <Notification active={notification} message={notificationMessage}/>
         <div className="contactForm container">
 
             <div>
@@ -75,7 +82,6 @@ function ContactForm() {
                         initialValues={{ nom: "", prenom: "", telephone: "", email: "", message: "" }}
                         validationSchema={validationSchema}
                         onSubmit={(values, { resetForm }) => {
-                            console.log("Form data:", values);
                             sendEmail(); // Appel de la fonction pour envoyer l'email
                             resetForm(); // Réinitialise le formulaire après la soumission
                         }}
@@ -148,15 +154,14 @@ function ContactForm() {
                                 <button type="submit" disabled={isSubmitting}>
                                     <span>Envoyer</span>
                                     <img src={send} alt="send_icon" width={20} />
-                                </button>
-
-                                {message!=null?<div className='message'>{message} </div>:null} 
+                                </button> 
                             </Form>
                         )}
                     </Formik>
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

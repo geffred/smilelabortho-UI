@@ -15,7 +15,9 @@ export default defineConfig({
       "/api/appareils/delete/{id}":"http://localhost:8080",
       "/api/appareils/save/":"http://localhost:8080",
       "/api/image/appareils/":"http://localhost:8080",
+      "/api/image/appareils/{id}":"http://localhost:8080",
       "/api/imageAppareils/delete/{id}":"http://localhost:8080",
+      "/api/image/appareils/save":"http://localhost:8080",
     }
   }
 })
