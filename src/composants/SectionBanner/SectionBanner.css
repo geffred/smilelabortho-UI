@@ -5,7 +5,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items:center ;
+    align-items:center;
     color: white;
 }
 
@@ -30,6 +30,7 @@
     object-fit: cover;
     z-index: -1;
     filter: blur(4px);
+    transform: scale(1.05);
 }
 
 .SectionBanner .contenu{
@@ -50,5 +51,6 @@
 }
 
 .SectionBanner .contenu h1{
+    text-transform: uppercase;
     font-weight: bold;
 }

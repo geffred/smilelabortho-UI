@@ -5,8 +5,8 @@
     
 }
 :root{
-    --color-primary: #0098FF;
-    --color-primary-glass:  #228dff27;
+    --color-primary: rgb(28, 123, 255);
+    --color-primary-glass:  #228dff4b;
 }
 
 body{

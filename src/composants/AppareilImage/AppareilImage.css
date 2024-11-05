@@ -16,6 +16,9 @@
     border-radius: 5px;
 }
 
+.AppareilImage .hide{
+    display: none;
+}
 
 .AppareilImage .cover:hover .im{
     opacity: .8;

@@ -4,7 +4,7 @@ import cancel from '/image/cancel.svg';
 import useSWR from 'swr';
 import { mutate } from 'swr';
 
-function AppareilImage({ id }) {
+function AppareilImage({ id , isDashboard = false}) {
     
     const url = `/api/image/appareils/${id}`;
     const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -35,7 +35,7 @@ function AppareilImage({ id }) {
     if (error) return <div>Erreur lors de la récupération des données</div>;
 
     return (
-        <div className='AppareilImage'>
+        <div className={isDashboard?'AppareilImage':'AppareilImage hide'}>
             {data && data.map((image) => (
                 <div className='cover' key={image.id}>
                     <img

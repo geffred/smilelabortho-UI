@@ -22,7 +22,7 @@
 .ImageDisplay .second {
     display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: start;
     margin-top:10px ;
     flex-wrap: wrap;
 }

@@ -41,13 +41,8 @@ function Appareil({ data, dashboard = true , handleDelete , handleEdit , handleC
                     <p>
                         {data.nom}     
                     </p>
+                    <span> {data.prixUnitaire} € </span>
                     <div className='btn'>
-                        <a href="">
-                            <span className='mx-1'> {data.prixUnitaire} € </span>
-                            <span>Commader</span>
-                            <img src={shop} alt="buy_icon" width={20} />
-                        </a>
-                       
                         <NavLink to={"/Appareils/"+data.id}> 
                             <span>Ajouter au Panier</span>
                             <img src={buy} alt="buy_icon" width={25} />

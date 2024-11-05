@@ -1,0 +1,61 @@
+.shop-page{
+    height: 100vh;
+    position: relative;
+}
+
+.shop-page form input{
+    width: 80%;
+    margin: auto;
+    border: 1px solid var(--color-primary);
+    background-image: url('/image/loop.svg'); 
+    background-repeat: no-repeat; 
+    background-position: right center;
+    background-size: 30px 30px;
+}
+
+.shop-page form {
+    padding: 10px;
+    align-items: center;
+  
+}
+
+
+.shop-page .appareils-box{
+    position: relative;
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.categorie-menu{
+    position: relative;
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.shop-page .appareils-box::-webkit-scrollbar{
+    width: 5px;
+}
+
+.shop-page .appareils-box::-webkit-scrollbar-track{
+    background-color: var(--color-primary-glass);
+    border-radius: 10px;
+}
+
+.shop-page .appareils-box::-webkit-scrollbar-thumb{
+    background-color: var(--color-primary);
+    border-radius: 10px;
+}
+
+.shop-page .categorie-menu::-webkit-scrollbar{
+    width: 5px;
+}
+
+.shop-page .categorie-menu::-webkit-scrollbar-track{
+    background-color: var(--color-primary-glass);
+    border-radius: 10px;
+}
+
+.shop-page .categorie-menu::-webkit-scrollbar-thumb{
+    background-color: var(--color-primary);
+    border-radius: 10px;
+}

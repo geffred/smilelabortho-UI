@@ -57,7 +57,7 @@ function Process(){
     const [scroll, setScroll] = useState(false);
       
         const handleScroll = () => {
-          setScrolling(window.scrollY > 300); 
+          setScrolling(window.scrollY > 450); 
         };
 
         const handleScrollResume = () => {

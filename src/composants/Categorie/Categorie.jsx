@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import './Categorie.css'
 import edit from "/image/edit.svg"
 import trash from "/image/trash.svg"
@@ -9,6 +10,7 @@ function Categorie({ data, dashboard = false , handleDelete , handleEdit}) {
     
 
     return (
+        <NavLink to={"/shop/"+data.id}>
         <div className="Categorie" id= {data.id}>
             <div className={dashboard ? 'dashboard' : 'dashboard hide'}>
                 <HashLink smooth to="#top">
@@ -31,6 +33,7 @@ function Categorie({ data, dashboard = false , handleDelete , handleEdit}) {
                 <img src="/image/arrow-right.svg" alt="arrow" width={25} className='im2' />
             </div>
         </div>
+        </NavLink>
     );
 }
 

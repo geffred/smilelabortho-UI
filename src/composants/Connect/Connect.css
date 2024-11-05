@@ -16,12 +16,16 @@
 .partenaire h1{
     text-align:center;
     font-family:calibri;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 4em;
 }
 
 .partenaire p{
     text-align: center;
     max-width: 650px;
     margin: 0px auto 20px auto;
+    font-size: 1.1em;
 }
 
 .partenaire {

@@ -8,7 +8,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { NavLink } from "react-router-dom"
 
-function NavBar({dashboard=false,compte=false,bg="rgba(0, 0, 0, 0.5)"}){
+function NavBar({dashboard=false,compte=false,bgColor="rgba(0, 0, 0, 0.5)" , bgColorScroll ="rgba(0, 0, 0, 0.8)",logoTextColor }){
 
         const [scrolling, setScrolling] = useState(false);
       
@@ -26,8 +26,8 @@ function NavBar({dashboard=false,compte=false,bg="rgba(0, 0, 0, 0.5)"}){
         }, []);  
 
     return (
-        <nav className="navBar" style={scrolling?{background:"rgba(0, 0, 0, 0.8)"}:{background:bg}} id="form" >
-            <NavLink to={'/'} className="left-section">
+        <nav className="navBar" style={scrolling?{background:bgColorScroll}:{background:bgColor}} id="form" >
+            <NavLink to={'/'} className="left-section" style={{color:logoTextColor}}>
                 <img src={logo_smilelab} alt="logo_smilelab"/>
                 <span>Smile <span className="lab">lab</span> </span>
             </NavLink>
@@ -65,7 +65,7 @@ function NavBar({dashboard=false,compte=false,bg="rgba(0, 0, 0, 0.5)"}){
                     <ul>
                         <li className={dashboard?"opt-show":"opt-hide"}> <NavLink to={"/dashboard"}> Dashbord </NavLink> </li>
                         <li className={compte?"opt-show":"opt-hide"}><a href="#">Compte</a></li>
-                        <li><a href="#">Inscription</a></li>
+                        <li><NavLink to="/inscription">Inscription</NavLink></li>
                         <li><a href="#">Connexion</a></li>
                     </ul>
                 </div>

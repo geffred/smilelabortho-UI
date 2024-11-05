@@ -18,7 +18,7 @@ function Dashboard(){
 
     return(
         <div>
-            <NavBar bg="#262626" />
+            <NavBar bgColor="#262626" />
             <div className="Dashboard container-fluid">
                 
                 <div className="row">

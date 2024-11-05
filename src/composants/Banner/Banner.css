@@ -48,8 +48,7 @@
   }
 
 .banner button:hover{
-    background: transparent;
-    border: .5px solid var(--color-primary);
+    opacity: .5;
   }
 
 .banner button img{
@@ -64,10 +63,15 @@
     right: 10px;
   }
   
+.banner *{
+  opacity: 1;
+}
 
 .banner .lab{
     color: rgb(0, 145, 255);
+    
 }
+
 .banner .left-section{
     position: absolute;
     left: 50%;

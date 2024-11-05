@@ -1,8 +1,8 @@
 import './SectionBanner.css'
 
-function SectionBanner({image , title , description = null }){
+function SectionBanner({image , title , description = null , style}){
     return(
-        <div className="SectionBanner">
+        <div className="SectionBanner" style={style}>
             <img src={image} alt="banner_icon" />
             <div className='contenu'>
                 <h1>

@@ -3,12 +3,12 @@ import useSWR, { mutate } from 'swr';
 import Spinner from '../Spinner/Spinner';
 import Appareil from '../Appareil/Appareil';
 import AppareilInput from '../AppareilInput/AppareilInput';
-import AppareilImage from '../AllImageAppareil/AppareilImage';
+import AppareilImage from '../AppareilImage/AppareilImage';
 import { useState } from 'react';
 import Notification from '../Notification/Notification';
 
-function AllAppareil({ isDashboard = true }) {
-    const url = `/api/appareils/`;
+function AllAppareil({ isDashboard = true , url=`/api/appareils/` }) {
+
     const [id, setId] = useState(0);
     const [imageActive, setImageActive] = useState(false);
     const [display, setDisplay] = useState(false);
@@ -69,7 +69,7 @@ function AllAppareil({ isDashboard = true }) {
                 reinitialiser={() => setEditData({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"",description:"" })}
             />
 
-            <AppareilImage id={id} />
+            <AppareilImage id={id} isDashboard={isDashboard} />
 
             <div className="container">
                 {data.map((appareil) => (

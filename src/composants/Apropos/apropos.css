@@ -1,75 +1,71 @@
 .apropos{
     display: flex;
-    align-items: center;
-    margin: 20px auto;
-    gap: 20px;
-    border-radius: 20px;
     position: relative;
-    max-width: 1200px;
-    padding: 10px 50px;
+    width: 100%;
     transition: all .85s ease;
-    background: white;
-    box-shadow: 0px 0px 10px rgba(215, 215, 215, 0.4);
+    background: linear-gradient(45deg , var(--color-primary) , rgb(0, 104, 222));
+    height: 400px;
+   
+
+}
+
+.important{
+     color: white !important;
 }
 
 
-.important{
-     color: var(--color-primary) ;
+.apropos .b-1{
+    position: relative;
+   display: flex;
+   justify-content: center;
 }
 
 
 .apropos .b-1 img{
-    max-width: 150px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+.apropos .b-2{
+    display: flex;
+    align-items: center;
+    padding: 0px 60px;
 }
 
 .apropos .b-2 p{
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-family: calibri;
-    text-align: center;
+    text-align: justify;
     padding: 50px 10px;
-    color: rgb(50, 50, 50);
+    color: rgba(255, 255, 255, 0.628);
 }
 
-.hide{
-    opacity: 0;
-    transform: translateY(100px);
+.apropos .b-2 p::first-letter{
+    font-size: 1.5em;
 }
 
-.show{
-    opacity: 1;
-    transform: translateY(0px);
-}
 
 @media screen and (max-width:1500px) {
-    .apropos {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0px;
-        margin: 20px 20px;
-        opacity: 1;
-        transform: translateY(0);
-        padding: 20px;
 
+    .apropos{
+        height: auto;
+    }
+    .apropos .b-1{
+        height: 200px;
     }
 
-    .apropos .b-1 img{
-        max-width: 100px;
+    .apropos .b-2{
+        padding: 0px;
     }
 
     .apropos .b-2 p{
-        font-size: .9em;
-        padding: 0px;
-        margin-top: 15px;
-        text-align: justify;
-    }
-
-    .apropos .b-1 {
-        background: var(--color-primary);
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 10px 0px;
-        border-radius: 10px 10px 0px 0px;
+        padding: 30px;
+        font-size: 1em;
     }
     
 }
