@@ -1,0 +1,67 @@
+
+.AllOptions .actions{
+    display: flex;
+    gap: 5px;
+    transition: all .5s ease;
+}
+
+
+.AllOptions table thead{
+    background: rgb(23, 23, 23);
+    color: white;
+   
+}
+
+.AllOptions table{
+    border-radius: 10px !important;
+    overflow: hidden;
+    background: rgba(128, 128, 128, 0.034) !important;
+}
+
+.AllOptions table {
+    font-family: calibri;
+}
+
+.AllOptions table tbody td:nth-child(2)::first-letter{
+    text-transform: uppercase;
+}
+
+.AllOptions table tbody tr:hover{
+    background: rgba(0, 140, 255, 0.084);
+}
+
+.AllOptions .actions a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+.AllOptions .actions a{
+
+    background: var(--color-primary);
+   
+}
+
+.AllOptions .actions .delete:hover{
+   
+    background: rgb(255, 35, 35);
+}
+
+.AllOptions .actions a:hover{
+    background: var(--color-primary-glass);
+}
+
+
+.AllOptions .actions a:active{
+    transform: scale(.9);
+}
+
+.AllOptions .actions a:last-child img{
+    transform: scale(.8);
+}

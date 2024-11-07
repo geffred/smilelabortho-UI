@@ -53,20 +53,56 @@ function ImageDisplay({dataImage}){
 
     return(
             <div className='ImageDisplay'>
+                  <div className="third">
+                    <Formik
+                     initialValues={{ appareil:dataImage.id ,url: ""}}
+                     validationSchema={validationSchema}
+                     onSubmit={(values, { resetForm }) => {
+                        console.log(values)
+                        sendData(values)
+                        resetForm(); // Réinitialise le formulaire après la soumission
+                     }}
+                     enableReinitialize={true}
+                    >
+                        {({  errors, touched, isSubmitting })=>( 
+                            <Form className=' container form'>
+                                <div className="row align-items-center mx-0">
+                                    <div className="col-lg-9 col-12 px-0">
+                                        <Field
+                                        type="text"
+                                        name="url"
+                                        placeholder="http://url"
+                                        className={`form-control ${touched.url && errors.url ? 'is-invalid' : ''}`}
+                                        />
+                                        <ErrorMessage name="nom" component="div" className="error" />
+                                    </div>
+                                    <div className="col-lg-3 col-12 px-2" >
+                                        <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        >Ajouter</button>
+                                    </div>
+                                </div>
+                            </Form>
+                            ) }
+                    </Formik>
+                </div>
+                
                 <div className='first'>
                     <img src={image} alt="appareil_image" />
                 </div>
-                <div className='second'>
+                
+                <div className='second container'>
 
                             <div
-                                className={active === data.id ? 'box active' : 'box'}
+                                className={active === 0 ? 'box active' : 'box'}
                                 key={crypto.randomUUID()}
                                 >
-                                    <div className={active === data.id ? 'bg_hover' : null}></div>
+                                    <div className={active === 0 ? 'bg_hover' : null}></div>
                                     <img 
                                     src={dataImage.thumbnail}
                                     alt="appareil_image"
-                                    onClick={()=>handleClick(dataImage.thumbnail,dataImage.id)}
+                                    onClick={()=>handleClick(dataImage.thumbnail,0)}
                                 />
                             </div>
                         
@@ -86,40 +122,7 @@ function ImageDisplay({dataImage}){
                         ))
                     }
                 </div>
-                <div className="container third">
-                    <Formik
-                     initialValues={{ appareil:dataImage.id ,url: ""}}
-                     validationSchema={validationSchema}
-                     onSubmit={(values, { resetForm }) => {
-                        console.log(values)
-                        sendData(values)
-                        resetForm(); // Réinitialise le formulaire après la soumission
-                     }}
-                     enableReinitialize={true}
-                    >
-                        {({  errors, touched, isSubmitting })=>( 
-                            <Form className='form'>
-                                <div className="row align-items-center">
-                                    <div className="col-lg-9 col-12">
-                                        <Field
-                                        type="text"
-                                        name="url"
-                                        placeholder="http://url"
-                                        className={`form-control ${touched.url && errors.url ? 'is-invalid' : ''}`}
-                                        />
-                                        <ErrorMessage name="nom" component="div" className="error" />
-                                    </div>
-                                    <div className="col-lg-3 col-12 my-2 " >
-                                        <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        >Ajouter</button>
-                                    </div>
-                                </div>
-                            </Form>
-                            ) }
-                    </Formik>
-                </div>
+              
             </div>                 
     )
 }

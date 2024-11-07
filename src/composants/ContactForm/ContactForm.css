@@ -1,6 +1,6 @@
 .contactForm{
     font-family: calibri;
-    margin: 20px auto;
+
 }
 
 .contactForm > div:not(.messageAlert){
@@ -12,16 +12,25 @@
 
 .contactForm .right-contact{
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
+.contactForm  form{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .contactForm .left-contact{
     position: relative;
     background: rgb(25, 25, 25);
-    border-radius: 10px 0px 0px 10px;
-    height: 510px;
+    height: 100vh;
     padding: 20px;
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,16 +74,19 @@
     
 }
 
+
 .right-contact input{
     width: 100%!important;
     padding: 15px;
     margin: 0px auto;
     margin-bottom: 10px;
+    border-color:var(--color-primary-glass);
    
 }
 
 .right-contact textarea{
     min-height: 250px;
+    border-color:var(--color-primary-glass);
 }
 
 .right-contact button{
@@ -87,7 +99,8 @@
     background: var(--color-primary);
     cursor: pointer;
     font-size: 1.2em;
-    transition: all .2s ease;
+    transition: all .1s ease;
+    border: 1px solid transparent;
 }
 
 .right-contact button img{
@@ -95,7 +108,9 @@
 }
 
 .right-contact button:hover{
-    background: rgb(11, 11, 11);
+    background: transparent;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 .right-contact .error{
     color: red;
@@ -110,6 +125,37 @@
     border-color: brown;
 }
 
+.contact-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0px 10px;
+    text-align: center;
+}
+.contact-form h1{
+    font-weight: bold;
+    color: var(--color-primary);
+    position: relative;
+   text-transform: capitalize;
+}
+
+.contact-form h1::after{
+    content: "";
+    width: 80%;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    height: 5px;
+}
+.contact-form p{
+    color: var(--color-primary);
+    padding: 10px;
+}
+
 @media screen and (max-width:1500px){
     .contactForm > div:not(.messageAlert){
         flex-wrap: wrap;
@@ -121,9 +167,19 @@
     }
 
     .contactForm .left-contact{
-        border-radius: 10px 10px 0px 0px;
-        margin: 10px 0px;
         height: 400px;
+    }
+
+    .contactForm .left-contact{
+        width: 100%;
+    }
+
+    .contactForm  form{
+        width: 100%;
+    }
+
+    .contact-form h1{
+        font-size: 2em;
     }
     
 }

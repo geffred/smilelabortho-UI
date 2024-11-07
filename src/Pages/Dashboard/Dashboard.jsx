@@ -4,8 +4,8 @@ import "./Dashboard.css"
 import { useState } from "react";
 import Display from "../../composants/Display/Display";
 import AllCategorie from "../../composants/AllCategorie/AllCategorie";
-import CategorieInput from "../../composants/CategorieInput/CategorieInput";
 import AllAppareil from "../../composants/AllAppareil/AllAppareil";
+import AllModelAppaeil from "../../composants/AllModelAppaeil/AllModelAppaeil";
 
 function Dashboard(){
     const [active , setActive] = useState(0)
@@ -32,6 +32,10 @@ function Dashboard(){
 
                         <Display active={active} label={"Appareils"}>
                             <AllAppareil isDashboard={true} style={{transform:"translateY(0px)",border:"none",paddingTop:"15px"}}/>
+                        </Display>
+
+                        <Display active={active} label={"Model Appaeil"}>
+                            <AllModelAppaeil/>
                         </Display>
                     </div>
                 </div>

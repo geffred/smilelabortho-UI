@@ -7,7 +7,7 @@
     width: 80%;
     margin: auto;
     border: 1px solid var(--color-primary);
-    background-image: url('/image/loop.svg'); 
+    background-image: url('/image/loop2.svg'); 
     background-repeat: no-repeat; 
     background-position: right center;
     background-size: 30px 30px;
@@ -22,40 +22,40 @@
 
 .shop-page .appareils-box{
     position: relative;
-    height: 70vh;
+    height: 100vh;
     overflow-y: scroll;
 }
 
 .categorie-menu{
     position: relative;
-    height: 70vh;
+    height: 100vh;
     overflow-y: scroll;
 }
 
 .shop-page .appareils-box::-webkit-scrollbar{
-    width: 5px;
+    width: 10px;
 }
 
 .shop-page .appareils-box::-webkit-scrollbar-track{
     background-color: var(--color-primary-glass);
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .shop-page .appareils-box::-webkit-scrollbar-thumb{
     background-color: var(--color-primary);
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .shop-page .categorie-menu::-webkit-scrollbar{
-    width: 5px;
+    width: 8px;
 }
 
 .shop-page .categorie-menu::-webkit-scrollbar-track{
-    background-color: var(--color-primary-glass);
-    border-radius: 10px;
+    background-color: rgba(128, 128, 128, 0.196);
+    border-radius: 2px;
 }
 
 .shop-page .categorie-menu::-webkit-scrollbar-thumb{
-    background-color: var(--color-primary);
-    border-radius: 10px;
+    background-color: black;
+    border-radius: 2px;
 }

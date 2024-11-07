@@ -48,7 +48,7 @@ function ContactForm() {
     return (
         <>
         <Notification active={notification} message={notificationMessage}/>
-        <div className="contactForm container">
+        <div className="contactForm ">
 
             <div>
                 <div className='left-contact'>
@@ -90,6 +90,12 @@ function ContactForm() {
                         {({ errors, touched, isSubmitting }) => (
                             <Form ref={form}>
                                 <div className='row'>
+                                    <div className='contact-form'>
+                                        <h1>Formulaire de contact</h1>
+                                        <p>
+                                            Laissez-nous un message et nous vous répondrons dans les plus brefs délais
+                                        </p>
+                                    </div>
                                     <div className='col-lg-6 col-12'>
                                         <Field
                                             type="text"

@@ -11,26 +11,25 @@ function Categorie({ data, dashboard = false , handleDelete , handleEdit}) {
 
     return (
         <NavLink to={"/shop/"+data.id}>
-        <div className="Categorie" id= {data.id}>
-            <div className={dashboard ? 'dashboard' : 'dashboard hide'}>
-                <HashLink smooth to="#top">
-                    <button>
-                        <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
+        <div className='categorie-wrapper'>
+            <div className="Categorie" id= {data.id}>
+                <div className={dashboard ? 'dashboard' : 'dashboard hide'}>
+                    <HashLink smooth to="#top">
+                        <button>
+                            <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
+                        </button>
+                    </HashLink>
+                    <button className='delete' onClick={() => handleDelete(data.id)}>
+                        <img src={trash} alt="trash" width={20} />
                     </button>
-                </HashLink>
-                <button className='delete' onClick={() => handleDelete(data.id)}>
-                    <img src={trash} alt="trash" width={20} />
-                </button>
+                </div>
+                
+                <div className='thumb'>
+                    <img src={data.thumbnail} alt="thumbnail" className='thumbnail' />
+                </div>
             </div>
-            
-            <div className='thumb'>
-                <img src={data.thumbnail} alt="thumbnail" className='thumbnail' />
-            </div>
-
             <div className='footerContainer'>
-                <img src="/image/arrow-right.svg" alt="arrow" width={25} className='im1' />
-                <h1> {data.titre} </h1>
-                <img src="/image/arrow-right.svg" alt="arrow" width={25} className='im2' />
+                    <h1> {data.titre} </h1>
             </div>
         </div>
         </NavLink>

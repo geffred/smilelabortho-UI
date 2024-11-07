@@ -39,25 +39,26 @@ function Shop(){
           <SectionBanner
            title={"shop"}
            image={banner}
-           style={{height:"200px", alignItems:"end"}}
+           style={{height:"180px", alignItems:"end"}}
             /> 
-          <form action="" className="row">
-              <div className="form-group col-lg-12 my-0">
-                  <input
-                 type="text"
-                  className="form-control py-2"
-                  onChange={handleChange}
-                  placeholder="Recherche..."/>
-              </div>
-          </form>
+          
           <div className="container-fluid ">
               <div className="row">
 
-                <div className="col-lg-3 px-0 categorie-menu">
+                <div className="col-lg-2 px-1 categorie-menu">
                   <ShopMenu isActive={active} handleClick={handleClick}/>   
                 </div>
 
-                <div className="col-lg-9 appareils-box">
+                <div className="col-lg-10 appareils-box">
+                  <form action="" className="row">
+                      <div className="form-group col-lg-12 my-0">
+                          <input
+                        type="text"
+                          className="form-control py-2"
+                          onChange={handleChange}
+                          placeholder="Recherche..."/>
+                      </div>
+                  </form>
                   <Display>
                     <AllAppareil isDashboard = {false} url={url} />
                   </Display>

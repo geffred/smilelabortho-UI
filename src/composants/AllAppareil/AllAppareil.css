@@ -2,9 +2,18 @@
 .AllAppareil .container{
     max-width:100% !important;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
 }
+
+.AllAppareil .container{
+    max-width: 1300px !important;
+    display: flex;
+    gap: 20px;
+    padding: 30px 0px 30px 0px;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
 
 
 @media screen and (max-width:1500px){

@@ -19,7 +19,9 @@ export default defineConfig({
       "/api/imageAppareils/delete/{id}":"http://localhost:8080",
       "/api/image/appareils/save":"http://localhost:8080",
       "/api/appareils/categories/{id}":"http://localhost:8080",
-      "/api/appareils/search/{name}":"http://localhost:8080"
+      "/api/appareils/search/{name}":"http://localhost:8080",
+      "/api/models":"http://localhost:8080",
+      "/api/models/delete/{id}":"http://localhost:8080"
     }
   }
 })

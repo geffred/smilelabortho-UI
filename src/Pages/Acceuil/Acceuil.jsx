@@ -43,7 +43,9 @@ function Acceuil(){
         <Apropos/> 
         <Process/>
         <Connect/>
-        <AllCategorie />
+        <AllCategorie
+            style={{borderColor:"transparent",backgroundColor:" rgba(30, 144, 255,.03)"}}
+        />
         <About/>
         <Map/> 
         <Footer/> 

@@ -3,6 +3,7 @@ import right from "/image/arrow-next.svg"
 import device from "/image/device.svg"
 import useSWR from "swr"
 import Spinner from "../Spinner/Spinner"
+import teeth from "/image/teeth.svg"
 
 function ShopMenu({handleClick , isActive}){
 
@@ -29,7 +30,7 @@ function ShopMenu({handleClick , isActive}){
                     data.map((info)=>{
                         return <a href="#" key={info.id} onClick={()=>handleClick(info.id)}  className={isActive===info.id ? "line active":"line"}>
                         <div className="icon">
-                            <img src={info.thumbnail} alt="Services" width={40} height={40} />
+                            <img src={teeth} alt="Services" width={40} height={40} />
                         </div>
                         <span>{info.titre} </span>
                         <img src={right} alt="arrow-right" width={20} className="arrow"/>

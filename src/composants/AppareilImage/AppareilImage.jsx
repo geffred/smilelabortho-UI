@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Spinner from '../Spinner/Spinner';
 import './AppareilImage.css';
 import cancel from '/image/cancel.svg';
@@ -10,7 +11,11 @@ function AppareilImage({ id , isDashboard = false}) {
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const { data , error} = useSWR(url, fetcher);
 
-
+    useEffect(() =>{
+        console.log(data);
+        console.log("id",id)
+    })
+    
     const handleDelete = async (imageId) => {        
         try {
             const response = await fetch(`/api/image/appareils/delete/${imageId}`, {

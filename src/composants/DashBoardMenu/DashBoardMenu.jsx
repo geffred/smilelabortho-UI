@@ -6,6 +6,7 @@ import teeth from "/image/teeth.svg"
 import device from "/image/device.svg"
 import order from "/image/order.svg"
 import analytics from "/image/analytics.svg"
+import circle from "/image/circle.svg"
 
 import { useEffect, useState } from "react";
 
@@ -24,6 +25,11 @@ const data = [
         "id":crypto.randomUUID(),
         "title":"Appareils",
         "icon":device
+    },
+    {
+        "id":crypto.randomUUID(),
+        "title":"Model Appaeil",
+        "icon":circle
     },
     {
         "id":crypto.randomUUID(),

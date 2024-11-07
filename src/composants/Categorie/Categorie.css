@@ -1,18 +1,30 @@
 .Categorie{
     position: relative;
-    width: 280px;
+    max-width: 280px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding: 20px 20px 50px 20px;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
     border-radius: 20px;
     cursor: pointer;
     border: .5px solid var(--color-primary-glass);
-    min-height: 300px;
     transition: all .85 ease;
     background: white;
+    justify-content: end;
+    overflow: hidden;
+}
+
+.Categorie::after{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: "";
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    background: rgba(0, 140, 255, 0.066);
 }
 
 .Categorie .thumbnail{
@@ -25,48 +37,29 @@
     border-radius: 20px;
     filter: contrast(.6) brightness(1.3);
     transform: scale(1);
-    transition: all .85s ease;
+    box-shadow: 0px 0px 10px transparent;
+    transition: all .1s ease;
 }
 
-.Categorie:hover .thumbnail{
-    transform: scale(1.2);
+.categorie-wrapper{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-primary-glass);
+    padding: 5px;
+    transition: all .2s ease;
+    width: 280px;
+    border-radius: 20px;
+    padding: 10px ;
+    background: transparent;
 }
 
-.Categorie .thumb{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px 20px 5px 5px;
+.categorie-wrapper:hover{
+    box-shadow: 0px 0px 10px rgba(129, 198, 255, 0.235);
+    transform: scale(1.05);
 }
 
-.Categorie::after{
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-radius: 20px 20px 5px 5px;
-    background:var(--color-primary-glass);
-    z-index: -1;
-    transition: all .3s ease;
-    transform: translateY(-15px);
-
-}
-
-.Categorie:hover::after{
-    transform: rotate(0deg);
-    
-}
-
-.Categorie:hover h1{
-    position: relative;
-    transition: all .3s ease;
-    opacity: 1;
+.categorie-wrapper h1{
+    color:var(--color-primary);
 }
 
 .Categorie:hover::before{
@@ -74,69 +67,32 @@
 }
 
 
-
-.Categorie h1{
+.categorie-wrapper  .footerContainer h1{
     position: relative;
     z-index: 1;
     font-family:Calibri;
     opacity: .8;
     font-size: 1.1em;
-    text-align: center;
+    text-align: start;
     margin:0px;
+
 }
 
-.Categorie .footerContainer{
-
-    display: flex;
-    height: 70px;
-    justify-content:space-between;
-    align-items: center;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
+.categorie-wrapper .footerContainer{
+    height: 60px;
+    align-items: start;
     width: 100%;
-    background:var(--color-primary) ;
     padding: 10px 20px;
     border-radius: 10px 10px 5px 5px;
     z-index: 2;
-   
 }
 
-.Categorie .im2{
-    transform: rotate(180deg);
-}
 
-.Categorie:hover .im1{
-    transform: translateX(5px);
-}
-
-.Categorie:hover .im2{
-    transform: rotate(180deg) translateX(5px);
-}
-
-.Categorie .footerContainer img{
-    transition: all .85s ease;
-}
-
-.Categorie .footerContainer img,span{
-    opacity: .8;
-}
-
-.Categorie .logo{
-    position: relative;
-    z-index: 1;
-}
-
-.Categorie .footerContainer div{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
 
 .Categorie .dashboard{
     position: absolute;
     z-index: 2;
-    right: 10px;
+    left: -25px;
     top: 25px;
     display: flex;
     gap: 5px;
