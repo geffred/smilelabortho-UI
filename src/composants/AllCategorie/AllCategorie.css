@@ -34,6 +34,7 @@
 @media screen and (max-width:1500px){
     .AllCategorie .container{
         flex-wrap: wrap;
+        justify-content:center ;
     }
 }
 

@@ -9,6 +9,7 @@ import Shop from "./Pages/Shop/Shop"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import AppareilDetails from "./Pages/AppareilDetails/AppareilDetails"
 import Inscription from "./Pages/Inscription/Inscription"
+import ServicePage from "./Pages/ServicePage/ServicePage"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
      <Routes>
         <Route index path="/" element={<Acceuil/>} />
         <Route path="/services" element={<Services/>} />
+        <Route path="/services/:id" element={<ServicePage/>} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/Appareils" element={<Appareils/>} />
         <Route path="/Shop" element={<Shop/>} />

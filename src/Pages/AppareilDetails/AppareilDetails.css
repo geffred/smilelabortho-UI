@@ -1,4 +1,16 @@
+.AppareilDetails form input,select,select{
+    border-color:var(--color-primary-glass) !important;
+}
+
 .ImageDisplay{
     width: 100%;
+   
+}
+
+
+.similaire{
+    font-family: calibri;
+    margin-top: 30px;
+    position: relative;
 }
 

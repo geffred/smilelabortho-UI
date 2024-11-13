@@ -7,6 +7,7 @@ import Spinner from '../../composants/Spinner/Spinner';
 import useSWR from 'swr';
 import DetailsInput from '../../composants/DetailsInput/DetailsInput';
 import Footer from '../../composants/Footer/Footer';
+import AllAppareil from '../../composants/AllAppareil/AllAppareil';
 
 
 function AppareilDetails(){
@@ -39,8 +40,21 @@ function AppareilDetails(){
                         <div className='col-lg-6'>
                             <DetailsInput data={data}/>
                         </div>
+
+                        <div className='col-lg-12'>
+                            <div className='similaire'>
+                                <h1>Appareils Similaires </h1>
+                                <hr />
+                            </div>
+                            <AllAppareil isDashboard={false} url={'/api/appareils/categories/'+data.categorie} />
+                        </div>
                     </div> 
-                }  
+
+                    
+                }
+                <div className='row'>
+                    
+                </div>  
             </div>
 
             <Footer/>

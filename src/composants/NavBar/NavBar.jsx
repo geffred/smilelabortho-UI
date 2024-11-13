@@ -1,4 +1,4 @@
-import logo_smilelab from "/image/logo_smilelab_bg.svg"
+import logo_smilelab from "/image/logo_smilelab.svg"
 import shop from "/image/shop.svg"
 import arrow from "/image/arrow.svg"
 import "./NavBar.css"
@@ -27,8 +27,10 @@ function NavBar({dashboard=false,compte=false,bgColor="rgba(0, 0, 0, 0.5)" , bgC
 
     return (
         <nav className="navBar" style={scrolling?{background:bgColorScroll}:{background:bgColor}} id="form" >
-            <NavLink to={'/'} className="left-section" style={{color:logoTextColor}}>
-                <img src={logo_smilelab} alt="logo_smilelab"/>
+            <NavLink to={'/'} className="left-section">
+                <div className="logo-container">
+                    <img src={logo_smilelab} alt="logo_smilelab"/>
+                </div>
                 <span>Smile <span className="lab">lab</span> </span>
             </NavLink>
 

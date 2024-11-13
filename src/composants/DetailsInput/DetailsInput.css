@@ -55,7 +55,13 @@
 }
 
 
-
+.error{
+    color: red;
+    margin-top: 10px;
+    transform: translateY(-10px);
+    font-size: .9em;
+    opacity: .9;
+}
 
 
 .AppareilDetails .detailsFooter button{
