@@ -1,0 +1,44 @@
+.panier{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.panier .content{
+    flex: 3;
+    padding: 20px 20px 80px 20px;
+    background: rgba(0, 149, 255, 0.037);
+    min-height: 70vh;
+    position: relative;
+}
+
+
+.panier .boutton {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 20px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: 10px;
+}
+.panier .boutton button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: calibri;
+    gap: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    outline: none;
+}
+
+.panier .boutton button:hover{
+    background: rgb(22, 107, 255);
+}

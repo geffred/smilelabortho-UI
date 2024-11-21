@@ -10,11 +10,6 @@ function AppareilImage({ id , isDashboard = false}) {
     const url = `/api/image/appareils/${id}`;
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const { data , error} = useSWR(url, fetcher);
-
-    useEffect(() =>{
-        console.log(data);
-        console.log("id",id)
-    })
     
     const handleDelete = async (imageId) => {        
         try {

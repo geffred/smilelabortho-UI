@@ -1,0 +1,105 @@
+.AppareilPanier{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    font-family: calibri;
+    gap: 20px;
+    border-radius: 5px;
+    justify-content: center;
+    box-shadow: 0px 0px 10px rgba(146, 146, 146, 0.167);
+    margin: 20px 0px;
+}
+
+.AppareilPanier .cancel{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    cursor: pointer;
+}
+
+.AppareilPanier p{
+    text-align: start;
+    padding: 0px;
+    margin: 0px;
+    opacity: .70;
+}
+
+.AppareilPanier em{
+    font-style: normal;
+}
+
+.AppareilPanier h1{
+    font-size: 2em;
+    margin:0px;
+    opacity: .70;
+   
+}
+
+.AppareilPanier h2{
+    font-size: 1.5em;
+    margin:0px;
+    opacity: .70;
+}
+
+.AppareilPanier .cover{
+    position: relative;
+    height: 200px !important;
+    width: 30% !important;
+    border-radius: 5px;
+}
+
+.AppareilPanier .cover::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    border-radius: 10px;
+    background: linear-gradient(0deg  , var(--color-primary-glass), transparent);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    color: white;
+    cursor: pointer;
+}
+
+.AppareilPanier .cover img{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.AppareilPanier .data-appareil{
+    width: 100%;
+}
+
+.AppareilPanier .data-appareil div{
+    padding: 0px 20px 0px 0px ;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-primary);
+    opacity: .9;
+}
+
+@media screen and (max-width:950px) {
+    .AppareilPanier{
+        flex-wrap: wrap;
+        justify-content: center;
+      
+    }
+
+    .AppareilPanier .cover{
+        width: 100% !important;
+    }
+    
+}

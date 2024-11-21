@@ -7,8 +7,9 @@ import Map from "../../composants/Map/Map"
 import Connect from "../../composants/Connect/Connect"
 import AllCategorie from "../../composants/AllCategorie/AllCategorie"
 import About from "../../composants/About/About"
-import Appareil from "../../composants/Appareil/Appareil"
-import AllAppareil from "../../composants/AllAppareil/AllAppareil"
+import PanierBtn from "../../composants/PanierBtn/PanierBtn"
+import CompteUtilisateur from "../Profil/Profil"
+
 
 const cards = [
     {
@@ -38,6 +39,7 @@ const cards = [
 function Acceuil(){
     return(
         <div className="app">
+        <PanierBtn/> 
         <NavBar dashboard={true} />
         <Banner/>
         <Apropos/> 

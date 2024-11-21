@@ -6,6 +6,25 @@ import linkedin from "/image/linkedin.svg";
 import { Formik , Form , Field , ErrorMessage } from "formik";
 import Footer from "../../composants/Footer/Footer";
 import * as Yup from "yup";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const LoginButton = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  return <a onClick={() => loginWithRedirect()}><img src={google} alt="" width={25}/></a>;
+};
+
+const LogoutButton = () => {
+    const { logout } = useAuth0();
+  
+    return (
+      <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+        Log Out
+      </button>
+    );
+  };
+
+
 
 function Inscription(){
     const validationSchema = Yup.object(
@@ -29,9 +48,8 @@ function Inscription(){
                         <div>
                             <h1>Créer un compte</h1>
                             <div className="social-login">
-                                <a href="">
-                                    <img src={google} alt="" width={25} />
-                                </a>
+                                <LogoutButton/>
+                                <LoginButton/>
                                 <a href="">
                                     <img src={linkedin} alt="" width={30} />
                                 </a>

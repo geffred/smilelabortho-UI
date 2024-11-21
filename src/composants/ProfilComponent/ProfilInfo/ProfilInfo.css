@@ -1,0 +1,134 @@
+.profilIinfo{
+    position: relative;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--color-primary-glass);
+    border-radius: 5px;
+}
+
+.profilIinfo::after{
+    content: '';
+    width: 100%;
+    height: 100%;
+    background:rgba(0, 145, 255, 0.559);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 5px;
+}
+
+.profilIinfo>.header{
+    position:absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(255, 255, 255);
+    font-family: calibri;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.profilIinfo>.header h1{
+    font-family: calibri;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+.profilIinfo>.header em{
+    font-style: normal;
+    font-family: "Pacifico", cursive !important;
+    font-weight: 100;
+}
+
+
+.profilIinfo>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.profilIinfo .profil-thumbnail{
+    position: relative;
+    z-index: 5;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+
+}
+
+.profilIinfo .profil-thumbnail img{
+    width: 120px;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    filter: contrast(1.1);
+    box-shadow: 0px 0px 10px rgba(166, 205, 255, 0.281);
+}
+
+/*******************************infoBox****************************************/
+
+.infoBox{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px 0px;
+    border-radius: 10px;
+    
+}
+
+.infoBox h1{
+    font-family: calibri;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: rgb(0, 145, 255);
+}
+
+.infoBox ul{
+
+    list-style: none;
+    font-family: calibri;
+    font-size: 1.2em;
+    
+}
+
+.infoBox ul li{
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    border: 1px solid rgba(0, 115, 255, 0.164);
+    color: var(--color-primary);
+    text-transform: lowercase;
+    
+}
+
+.infoBox ul li span:first-child{
+    color: rgba(0, 0, 0, 0.582);
+    text-transform: capitalize;
+}
+
+
+@media screen and (max-width: 768px){
+    .profilIinfo>.header{
+        font-size: 1em;
+        transform: translateY(-58%);
+        padding: 0px 5%;
+    }
+    
+    .profilIinfo>.header h1{
+        font-size: 1.8em;
+    }
+
+    .profilIinfo>.header p{
+        font-size: 1.1em;
+    }
+    .infoBox{
+        margin: 50px auto;
+        
+    }
+}

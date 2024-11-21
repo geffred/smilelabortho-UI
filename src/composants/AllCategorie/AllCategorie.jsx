@@ -80,7 +80,7 @@ function AllCategorie({ isDashboard = false , style}){
 
             <div className="container">
                 {
-                    data.map((categorie)=> <Categorie
+                     data.map((categorie)=> <Categorie
                      key={categorie.id}
                      data={categorie}
                      dashboard={isDashboard}

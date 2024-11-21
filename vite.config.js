@@ -23,6 +23,8 @@ export default defineConfig({
       "/api/models":"http://localhost:8080",
       "/api/models/delete/{id}":"http://localhost:8080",
       "/api/models/":"http://localhost:8080",
+      "/api/paniers/":"http://localhost:8080",
+      "/api/paniers/{id}":"http://localhost:8080",
     }
   }
 })

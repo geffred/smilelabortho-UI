@@ -1,0 +1,30 @@
+.menu_profil{
+    width: 100%;
+    padding: 20px 0px;
+    box-shadow: 0px 0px 4px rgba(128, 128, 128, 0.281);
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.menu_profil a{
+    padding: 15px 0px 15px 10px;
+    text-decoration: none;
+    border-right: 6px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: calibri;
+    font-size: 1.1em;
+}
+
+.menu_profil a:hover{
+    background:  rgba(28, 123, 255, 0.055);
+    color: var(--color-primary);
+}
+
+.menu_profil-active{
+    background:  rgba(28, 123, 255, 0.055);
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary);
+}

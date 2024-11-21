@@ -30,10 +30,10 @@ function AllModelAppaeil(){
 
             if (response.ok) {
                 mutate(url)
-                setNotificationMessage('Catégorie supprimé avec succès');
+                setNotificationMessage('Model Appareil supprimé avec succès');
                 setNotification(true)
             } else {
-                setNotificationMessage('Erreur lors de la suppression de la catégorie');
+                setNotificationMessage('Erreur lors de la suppression du model de l\'appareil');
                 setNotification(true)
             }
         } catch (error) {

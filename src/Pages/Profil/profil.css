@@ -1,0 +1,10 @@
+.profil{
+    padding-top: 100px;
+}
+
+
+@media screen and (max-width: 768px){
+    .profil{
+        padding-top: 0px;
+    }
+}

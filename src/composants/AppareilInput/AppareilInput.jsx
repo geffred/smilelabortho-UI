@@ -4,7 +4,7 @@ import { Field, Formik, Form, ErrorMessage } from "formik";
 import cancel from "/image/cancel.svg";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import categorie from '../categorie/categorie';
+import categorie from '../Categorie/Categorie';
 import useSWR from "swr";
 
 function AppareilInput({onMutate,isDashboard =false , display, setDisplay , editData , reinitialiser }){

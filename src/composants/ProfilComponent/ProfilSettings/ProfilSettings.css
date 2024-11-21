@@ -1,0 +1,26 @@
+.profilSettings {
+    font-family: calibri;
+    font-size: 1.1em;
+    color: rgba(0, 0, 0, 0.694);
+}
+
+
+.profilSettings input{
+   padding: 15px;
+}
+
+.profilSettings .information button{
+    padding: 15px;
+    width: 100%;
+    border: 1px solid var(--color-primary);
+    margin-bottom: 10px;
+    transition: none;
+    font-size: 1em;
+    outline: none;
+}
+
+.profilSettings .information button:hover{
+    background: transparent;
+    color: var(--color-primary);
+}
+

@@ -50,7 +50,7 @@ function ServicePage(){
                                 </p>
                             </div>
                             <div className="col-lg-12 cover">
-                                <img src={bg} alt="fritage_laser" className="img-fluid" />
+                                <img src={"https://www.dentalemergence.com/public/img/big/P10203981600x1200JPG_5dab700173ae2.JPG"} alt="fritage_laser" className="img-fluid" />
                             </div>
                     </div>
                    </div>
@@ -59,8 +59,8 @@ function ServicePage(){
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-6 ">
-                                    <div className="im1"><img src={bg} alt="" /></div>
-                                    <div className="im2"><img src={bg} alt="" /></div>
+                                    <div className="im1"><img src={"https://smilelabortho.be/wp-content/uploads/elementor/thumbs/service-impression-metal-q7oa8qfnowi1lo7d4n1fc4e1c170eht1pckubdpa00.jpg"} alt="" /></div>
+                                    <div className="im2"><img src={"https://img.facfox.com/imgs/2022/02/a057fe2f7ffcbf78.png"} alt="" /></div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div>

@@ -8,6 +8,7 @@ import AllAppareil from "../../composants/AllAppareil/AllAppareil"
 import "./shop.css"
 import Footer from "../../composants/Footer/Footer"
 import { useParams } from "react-router-dom";
+import PanierBtn from "../../composants/PanierBtn/PanierBtn";
 
 function Shop(){
 
@@ -35,6 +36,7 @@ function Shop(){
   }
     return (
         <div className="shop-page">
+          <PanierBtn/>
           <Navbar/>
           <SectionBanner
            title={"shop"}

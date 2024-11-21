@@ -10,7 +10,8 @@ import Dashboard from "./Pages/Dashboard/Dashboard"
 import AppareilDetails from "./Pages/AppareilDetails/AppareilDetails"
 import Inscription from "./Pages/Inscription/Inscription"
 import ServicePage from "./Pages/ServicePage/ServicePage"
-
+import Panier from "./Pages/Panier/panier"
+import CompteUtilisateur from "./Pages/Profil/Profil"
 
 function App() {
 
@@ -26,7 +27,9 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/Appareils/:id" element={<AppareilDetails/>} />
         <Route path="/shop/:id" element={<Shop/>} />
+        <Route path="/panier" element={<Panier/>} />
         <Route path="/inscription" element={<Inscription/>} />
+        <Route path="/profil/" element={<CompteUtilisateur/>} />
      </Routes>
     </>
   )

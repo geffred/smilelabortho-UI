@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import DetailsInput from '../../composants/DetailsInput/DetailsInput';
 import Footer from '../../composants/Footer/Footer';
 import AllAppareil from '../../composants/AllAppareil/AllAppareil';
+import PanierBtn from '../../composants/PanierBtn/PanierBtn';
 
 
 function AppareilDetails(){
@@ -22,6 +23,7 @@ function AppareilDetails(){
     
     return(
         <div className='AppareilDetails'>
+            
             <NavBar 
             
             />

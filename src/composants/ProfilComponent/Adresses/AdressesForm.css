@@ -1,0 +1,52 @@
+.AdressesForm{
+    font-family: calibri;
+    margin: 20px 0px;
+}
+
+.AdressesForm form{
+
+    color: var(--color-primary);
+
+}
+
+.AdressesForm form input{
+
+    border-color:var(--color-primary-glass);
+}
+
+.AdressesForm form section button{
+
+    padding: 12px 40px;
+    font-size: 1.1em;
+    transition: none;
+}
+
+.AdressesForm form section button:hover{
+    background: transparent;
+    border-color:var(--color-primary) ;
+    color: var(--color-primary);
+}
+
+.AdressesForm form .form-group{
+    margin: 5px 0px;
+}
+
+.AdressesForm .adress-btn{
+    margin: 10px 0px;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--color-primary);
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--color-primary);
+    background: none;
+    outline: none;
+    transition: all .5s ease;
+}
+
+.AdressesForm .adress-btn:active{
+    transform: scale(.95);
+}

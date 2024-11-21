@@ -1,0 +1,40 @@
+.PanierBtn{
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background: var(--color-primary);
+    right: 10px;
+    bottom: 100px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all .5s ease;
+    z-index: 10;
+}
+
+.PanierBtn span{
+    position: absolute;
+    color: var(--color-primary);
+    display: inline-block;
+    font-family: calibri;
+    left: -10px;
+    bottom: 0px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--color-primary);
+}
+
+.PanierBtn:hover{
+    background:rgb(0, 106, 228);
+    transform: scale(.95);
+}
+
+.PanierBtn:active{
+    transform: scale(.9);
+}

@@ -47,15 +47,15 @@
 }
 
 .shop-page .categorie-menu::-webkit-scrollbar{
-    width: 8px;
+    width: 4px;
 }
 
 .shop-page .categorie-menu::-webkit-scrollbar-track{
-    background-color: rgba(128, 128, 128, 0.196);
+    background-color: rgba(128, 128, 128, 0.075);
     border-radius: 2px;
 }
 
 .shop-page .categorie-menu::-webkit-scrollbar-thumb{
-    background-color: black;
+    background-color: rgba(0, 123, 255, 0.121);
     border-radius: 2px;
 }
