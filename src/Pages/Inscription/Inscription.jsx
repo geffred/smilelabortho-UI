@@ -14,19 +14,12 @@ const LoginButton = () => {
   return <a onClick={() => loginWithRedirect()}><img src={google} alt="" width={25}/></a>;
 };
 
-const LogoutButton = () => {
-    const { logout } = useAuth0();
-  
-    return (
-      <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-        Log Out
-      </button>
-    );
-  };
+
 
 
 
 function Inscription(){
+    const url = "/api/utilisateurs/register";
     const validationSchema = Yup.object(
         {
             email: Yup.string()
@@ -37,6 +30,34 @@ function Inscription(){
                .required("Le mot de passe est obligatoire")
         }
     )
+
+      async function sendData(data) {
+        try {
+          const response = await fetch(url, {
+            method: "POST", // Type de la requête HTTP
+            headers: {
+              "Content-Type": "application/json",
+              // On précise que l'on envoie des données JSON
+              //"Authorization": `Bearer ${token}` 
+            },
+            body: JSON.stringify(data), // Convertir les données en JSON pour les envoyer
+          });
+
+          // Vérification de la réponse du serveur
+          if (response.ok) {
+            const responseData = await response.json(); // Extraire la réponse JSON du serveur
+            console.log("Données envoyées avec succès:", responseData);
+          } else {
+            console.error(
+              "Erreur lors de l'envoi des données:",
+              response.statusText
+            );
+          }
+        } catch (error) {
+          console.error("Erreur réseau:", error);
+        }
+      }
+
     return(
         <div className="inscription-container">
             <NavBar 
@@ -48,7 +69,6 @@ function Inscription(){
                         <div>
                             <h1>Créer un compte</h1>
                             <div className="social-login">
-                                <LogoutButton/>
                                 <LoginButton/>
                                 <a href="">
                                     <img src={linkedin} alt="" width={30} />
@@ -61,9 +81,16 @@ function Inscription(){
                                 ou en utilisant votre adresse email
                             </p>
                             <Formik
-                                initialValues={{email: "" , password: "" }}
+                                initialValues={{email: "" , password: ""}}
                                 validationSchema={validationSchema}
                                 onSubmit={(values, { resetForm }) => {
+                                    sendData({
+                                      email: "tchapda20@e.com",
+                                      password: "123",
+                                      nom: "hey",
+                                      prenom: "bad",
+                                      roles: ["ADMIN"],
+                                    });
                                     console.log(values)
                                     resetForm(); // Réinitialise le formulaire après la soumission
                                 }}

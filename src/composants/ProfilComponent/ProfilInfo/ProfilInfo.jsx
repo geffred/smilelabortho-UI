@@ -1,5 +1,6 @@
 
 import Spinner from "../../Spinner/Spinner";
+import ListAdresses from "../ListAdresses/ListAdresses";
 import "./ProfilInfo.css"
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -57,6 +58,10 @@ function ProfilInfo(){
             </ul>
           </aside>
         )}
+
+        <div>
+            <ListAdresses/>
+        </div>
       </div>
     );
    

@@ -76,7 +76,7 @@
 
 .infoBox{
     max-width: 800px;
-    margin: 40px auto;
+    margin: 40px auto 0px auto;
     padding: 20px 0px;
     border-radius: 10px;
     
@@ -94,6 +94,7 @@
     list-style: none;
     font-family: calibri;
     font-size: 1.2em;
+    margin: 0px;
     
 }
 
@@ -128,7 +129,7 @@
         font-size: 1.1em;
     }
     .infoBox{
-        margin: 50px auto;
+        margin: 50px auto 0px auto;
         
     }
 }
