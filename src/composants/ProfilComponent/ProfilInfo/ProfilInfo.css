@@ -55,9 +55,11 @@
 }
 
 .profilIinfo .profil-thumbnail{
+    width: 120px;
+    height: 120px;
     position: relative;
     z-index: 5;
-    transform: translateY(-50%);
+    transform: translateY(-60px);
     display: flex;
     justify-content: center;
     border-radius: 10px;
@@ -65,7 +67,10 @@
 }
 
 .profilIinfo .profil-thumbnail img{
-    width: 120px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
     background: rgb(255, 255, 255);
     border-radius: 50%;
     filter: contrast(1.1);

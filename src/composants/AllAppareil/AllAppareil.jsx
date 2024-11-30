@@ -14,7 +14,17 @@ function AllAppareil({ isDashboard = true , url=`/api/appareils/` }) {
     const [display, setDisplay] = useState(false);
     const [editData, setEditData] = useState({ nom: "", thumbnail: "",prixUnitaire:"",categorie:"",description:"" });
 
-    const fetcher = (url) => fetch(url).then((res) => res.json());
+       const fetcher = (url) =>
+         fetch(url, {
+           method: "GET",
+           credentials: "include", // Inclure les cookies dans la requête
+         }).then((response) => {
+           if (!response.ok) {
+             throw new Error("Erreur lors de la récupération des données");
+           }
+           return response.json();
+         });
+
     const { data, error } = useSWR(url, fetcher);
     const [notification, setNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
@@ -24,30 +34,27 @@ function AllAppareil({ isDashboard = true , url=`/api/appareils/` }) {
         setImageActive(!imageActive);
     };
 
-    const handleDelete = async (id) => {
-        if (notification) setNotification(false);
-        try {
-            const response = await fetch(`${url}delete/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+   const handleDelete = async (id) => {
+     try {
+       const response = await fetch(`/api/paniers/delete/${id}`, {
+         method: "DELETE",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         credentials: "include", // Inclut le cookie de session
+       });
 
-            if (response.ok) {
-                mutate(url);
-                setNotification(true)
-                setNotificationMessage('Appareil supprimé avec succès');
-            } else {
-                setNotification(true)
-                setNotificationMessage('Erreur lors de la suppression de l\'Appareil');
-            }
-        } catch (error) {
-            setNotification(true)
-            setNotificationMessage('Erreur réseau lors de la suppression de l\'Appareil')
-        }
-            
-    };
+       if (response.ok) {
+         mutate(url); // Rafraîchit les données après suppression
+         console.log("Item supprimé avec succès");
+       } else {
+         console.error("Erreur lors de la suppression de l'item");
+       }
+     } catch (error) {
+       console.error("Erreur réseau :", error);
+     }
+   };
+
 
     const handleEdit = (data) => {
         setDisplay(true);

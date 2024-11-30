@@ -3,8 +3,43 @@ import { Formik, Field, ErrorMessage, Form } from "formik";
 import * as Yup from "yup";
 import Thumbnail from "../Thumbnail/Thumbnail";
 import AdressesForm from "../Adresses/AdressesForm";
+import Spinner from "../../Spinner/Spinner";
+import { useContext, useState } from "react";
+import { UserContext } from "../../UserContext";
+import useSWR, { mutate } from "swr";
 
 function ProfilSettings() {
+  const { user } = useContext(UserContext); // Utiliser le contexte
+  const [updateError, setUpdateError] = useState(null); // État pour les erreurs de mise à jour
+  const URL = `/api/auth/utilisateurs/${user.email}`;
+
+  // Fetcher pour récupérer les données utilisateur
+  const fetcher = async (url) => {
+    const res = await fetch(url, {
+      method: "GET",
+      credentials: "include", // Inclure les cookies si nécessaire
+    });
+
+    if (!res.ok) {
+      throw new Error(`Erreur: ${res.statusText}`);
+    }
+
+    const contentType = res.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+      return res.json();
+    } else {
+      const text = await res.text();
+      throw new Error(`Réponse inattendue : ${text}`);
+    }
+  };
+
+  const { data, error, isLoading } = useSWR(URL, fetcher);
+
+  if (isLoading) return <Spinner />;
+  if (error)
+    return <div className="error-message">Erreur: {error.message}</div>;
+
+  // Schéma de validation
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Veuillez saisir une adresse email valide")
@@ -13,23 +48,62 @@ function ProfilSettings() {
       .min(3, "Le nom doit contenir au moins 3 caractères")
       .required("Le nom est obligatoire"),
     prenom: Yup.string()
-      .min(3, "Le prenom doit contenir au moins 3 caractères")
-      .required("Le prenom est obligatoire"),
-    telephone: Yup.number()
-      .min(10, "Le numero de telephone doit contenir au moins 10 caractères")
-      .positive("La valeur doit être un nombre positif")
-      .required("Ce champ est obligatoire"),
+      .min(3, "Le prénom doit contenir au moins 3 caractères")
+      .required("Le prénom est obligatoire"),
+    tel: Yup.string()
+      .matches(/^\+?[0-9]{10,15}$/, "Numéro de téléphone invalide")
   });
+
+  // Fonction pour envoyer les données mises à jour
+  const sendData = async (dataUpdate) => {
+    try {
+      const response = await fetch("/api/auth/udpate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataUpdate),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.log(response.text());
+        throw new Error(errorData);
+      }
+
+      const responseData = await response.json();
+      setUpdateError("Mise à jour réussie !");
+      return responseData;
+    } catch (err) {
+      setUpdateError("Erreur lors de la mise à jour");
+      throw err;
+    }
+  };
 
   return (
     <div className="profilSettings">
       <Thumbnail />
+
+      {updateError && (
+        <div className="error-message">
+          {updateError}
+        </div>
+      )}
+
       <Formik
-        initialValues={{ email: "", nom: "", prenom: "", telephone :""}}
+        initialValues={{
+          email: data?.email || "",
+          nom: data?.nom || "",
+          prenom: data?.prenom || "",
+          tel: data?.tel || "",
+        }}
         validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          console.log(values);
-          resetForm(); // Réinitialise le formulaire après la soumission
+        onSubmit={async (values, { setSubmitting }) => {
+
+          sendData({ ...values }); // Envoi des données
+          mutate()
+          setSubmitting(false); // Arrête le spinner de soumission
+          
         }}
       >
         {({ touched, errors, isSubmitting }) => (
@@ -50,7 +124,7 @@ function ProfilSettings() {
               </div>
 
               <div className="form-group col-lg-6 col-12">
-                <label htmlFor="prenom">Prenom</label>
+                <label htmlFor="prenom">Prénom</label>
                 <Field
                   type="text"
                   name="prenom"
@@ -58,7 +132,7 @@ function ProfilSettings() {
                     touched.prenom && errors.prenom ? "is-invalid" : ""
                   }`}
                   id="prenom"
-                  placeholder="prenom"
+                  placeholder="Prénom"
                 />
                 <ErrorMessage name="prenom" component="div" className="error" />
               </div>
@@ -80,21 +154,17 @@ function ProfilSettings() {
               </div>
 
               <div className="form-group col-lg-6 col-12">
-                <label htmlFor="telephone">telephone</label>
+                <label htmlFor="tel">Téléphone</label>
                 <Field
-                  type="number"
-                  name="telephone"
+                  type="text"
+                  name="tel"
                   className={`form-control ${
-                    touched.telephone && errors.telephone ? "is-invalid" : ""
+                    touched.tel && errors.tel ? "is-invalid" : ""
                   }`}
-                  id="telephone"
-                  placeholder=" +32 2 374 XX XX"
+                  id="tel"
+                  placeholder="+32 2 374 XX XX"
                 />
-                <ErrorMessage
-                  name="telephone"
-                  component="div"
-                  className="error"
-                />
+                <ErrorMessage name="tel" component="div" className="error" />
               </div>
             </div>
 
@@ -103,11 +173,14 @@ function ProfilSettings() {
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              Mettre à jour mes informations
+              {isSubmitting
+                ? "Mise à jour..."
+                : "Mettre à jour mes informations"}
             </button>
           </Form>
         )}
       </Formik>
+
       <AdressesForm />
     </div>
   );

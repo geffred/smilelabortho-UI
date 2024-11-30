@@ -13,28 +13,40 @@ import { mutate } from "swr";
 
 function Panier(){
     const url = "/api/paniers/"
-    const fetcher = (url)=>fetch(url).then((response)=>response.json())
+    const fetcher = (url) =>
+      fetch(url, {
+        method: "GET",
+        credentials: "include", // Inclut automatiquement les cookies comme JSESSIONID
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+        }
+        return response.json();
+      });
+
     const {data , error , isLoading } = useSWR(url , fetcher);
 
-    const handleDelete = async (id) => {        
-        try {
-            const response = await fetch(`/api/paniers/delete/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+    const handleDelete = async (id) => {
+      try {
+        const response = await fetch(`/api/paniers/delete/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // Inclut le cookie de session
+        });
 
-            if (response.ok) {
-                mutate(url); // Rafraîchit les données après suppression
-                console.log('item supprimée avec succès');
-            } else {
-                console.error("Erreur lors de la suppression de l'item");
-            }
-        } catch (error) {
-            console.error('Erreur réseau :', error);
+        if (response.ok) {
+          mutate(url); // Rafraîchit les données après suppression
+          console.log("Item supprimé avec succès");
+        } else {
+          console.error("Erreur lors de la suppression de l'item");
         }
+      } catch (error) {
+        console.error("Erreur réseau :", error);
+      }
     };
+
 
 
     if(isLoading) return <Spinner/>;

@@ -11,7 +11,17 @@ import Notification from "../Notification/Notification";
 // eslint-disable-next-line react/prop-types
 function AllCategorie({ isDashboard = false , style}){
   
-    const fetcher = (url) => fetch(url).then((res) => res.json())
+   const fetcher = (url) =>
+     fetch(url, {
+       method: "GET",
+       credentials: "include", // Inclure les cookies dans la requête
+     }).then((response) => {
+       if (!response.ok) {
+         throw new Error("Erreur lors de la récupération des données");
+       }
+       return response.json();
+     });
+
     const url = `/api/categories/`;
     const { data, error, isLoading } = useSWR(url,fetcher);
     const [scrolling, setScrolling] = useState(false);

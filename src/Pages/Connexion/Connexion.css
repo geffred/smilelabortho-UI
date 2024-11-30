@@ -1,5 +1,5 @@
 
-.inscription .content-1{
+.Connexion .content-1{
     display: flex;
     justify-content:center ;
     align-items: center;
@@ -7,11 +7,11 @@
 
 }
 
-.inscription .content-1>div{
+.Connexion .content-1>div{
     width: 50%;
 }
 
-.inscription .content-1 h1{
+.Connexion .content-1 h1{
     color: var(--color-primary);
     padding: 15px;
     margin-bottom: 20px;
@@ -19,7 +19,7 @@
     text-transform: capitalize;
 }
 
-.inscription .content-1 h1::after{
+.Connexion .content-1 h1::after{
     content: "";
     width: 30%;
     position: absolute;
@@ -30,13 +30,13 @@
     height: 5px;
 }
 
-.inscription .content-2 h1{
+.Connexion .content-2 h1{
     position: relative;
     padding: 15px;
     text-transform: capitalize;
 }
 
-.inscription .content-2 h1::after{
+.Connexion .content-2 h1::after{
     content: "";
     width: 30%;
     position: absolute;
@@ -47,36 +47,36 @@
     height: 5px;
 }
 
-.inscription .content-1 h1,p{
+.Connexion .content-1 h1,p{
     text-align: center;
 }
 
-.inscription .content-1 small{
+.Connexion .content-1 small{
     display: inline-block;
     text-align: center;
 }
 
 
-.inscription .content-1 form button{
+
+.Connexion .content-1 form button{
     padding: 15px;
     width: 100%;
     border: 1px solid var(--color-primary);
     margin-bottom: 10px;
 }
 
-.inscription .content-1 form button:hover{
+.Connexion .content-1 form button:hover{
     background: transparent;
     color: var(--color-primary);
 }
 
 
-.inscription .content-1 form input{
+.Connexion .content-1 form input{
     padding: 15px;
 }
 
 
-
-.inscription .content-2{
+.Connexion .content-2{
     text-align: center;
     display: flex;
     justify-content: center;
@@ -84,11 +84,11 @@
     background: linear-gradient(0deg, rgb(2, 100, 237),var(--color-primary) );
     color: white;
 }
-.inscription .content-2>div{
+.Connexion .content-2>div{
     display: flex;
     flex-direction: column;
 }
-.inscription .content-2 a{
+.Connexion .content-2 a{
     width: 300px;
     margin: 0px auto;
     padding: 15px;
@@ -97,18 +97,18 @@
     border: 1px solid transparent;
     transition: all .2s ease;
 }
-.inscription .content-2 a:hover{
+.Connexion .content-2 a:hover{
     background: transparent;
     color: white;
     border-color:white ;
 }
 
 @media only screen and (max-width: 768px) {
-    .inscription .content-1>div{
+    .Connexion .content-1>div{
         width: 100%;
         padding: 15px;
     }
-    .inscription .content-2>div{
+    .Connexion .content-2>div{
         padding: 15px;
         height: 400px;
         flex-direction: column;
