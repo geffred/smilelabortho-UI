@@ -6,15 +6,16 @@ import { UserContext } from "../UserContext";
 import Commande from "./Commande";
 import CommandeDetails from "./CommandeDetails";
 
-
 const Display = ({ children, active }) => {
   return active ? children : null;
 };
 
-
-function AllCommande({url = "/api/commandes/", isDashboard = true }) {
+function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); // État pour la barre de recherche
+  const [filterDate, setFilterDate] = useState(""); // État pour le filtre de date
+  const [filterRefPatient, setFilterRefPatient] = useState(""); // État pour le filtre par refPatient
   const { user } = useContext(UserContext);
 
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -22,17 +23,12 @@ function AllCommande({url = "/api/commandes/", isDashboard = true }) {
   const { data: commandes, error, isLoading } = useSWR(url, fetcher);
   const { data: utilisateurs } = useSWR("/api/auth/utilisateurs/", fetcher);
   const { data: paniers } = useSWR(`/api/paniers/`, fetcher);
-  const { data: adresses } = useSWR(
-    `/api/adresses/`,
-    fetcher
-  );
-  console.log(adresses)
+  const { data: adresses } = useSWR(`/api/adresses/`, fetcher);
 
   const nouvellesCommandes =
     commandes &&
     utilisateurs &&
     commandes.map((commande) => {
-      // Vérification des données avant de les utiliser
       const utilisateur = utilisateurs?.find(
         (u) => u.id === commande.utilisateurId
       );
@@ -52,8 +48,25 @@ function AllCommande({url = "/api/commandes/", isDashboard = true }) {
       };
     });
 
+  // Tri et filtrage des commandes
+  const filteredCommandes = nouvellesCommandes?.filter((commande) => {
+    const utilisateur = commande.utilisateur || {};
+    const fullName = `${utilisateur.nom || ""} ${
+      utilisateur.prenom || ""
+    }`.toLowerCase();
+    const matchesSearch =
+      fullName.includes(searchTerm.toLowerCase()) ||
+      (commande.dateLivraisonSouhaitee || "").includes(searchTerm);
+    const matchesDate =
+      !filterDate || commande.dateLivraisonSouhaitee === filterDate;
+    const matchesRefPatient =
+      !filterRefPatient ||
+      (commande.refPatient || "")
+        .toLowerCase()
+        .includes(filterRefPatient.toLowerCase());
 
-  console.log(nouvellesCommandes);
+    return matchesSearch && matchesDate && matchesRefPatient;
+  });
 
   if (isLoading) return <Spinner />;
   if (error)
@@ -63,7 +76,67 @@ function AllCommande({url = "/api/commandes/", isDashboard = true }) {
     <div>
       <Display active={!active}>
         <div className="commandes container-fluid">
-          {nouvellesCommandes?.map((commande) => (
+          {/* Barre de recherche et filtres */}
+          <form className="row mb-3">
+            <div className="form-group col-lg-4">
+              <input
+                type="text"
+                className="form-control py-2"
+                placeholder="Recherche par nom, prénom ou date..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div className="form-group col-lg-4">
+              <select
+                value={filterDate}
+                onChange={(e) => setFilterDate(e.target.value)}
+              >
+                <option value="">Toutes les dates</option>
+                {Array.from(
+                  new Set(
+                    nouvellesCommandes?.map((c) => c.dateLivraisonSouhaitee)
+                  )
+                )
+                  .slice(0, 30)
+                  .map((date) => (
+                    <option key={date} value={date}>
+                      {date}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div className="form-group col-lg-4">
+              <input
+                type="text"
+                className="form-control py-2"
+                placeholder="Filtrer par Ref Patient..."
+                value={filterRefPatient}
+                onChange={(e) => setFilterRefPatient(e.target.value)}
+              />
+            </div>
+          </form>
+          <section className="row commande" id="head-commande">
+            <div className="col-lg-1 col-12">
+              <img
+                src="/image/order.svg"
+                alt="Commande"
+                width={45}
+                className="thumbnail"
+              />
+            </div>
+            <div className="col-lg-1 col-12">#</div>
+            <div className="col-lg-1 col-12">Nom</div>
+            <div className="col-lg-1 col-12">Prenom</div>
+            <div className="col-lg-2 col-12">Ref Patient</div>
+            <div className="col-lg-1 col-12">Dateline</div>
+            <div className="col-lg-1 col-12 d-flex justify-content-center">
+              Statut
+            </div>
+            <div className="col-lg-4 col-12 d-flex justify-content-end menu"></div>
+          </section>
+          {/* Liste des commandes filtrées */}
+          {filteredCommandes?.map((commande) => (
             <Commande
               isDashboard={isDashboard}
               data={commande}

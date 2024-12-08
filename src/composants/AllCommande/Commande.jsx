@@ -59,16 +59,18 @@ const Commande = ({ data, handleClick , isDashboard  }) => {
       <div className="col-lg-1 col-12">
         {data.utilisateur?.prenom || "Inconnu"}
       </div>
-      <div className="col-lg-1 col-12">{data.dateCommande}</div>
-      <div className="col-lg-1 col-12">{data.heureCommande}</div>
-      <div className="col-lg-1 col-12 email">{data.email}</div>
-      <div className="col-lg-1 col-12 statut">
-        {data.statut
-          .split("_")
-          .map(
-            (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-          )
-          .join(" ")}
+      <div className="col-lg-2 col-12">#{data.refPatient}</div>
+      <div className="col-lg-1 col-12">{data.dateLivraisonSouhaitee}</div>
+      <div className="col-lg-1 col-12 d-flex justify-content-center">
+        <span className="statut">
+          {data.statut
+            .split("_")
+            .map(
+              (word) =>
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            )
+            .join(" ")}
+        </span>
       </div>
       <div className="col-lg-4 col-12 d-flex justify-content-end menu">
         {isDashboard && (
@@ -79,28 +81,27 @@ const Commande = ({ data, handleClick , isDashboard  }) => {
             onClick={() => setDisplay(!display)}
           />
         )}
-        {display &&(
-            <ul className="all-statut" onMouseLeave={() => setDisplay(false)}>
-              {["EN_COURS", "TERMINEE", "EXPEDIEE"].map((statut) => (
-                <li
-                  key={statut}
-                  onClick={() => {
-                    updateStatut(statut);
-                    setDisplay(false); // Fermer le menu après la mise à jour
-                  }}
-                >
-                  {statut
-                    .split("_")
-                    .map(
-                      (word) =>
-                        word.charAt(0).toUpperCase() +
-                        word.slice(1).toLowerCase()
-                    )
-                    .join(" ")}
-                </li>
-              ))}
-            </ul>
-          )}
+        {display && (
+          <ul className="all-statut" onMouseLeave={() => setDisplay(false)}>
+            {["EN_COURS", "TERMINEE", "EXPEDIEE"].map((statut) => (
+              <li
+                key={statut}
+                onClick={() => {
+                  updateStatut(statut);
+                  setDisplay(false); // Fermer le menu après la mise à jour
+                }}
+              >
+                {statut
+                  .split("_")
+                  .map(
+                    (word) =>
+                      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                  )
+                  .join(" ")}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );
