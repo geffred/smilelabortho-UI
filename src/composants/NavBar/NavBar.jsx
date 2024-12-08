@@ -41,9 +41,11 @@ function NavBar({
       id="form"
     >
       <NavLink to={"/"} className="left-section">
-        <div className="logo-container">
-          <img src={logo_smilelab} alt="logo_smilelab" />
-        </div>
+        {false && (
+          <div className="logo-container">
+            <img src={logo_smilelab} alt="logo_smilelab" />
+          </div>
+        )}
         <span>
           Smile <span className="lab">lab</span>
         </span>
@@ -83,11 +85,14 @@ function NavBar({
           <img src={usernav} alt="user" width={25} className="user" />
           <ul>
             {/* Afficher le lien vers le Dashboard si l'utilisateur a le rôle ROLE_ADMIN */}
-            {user && user.roles.includes("ROLE_ADMIN") && ( 
-              <li>
-                <NavLink to={"/dashboard"}>Dashbord</NavLink>
-              </li>
-            )}
+            {user &&
+              user.roles.some((role) =>
+                ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(role)
+              ) && (
+                <li>
+                  <NavLink to={"/dashboard"}>Dashbord</NavLink>
+                </li>
+              )}
 
             {/* Afficher les options de connexion/déconnexion en fonction de l'état de l'utilisateur */}
             {!user ? (

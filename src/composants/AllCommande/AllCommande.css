@@ -1,0 +1,134 @@
+.commandes {
+    margin-top: 30px;
+    font-family: calibri;
+    font-size: 1.1em;
+}
+
+
+.commandes .commande{
+
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    border: 1px solid var(--color-primary-glass);
+    padding: 10px 0px;
+    border-radius: 5px;
+
+}
+
+.commandes .commande:hover{
+    background: rgb(243, 249, 255);
+}
+
+.commandes .commande .email{
+    color: var(--color-primary);
+}
+
+.commandes .commande .thumbnail{
+
+    border: 1px solid var(--color-primary-glass);
+    border-radius: 5px;
+    background:var(--color-primary);
+    cursor: pointer;
+}
+
+.commandes .commande .statut::first-letter{
+    text-transform: uppercase;
+}
+
+.commandes .commande .statut{
+    text-transform: lowercase;
+    background: var(--color-primary);
+    color: white;
+    border-radius:50px ;
+    text-align: center;
+    
+}
+
+.commandes .commande .menu {
+    position: relative;
+    height: 100%;
+}
+
+.commandes .commande .menu .all-statut{
+    position: absolute;
+    top: 0px;
+    list-style: none;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: var(--color-primary-glass);
+    color: white;
+    z-index: 5;
+}
+
+
+
+.commandes .commande .menu .all-statut li{
+    background: var(--color-primary);
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+
+}
+
+.commandes .commande .menu .all-statut li:hover{
+    border-color: white;
+    color: white;
+}
+
+.commandes .commande .menu .all-statut li::first-letter{
+    text-transform: uppercase;
+}
+
+.commandeDetails .commande-head{
+
+    background: var(--color-primary);
+    color: white;
+    padding: 20px;
+    font-size: 1.5em;
+    font-family: calibri;
+}
+
+.commandeDetails .commande-head small{
+    font-style: italic;
+    font-size: .8em;
+    opacity: .9;
+}
+
+.commandeDetails em{
+    color: var(--color-primary);
+}
+
+.commandeDetails  .info-perso{
+    font-family: calibri;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.commandeDetails button{
+
+    outline: none !important;
+    padding: 10px 35px;
+    border-radius: 5px;
+    background: var(--color-primary);
+    color: white;
+    border: 1px solid var(--color-primary);
+    cursor: pointer;
+}
+
+.commandeDetails button:hover{
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: transparent !important;;
+}
+
+

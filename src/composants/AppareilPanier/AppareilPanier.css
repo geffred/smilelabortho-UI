@@ -8,10 +8,13 @@
     gap: 20px;
     border-radius: 5px;
     justify-content: center;
-    box-shadow: 0px 0px 10px rgba(146, 146, 146, 0.167);
+    border: 1px solid rgb(170, 202, 255);
     margin: 20px 0px;
 }
 
+.AppareilPanier hr{
+    border-color: rgb(170, 202, 255);
+}
 .AppareilPanier .cancel{
     position: absolute;
     top: -5px;
@@ -33,19 +36,21 @@
 .AppareilPanier h1{
     font-size: 2em;
     margin:0px;
-    opacity: .70;
+    color: var(--color-primary);
+    opacity: .9;
    
 }
 
 .AppareilPanier h2{
     font-size: 1.5em;
     margin:0px;
-    opacity: .70;
+    color: var(--color-primary);
+
 }
 
 .AppareilPanier .cover{
     position: relative;
-    height: 200px !important;
+    height: 150px !important;
     width: 30% !important;
     border-radius: 5px;
 }
@@ -58,7 +63,8 @@
     left: 0px;
     top: 0px;
     border-radius: 10px;
-    background: linear-gradient(0deg  , var(--color-primary-glass), transparent);
+    /*background: rgba(0, 153, 255, 0.071);*/
+     border: 1px solid rgb(170, 202, 255);
     z-index: 1;
     display: flex;
     justify-content: center;

@@ -1,44 +1,16 @@
 import useSWR from "swr";
 import "./ListAdresses.css";
-import home from "/image/home.svg";
 import { useContext } from "react";
 import { UserContext } from "../../UserContext";
 import Spinner from "../../Spinner/Spinner";
-import { useState } from "react";
+import AdressCard from "./AdressCard";
 import { mutate } from "swr";
 
 
-const AdressCard = ({ adresse , handleDelete }) => {
-
-   
-  return (
-    <div className="adressCard">
-      <img src="/image/cancel.svg" alt="cancel" width={25} className="cancel-adress" onClick={()=>handleDelete(adresse.id)} />
-      <div className="icon">
-        <img src={home} alt="home_icon" width={80} />
-      </div>
-
-      <div className="content">
-        <ul>
-          <li> {adresse.entreprise || "Entreprise"} </li>
-          <li className="items">
-            <span> {adresse.rue || "Rue"} </span>
-            <span> {adresse.numeroRue || "Numéro Rue"} </span>
-          </li>
-          <li className="items">
-            <span> {adresse.codePostal || "Code Postal"} </span>
-            <span> {adresse.ville || "Ville"} </span>
-          </li>
-          <li> {adresse.pays || "Pays"} </li>
-        </ul>
-      </div>
-    </div>
-  );
-};
 
 function ListAdresses() {
   const { user } = useContext(UserContext);
-  const url = "/api/adresses/utilisateur/3";
+  const url = `/api/adresses/utilisateur/${user.id}`;
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(url, fetcher);
 
@@ -74,12 +46,15 @@ function ListAdresses() {
 
   if (Array.isArray(data)) {
     return (
-      <div className="listAdresses">
-        {data.map((adresse) => (
-          <div key={adresse.id}>
-            <AdressCard adresse={adresse} handleDelete={handleDelete} />
-          </div>
-        ))}
+      <div className="adresses">
+        <h2 className="mx-3">Vos adresses</h2>
+        <div className="listAdresses">
+          {data.map((adresse) => (
+            <div key={adresse.id}>
+              <AdressCard adresse={adresse} handleDelete={handleDelete} />
+            </div>
+          ))}
+        </div>
       </div>
     );
   } else {

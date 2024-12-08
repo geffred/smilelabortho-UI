@@ -14,11 +14,9 @@ function Categorie({ data, dashboard = false , handleDelete , handleEdit}) {
         <div className='categorie-wrapper'>
             <div className="Categorie" id= {data.id}>
                 <div className={dashboard ? 'dashboard' : 'dashboard hide'}>
-                    <HashLink smooth to="#top">
-                        <button>
-                            <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
-                        </button>
-                    </HashLink>
+                    <button>
+                        <img src={edit} alt="edit" width={20} onClick={()=>handleEdit(data)} />
+                    </button>
                     <button className='delete' onClick={() => handleDelete(data.id)}>
                         <img src={trash} alt="trash" width={20} />
                     </button>

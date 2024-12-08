@@ -11,30 +11,28 @@ function ProfilInfo() {
 
   const { user } = useContext(UserContext); // Utiliser le contexte
     const URL = "/api/auth/utilisateurs/" + user.email;
+    const fetcher = async (url) => {
+      const res = await fetch(url, {
+        method: "GET",
+        credentials: "include", // Inclure les cookies dans la requête si nécessaire
+      });
 
-  const fetcher = async (url) => {
-    const res = await fetch(url, {
-      method: "GET",
-      credentials: "include", // Inclure les cookies dans la requête si nécessaire
-    });
+      // Vérifier si la réponse est correcte (code HTTP 2xx)
+      if (!res.ok) {
+        throw new Error(`Erreur: ${res.statusText}`);
+      }
 
-    // Vérifier si la réponse est correcte (code HTTP 2xx)
-    if (!res.ok) {
-      throw new Error(`Erreur: ${res.statusText}`);
-    }
-
-    // Tenter de lire la réponse en JSON
-    const contentType = res.headers.get("Content-Type");
-    if (contentType && contentType.includes("application/json")) {
-      return res.json();
-    } else {
-      // Si ce n'est pas du JSON, essayer de retourner le texte de la réponse pour aider au débogage
-      const text = await res.text();
-      throw new Error(`La réponse n'est pas du JSON. Contenu reçu : ${text}`);
-    }
-  };
-
-  const { data, error, isLoading } = useSWR(URL, fetcher);
+      // Tenter de lire la réponse en JSON
+      const contentType = res.headers.get("Content-Type");
+      if (contentType && contentType.includes("application/json")) {
+        return res.json();
+      } else {
+        // Si ce n'est pas du JSON, essayer de retourner le texte de la réponse pour aider au débogage
+        const text = await res.text();
+        throw new Error(`La réponse n'est pas du JSON. Contenu reçu : ${text}`);
+      }
+    };
+    const { data, error, isLoading } = useSWR(URL, fetcher);
 
   if (isLoading) return <Spinner />;
   if (error)

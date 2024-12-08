@@ -1,0 +1,75 @@
+.utilisateurs {
+    margin-top: 30px;
+    font-family: calibri;
+    font-size: 1.1em;
+}
+
+
+.utilisateurs .utilisateur{
+
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    border: 1px solid var(--color-primary-glass);
+    padding: 10px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.utilisateurs .utilisateur:hover{
+    background: rgb(243, 249, 255);
+}
+
+.utilisateurs .utilisateur .email{
+    color: var(--color-primary);
+}
+
+.utilisateurs .utilisateur .thumbnail{
+
+    border: 1px solid var(--color-primary-glass);
+    border-radius: 50%;
+}
+
+/****************************** Roles ****************************/
+.utilisateurs .utilisateur  .all-statut{
+    position: absolute;
+    top: 0px;
+    list-style: none;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: var(--color-primary-glass);
+    color: white;
+    z-index: 5;
+}
+
+
+
+.utilisateurs .utilisateur  .all-statut li{
+    background: var(--color-primary);
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: .9em;
+
+
+}
+
+.utilisateurs .utilisateur  .all-statut li:hover{
+    border-color: white;
+    color: white;
+}
+
+.utilisateurs .utilisateur .all-statut li::first-letter{
+    text-transform: uppercase;
+}
+
+
+

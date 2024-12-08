@@ -1,0 +1,25 @@
+.CommandeForm form input{
+    padding: 15px;
+    border-color: rgba(11, 153, 255, 0.315);
+}
+
+.CommandeForm form textarea{
+    padding: 15px;
+    border-color: rgba(11, 153, 255, 0.315);
+}
+
+.CommandeForm form select{
+    padding: 15px;
+    width: 100%;
+    border-radius: 5px;
+    border-color: rgba(128, 128, 128, 0.315);
+    color: rgb(119, 119, 119);
+    outline: none;
+}
+
+.CommandeForm h2{
+    font-family: calibri;
+    color: var(--color-primary);
+}
+
+

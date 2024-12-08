@@ -80,7 +80,7 @@
 /*******************************infoBox****************************************/
 
 .infoBox{
-    max-width: 800px;
+    width: 100%;
     margin: 40px auto 0px auto;
     padding: 20px 0px;
     border-radius: 10px;

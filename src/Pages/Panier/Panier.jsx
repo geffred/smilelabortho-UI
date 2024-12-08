@@ -10,9 +10,15 @@ import { NavLink } from "react-router-dom";
 import useSWR from "swr";
 import Spinner from "../../composants/Spinner/Spinner";
 import { mutate } from "swr";
+import { useContext } from "react";
+import { UserContext } from "../../composants/UserContext";
+import CommandeForm from "../../composants/CommandeForm/CommandeForm";
 
 function Panier(){
-    const url = "/api/paniers/"
+
+   const {user} = useContext(UserContext)
+
+    const url = "/api/paniers/"+user.id
     const fetcher = (url) =>
       fetch(url, {
         method: "GET",
@@ -52,43 +58,31 @@ function Panier(){
     if(isLoading) return <Spinner/>;
     if(error) return <div>Une erreur s'est produite.</div>;
 
-    return(
-        <div className="panier">
-            <PanierBtn/> 
-            <NavBar/>
-            <SectionBanner
-            style={{height:"150px"}}
-            />
-            <div className="content container">
-                {
-                    data.map((panier)=>(
-                        <div key={panier.id}>
-                            <AppareilPanier 
-                                data={panier}
-                                handleDelete={handleDelete}
-                                />
-                        </div>
-                    ))
-                }
-
-                <div className="boutton">
-
-                    <NavLink to={"/shop"}>
-                        <button>
-                            <img src={arrow} alt="commander_icon" width={30} />
-                        </button>
-                    </NavLink>
-
-                    <button>
-                        <img src={buy} alt="commander_icon" width={30} />
-                        <span>Commander</span>
-                    </button>
-
+    return (
+      <div className="panier">
+        <PanierBtn />
+        <NavBar />
+        <SectionBanner style={{ height: "150px" }} />
+        <div className="content container-fluid">
+          <div className="row">
+            <div className="col-lg-7">
+              {data.
+              filter((panier) =>panier.valider === false)
+              .map((panier) => (
+                <div key={panier.id}>
+                  <AppareilPanier data={panier} handleDelete={handleDelete} />
                 </div>
+              ))
+              }
             </div>
-            <Footer/>
+            <div className="col-lg-5 commandes">
+              <CommandeForm/>
+            </div>
+          </div>
         </div>
-    )
+        <Footer />
+      </div>
+    );
 }
 
 export default Panier;

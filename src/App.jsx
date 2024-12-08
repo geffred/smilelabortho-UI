@@ -1,40 +1,79 @@
-import { Route } from "react-router-dom"
-import { Routes } from "react-router-dom"
-import "./App.css"
-import Acceuil from "./Pages/Acceuil/Acceuil"
-import Services from "./Pages/Services/Services"
-import Appareils from "./Pages/Appareils/Appareils"
-import Contact from "./Pages/Contact/Contact"
-import Shop from "./Pages/Shop/Shop"
-import Dashboard from "./Pages/Dashboard/Dashboard"
-import AppareilDetails from "./Pages/AppareilDetails/AppareilDetails"
-import Inscription from "./Pages/Inscription/Inscription"
-import ServicePage from "./Pages/ServicePage/ServicePage"
-import Panier from "./Pages/Panier/panier"
-import CompteUtilisateur from "./Pages/Profil/Profil"
-import Connexion from "./Pages/Connexion/Connexion"
+import { Route, Routes, Navigate } from "react-router-dom";
+import "./App.css";
+import Acceuil from "./Pages/Acceuil/Acceuil";
+import Services from "./Pages/Services/Services";
+import Appareils from "./Pages/Appareils/Appareils";
+import Contact from "./Pages/Contact/Contact";
+import Shop from "./Pages/Shop/Shop";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import AppareilDetails from "./Pages/AppareilDetails/AppareilDetails";
+import Inscription from "./Pages/Inscription/Inscription";
+import ServicePage from "./Pages/ServicePage/ServicePage";
+import Panier from "./Pages/Panier/panier";
+import CompteUtilisateur from "./Pages/Profil/Profil";
+import Connexion from "./Pages/Connexion/Connexion";
+
+import { useContext } from "react";
+import { UserContext } from "./composants/UserContext";
+
+// Composant pour les routes privées
+// Composant pour les routes privées
+const PrivateRoutes = ({ children, user, requiredRoles }) => {
+  if (!user || !user.roles.some((role) => requiredRoles.includes(role))) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
 
 function App() {
+  const { user } = useContext(UserContext);
+  console.log(user);
 
   return (
     <>
       <Routes>
+        {/* Routes publiques */}
         <Route index path="/" element={<Acceuil />} />
         <Route path="/services" element={<Services />} />
         <Route path="/services/:id" element={<ServicePage />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/Appareils" element={<Appareils />} />
         <Route path="/Shop" element={<Shop />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Appareils/:id" element={<AppareilDetails />} />
         <Route path="/shop/:id" element={<Shop />} />
-        <Route path="/panier" element={<Panier />} />
+        <Route
+          path="/panier"
+          element={
+            <PrivateRoutes user={user} requiredRoles={["ROLE_USER"]}>
+              <Panier />
+            </PrivateRoutes>
+          }
+        />
         <Route path="/inscription" element={<Inscription />} />
-        <Route path="/profil/" element={<CompteUtilisateur />} />
-        <Route path="/connexion" element={<Connexion/>} />
+        {/* Routes privées */}
+        <Route
+          path="/profil/"
+          element={
+            <PrivateRoutes user={user} requiredRoles={["ROLE_USER"]}>
+              <CompteUtilisateur />
+            </PrivateRoutes>
+          }
+        />
+        <Route path="/connexion" element={<Connexion />} />
+
+        {/* Routes privées */}
+        <Route
+          path="/Dashboard"
+          element={
+            <PrivateRoutes user={user} requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}>
+              <Dashboard />
+            </PrivateRoutes>
+          }
+        />
       </Routes>
     </>
   );
 }
 
-export default App
+export default App;
+
