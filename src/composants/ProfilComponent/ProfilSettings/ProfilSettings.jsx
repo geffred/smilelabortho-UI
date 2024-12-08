@@ -7,11 +7,13 @@ import Spinner from "../../Spinner/Spinner";
 import { useContext, useState } from "react";
 import { UserContext } from "../../UserContext";
 import useSWR, { mutate } from "swr";
+import { useNavigate } from "react-router-dom";
 
 function ProfilSettings() {
   const { user } = useContext(UserContext); // Utiliser le contexte
   const [updateError, setUpdateError] = useState(null); // État pour les erreurs de mise à jour
   const URL = `/api/auth/utilisateurs/${user.email}`;
+
 
   // Fetcher pour récupérer les données utilisateur
   const fetcher = async (url) => {
@@ -57,7 +59,7 @@ function ProfilSettings() {
   // Fonction pour envoyer les données mises à jour
   const sendData = async (dataUpdate) => {
     try {
-      const response = await fetch("/api/auth/udpate", {
+      const response = await fetch("/api/auth/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,13 +84,12 @@ function ProfilSettings() {
 
   return (
     <div className="profilSettings">
-      <Thumbnail />
+      <Thumbnail
+        user={data}
+        onMutate={() => mutate(`/api/auth/utilisateurs/${user.email}`)}
+      />
 
-      {updateError && (
-        <div className="error-message">
-          {updateError}
-        </div>
-      )}
+      {updateError && <div className="error-message">{updateError}</div>}
 
       <Formik
         initialValues={{
@@ -99,11 +100,9 @@ function ProfilSettings() {
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
-
           sendData({ ...values }); // Envoi des données
-          mutate()
+          mutate();
           setSubmitting(false); // Arrête le spinner de soumission
-          
         }}
       >
         {({ touched, errors, isSubmitting }) => (

@@ -28,6 +28,7 @@ export default defineConfig({
       "/api/auth/register": "http://localhost:8080",
       "/api/auth/login": "http://localhost:8080",
       "/api/auth/update": "http://localhost:8080",
+      "/api/auth/update/image": "http://localhost:8080",
       "/api/auth/utilisateurs/": "http://localhost:8080",
       "/api/auth/utilisateurs/{email}": "http://localhost:8080",
       "/api/adresses/add": "http://localhost:8080",

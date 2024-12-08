@@ -54,7 +54,7 @@ function ProfilInfo() {
         />
 
         <div className="profil-thumbnail">
-          <img src={userIcon} alt={"user_icon"} />
+          <img src={data && data.thumbnail || userIcon} alt={"user_icon"} />
         </div>
       </section>
 
@@ -83,7 +83,7 @@ function ProfilInfo() {
       )}
 
       <div>
-       <ListAdresses/>
+        <ListAdresses />
       </div>
     </div>
   );

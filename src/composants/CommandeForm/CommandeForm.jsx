@@ -9,7 +9,7 @@ import { mutate } from "swr";
 
 
 
-function CommandeForm({}) {
+function CommandeForm({prixTotal}) {
 
     const { user } = useContext(UserContext);
     const urlAdress = `/api/adresses/utilisateur/${user.id}`;
@@ -17,7 +17,7 @@ function CommandeForm({}) {
     const fetcher = (url) => fetch(url).then((res) => res.json());
     const { data: adresses } = useSWR(urlAdress, fetcher);
     const { data: paniers } = useSWR(urlPanier, fetcher);
-
+    const prixTotalPlusTVA = (prixTotal * 21) / 100 + prixTotal;
   // Validation des champs avec Yup
   const validationSchema = Yup.object({
     adresseLivraisonId: Yup.string()
@@ -73,7 +73,7 @@ function CommandeForm({}) {
       ...values,
       panierIds, // Tableau plat directement utilisé ici
       utilisateurId: user.id, // Ajout de l'utilisateur
-      prixTotalPlusTVA: 0,
+      prixTotalPlusTVA: prixTotalPlusTVA,
       statut: "EN_ATTENTE",
       refPatient: "PAT12345",
     };
@@ -163,6 +163,15 @@ function CommandeForm({}) {
                 component="div"
                 className="error"
               />
+            </div>
+
+            <div className="d-flex justify-content-between p-2">
+              <span>Prix Total </span>
+              <span> {prixTotal} €</span>
+            </div>
+            <div className="d-flex justify-content-between p-2">
+              <span>Prix Total plus TVA (21%) </span>
+              <span> { prixTotalPlusTVA } €</span>
             </div>
 
             {/* Boutons de soumission et de réinitialisation */}

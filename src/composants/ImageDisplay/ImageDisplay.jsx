@@ -1,16 +1,18 @@
 import "./ImageDisplay.css";
 import banner from "../../assets/process.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import { mutate } from "swr";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { UserContext } from "../UserContext";
 
 function ImageDisplay({ dataImage }) {
   const [image, setImage] = useState(dataImage.thumbnail);
   const [active, setActive] = useState(null);
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const url = `/api/image/appareils/${dataImage.id}`;
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
     if (dataImage && dataImage.thumbnail) {
@@ -59,36 +61,47 @@ function ImageDisplay({ dataImage }) {
   return (
     <div className="ImageDisplay">
       <div className="third">
-        <Formik
-          initialValues={{ appareil: dataImage.id, url: "" }}
-          validationSchema={validationSchema}
-          onSubmit={(values, { resetForm }) => {
-            sendData(values);
-            resetForm();
-          }}
-          enableReinitialize={true}
-        >
-          {({ errors, touched, isSubmitting }) => (
-            <Form className="container form">
-              <div className="row align-items-center mx-0">
-                <div className="col-lg-9 col-12 px-0">
-                  <Field
-                    type="text"
-                    name="url"
-                    placeholder="http://url"
-                    className={`form-control ${touched.url && errors.url ? "is-invalid" : ""}`}
-                  />
-                  <ErrorMessage name="url" component="div" className="error" />
-                </div>
-                <div className="col-lg-3 col-12 px-2">
-                  <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "En cours..." : "Ajouter"}
-                  </button>
-                </div>
-              </div>
-            </Form>
+        {user &&
+          user.roles.some((role) =>
+            ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(role)
+          ) && (
+            <Formik
+              initialValues={{ appareil: dataImage.id, url: "" }}
+              validationSchema={validationSchema}
+              onSubmit={(values, { resetForm }) => {
+                sendData(values);
+                resetForm();
+              }}
+              enableReinitialize={true}
+            >
+              {({ errors, touched, isSubmitting }) => (
+                <Form className="container form">
+                  <div className="row align-items-center mx-0">
+                    <div className="col-lg-9 col-12 px-0">
+                      <Field
+                        type="text"
+                        name="url"
+                        placeholder="http://url"
+                        className={`form-control ${
+                          touched.url && errors.url ? "is-invalid" : ""
+                        }`}
+                      />
+                      <ErrorMessage
+                        name="url"
+                        component="div"
+                        className="error"
+                      />
+                    </div>
+                    <div className="col-lg-3 col-12 px-2">
+                      <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "En cours..." : "Ajouter"}
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              )}
+            </Formik>
           )}
-        </Formik>
       </div>
 
       <div className="first">
@@ -96,10 +109,7 @@ function ImageDisplay({ dataImage }) {
       </div>
 
       <div className="second container">
-        <div
-          className={active === 0 ? "box active" : "box"}
-          key="thumbnail"
-        >
+        <div className={active === 0 ? "box active" : "box"} key="thumbnail">
           <div className={active === 0 ? "bg_hover" : null}></div>
           <img
             src={dataImage.thumbnail}

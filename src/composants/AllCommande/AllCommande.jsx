@@ -77,11 +77,11 @@ function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
       <Display active={!active}>
         <div className="commandes container-fluid">
           {/* Barre de recherche et filtres */}
-          <form className="row mb-3">
+          <form className="row mb-3 ">
             <div className="form-group col-lg-4">
               <input
                 type="text"
-                className="form-control py-2"
+                className="form-control py-2 search"
                 placeholder="Recherche par nom, prénom ou date..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -109,7 +109,7 @@ function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
             <div className="form-group col-lg-4">
               <input
                 type="text"
-                className="form-control py-2"
+                className="form-control py-2 search"
                 placeholder="Filtrer par Ref Patient..."
                 value={filterRefPatient}
                 onChange={(e) => setFilterRefPatient(e.target.value)}
@@ -117,7 +117,7 @@ function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
             </div>
           </form>
           <section className="row commande" id="head-commande">
-            <div className="col-lg-1 col-12">
+            <div className="col-lg-1 col-1">
               <img
                 src="/image/order.svg"
                 alt="Commande"
@@ -125,15 +125,14 @@ function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
                 className="thumbnail"
               />
             </div>
-            <div className="col-lg-1 col-12">#</div>
-            <div className="col-lg-1 col-12">Nom</div>
-            <div className="col-lg-1 col-12">Prenom</div>
-            <div className="col-lg-2 col-12">Ref Patient</div>
-            <div className="col-lg-1 col-12">Dateline</div>
-            <div className="col-lg-1 col-12 d-flex justify-content-center">
+            <div className="col-lg-1 col-1">#</div>
+            <div className="col-lg-1 col-2">Nom</div>
+            <div className="col-lg-1 col-2">Prenom</div>
+            <div className="col-lg-2 col-2">Ref Patient</div>
+            <div className="col-lg-1 col-2">Dateline</div>
+            <div className="col-lg-1 col-2 d-flex justify-content-center">
               Statut
             </div>
-            <div className="col-lg-4 col-12 d-flex justify-content-end menu"></div>
           </section>
           {/* Liste des commandes filtrées */}
           {filteredCommandes?.map((commande) => (
