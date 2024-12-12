@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import upload from "/image/upload.svg";
 import trash from "/image/trash.svg";
 import camera from "/image/photo-camera.svg";
+import userIconSetting from "/image/user-circle-1.svg";
 import { useState } from "react";
 import { mutate } from "swr";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Thumbnail = ({ user, onMutate }) => {
   // État local pour gérer l'URL de l'image de profil
   const [profileImage, setProfileImage] = useState(
-    user.thumbnail ||
-      "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
+    user.thumbnail || userIconSetting
   );
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false); // Contrôle du mode édition
@@ -58,9 +58,7 @@ const Thumbnail = ({ user, onMutate }) => {
           ...user,
           thumbnail: null, // Réinitialisation de l'image
         });
-        setProfileImage(
-          "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
-        );
+        setProfileImage(userIconSetting);
         setIsEdit(false);
       } catch (err) {
         console.error("Erreur lors de la suppression de l'image :", err);
@@ -71,7 +69,7 @@ const Thumbnail = ({ user, onMutate }) => {
   return (
     <div className="thumbnailInfo">
       <div className="row">
-        <div className="col-lg-3 thumbnail-section">
+        <div className="col-lg-2 thumbnail-section d-flex justify-content-end">
           <div className="thumbnail">
             <div
               className="camera"

@@ -17,6 +17,7 @@
     transition: none;
     font-size: 1em;
     outline: none;
+    background: var(--color-primary);
 }
 
 .profilSettings .information button:hover{

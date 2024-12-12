@@ -10,7 +10,11 @@ const Display = ({ children, active }) => {
   return active ? children : null;
 };
 
-function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
+function AllCommande({
+  url = "/api/commandes/",
+  isDashboard = true,
+ 
+}) {
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   const [searchTerm, setSearchTerm] = useState(""); // État pour la barre de recherche
@@ -40,11 +44,16 @@ function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
         (a) => a.id === commande.adresseLivraisonId
       );
 
+      const adresseFacturationAssocies = adresses?.find(
+        (a) => a.id === commande.adresseFacturationId
+      );
+
       return {
         ...commande,
         utilisateur: utilisateur || null,
         paniers: paniersAssocies || [],
         adresse: adresseAssocies || null,
+        adresseFacturation: adresseFacturationAssocies,
       };
     });
 
@@ -77,16 +86,18 @@ function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
       <Display active={!active}>
         <div className="commandes container-fluid">
           {/* Barre de recherche et filtres */}
-          <form className="row mb-3 ">
-            <div className="form-group col-lg-4">
-              <input
-                type="text"
-                className="form-control py-2 search"
-                placeholder="Recherche par nom, prénom ou date..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+          <form className="row">
+            {isDashboard && (
+              <div className="form-group col-lg-4">
+                <input
+                  type="text"
+                  className="form-control py-2 search"
+                  placeholder="Recherche par nom, prénom ou date..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+            )}
             <div className="form-group col-lg-4">
               <select
                 value={filterDate}
@@ -128,7 +139,7 @@ function AllCommande({ url = "/api/commandes/", isDashboard = true }) {
             <div className="col-lg-1 col-1">#</div>
             <div className="col-lg-1 col-2">Nom</div>
             <div className="col-lg-1 col-2">Prenom</div>
-            <div className="col-lg-2 col-2">Ref Patient</div>
+            <div className="col-lg-3 col-2">Refs Patients</div>
             <div className="col-lg-1 col-2">Dateline</div>
             <div className="col-lg-1 col-2 d-flex justify-content-center">
               Statut

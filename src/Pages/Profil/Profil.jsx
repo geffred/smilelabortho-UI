@@ -7,6 +7,7 @@ import Display from "../../composants/Display/Display";
 import ProfilSettings from "../../composants/ProfilComponent/ProfilSettings/ProfilSettings";
 import AllCommande from "../../composants/AllCommande/AllCommande";
 import { UserContext } from "../../composants/UserContext";
+import Footer from "../../composants/Footer/Footer"
 
 function Profil(){
     const [active,setActive] = useState("profil");
@@ -37,6 +38,7 @@ function Profil(){
             </div>
           </div>
         </div>
+        <Footer/>
       </main>
     );
 }

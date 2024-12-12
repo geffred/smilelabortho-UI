@@ -59,7 +59,7 @@ const Commande = ({ data, handleClick , isDashboard  }) => {
       <div className="col-lg-1 col-12">
         {data.utilisateur?.prenom || "Inconnu"}
       </div>
-      <div className="col-lg-2 col-12">#{data.refPatient}</div>
+      <div className="col-lg-3 col-12">{data.refPatient}</div>
       <div className="col-lg-1 col-12">{data.dateLivraisonSouhaitee}</div>
       <div className="col-lg-1 col-12 d-flex justify-content-center">
         <span className="statut">
@@ -72,7 +72,7 @@ const Commande = ({ data, handleClick , isDashboard  }) => {
             .join(" ")}
         </span>
       </div>
-      <div className="col-lg-4 col-12 d-flex justify-content-end menu">
+      <div className="col-lg-3 col-12 d-flex justify-content-end menu">
         {isDashboard && (
           <img
             src="/image/menu-dots.svg"

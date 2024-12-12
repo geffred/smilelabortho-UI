@@ -2,7 +2,7 @@ import useSWR from "swr";
 import "./AppareilPanier.css"
 import cancelPanier from "/image/cancel.svg"
 
-function AppareilPanier({data , handleDelete , cancel = true}){
+function AppareilPanier({ data, handleDelete, cancel = true, link=null }) {
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data: models, error, isLoading } = useSWR("/api/models/", fetcher);
   const model = models?.find((m) => data.model == m.id);
@@ -51,6 +51,16 @@ function AppareilPanier({data , handleDelete , cancel = true}){
           width={35}
           height={35}
         />
+      )}
+      {link && (
+        <a href={link}>
+          <img
+            src="https://www.svgrepo.com/show/506465/download.svg"
+            alt=""
+            width={20}
+            className="icon-icon"
+          />
+        </a>
       )}
     </div>
   );

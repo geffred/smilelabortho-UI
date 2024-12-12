@@ -63,6 +63,7 @@ function ModelAppareilInput({onMutate,isDashboard =false , display, setDisplay ,
                             alt="Annuler"
                             width={30}
                             height={30}
+                            className="icon-icon"
                             onClick={() => {
                                 resetForm(); // Réinitialiser le formulaire
                                 reinitialiser()

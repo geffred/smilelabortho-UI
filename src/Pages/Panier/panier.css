@@ -19,6 +19,7 @@
     justify-content: space-between;
     margin-top: 20px;
     width: 100%;
+
 }
 
 .panier .commandes{
@@ -26,7 +27,7 @@
     position: relative;
     min-height: 68vh;
     border-radius: 5px;
-     border: 1px solid rgb(170, 202, 255);
+    border:1px solid var(--color-primary-glass);
 }
 
 .panier * {

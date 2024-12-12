@@ -6,17 +6,17 @@ import home from "/image/home.svg";
 const AdressCard = ({ adresse, handleDelete, cancel = true }) => {
   return (
     <div className="adressCard">
-      { cancel &&
+      {cancel && (
         <img
           src="/image/cancel.svg"
           alt="cancel"
           width={25}
-          className="cancel-adress"
+          className="cancel-adress  icon-icon"
           onClick={() => handleDelete(adresse.id)}
         />
-      }
+      )}
       <div className="icon">
-        <img src={home} alt="home_icon" width={70} />
+        <img src={home} alt="home_icon" width={70} className=" icon-icon" />
       </div>
 
       <div className="content">

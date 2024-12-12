@@ -54,7 +54,7 @@ function AdressesForm(){
   return (
     <div className="AdressesForm">
       <button className="adress-btn" onClick={() => setAdress(!adress)}>
-        <img src={locationProfil} alt="" width={30} />
+        <img src={locationProfil} alt="" width={30} className="icon-icon" />
         <span>Ajouter Une Adresse</span>
       </button>
       <Formik

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo_smilelab from "/image/logo_smilelab_border_white.svg"
 import smile from "/image/smile.jpg"
 import prev from "/image/arrow-prev-white.svg";
 import next from "/image/arrow-next-white.svg";
@@ -33,8 +32,7 @@ function Carrousel({ slides }) {
     <div className="banner">
       <div className='cover'></div>
       <div className="left-section">
-            {/*<img src={logo_smilelab} alt="logo_smilelab"/> */}
-            <span className='logo-text'>Smile <span className="lab">lab</span> </span>
+            <img src="/public/image/smilelab_simple.svg" className='logo' alt="logo" />
             <p className='title'>le laboratoire d’orthodontie où l’artisanat rencontre l’innovation.</p>
             <a href="#">
                 <img src={shop} alt="shop" width={15} />

@@ -27,7 +27,7 @@
 }
 
 .AllOptions table tbody tr:hover{
-    background: rgb(243, 249, 255);
+    background: var(--color-primary-glass-2);
 }
 
 .AllOptions .actions a{

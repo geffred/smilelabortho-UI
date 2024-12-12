@@ -67,10 +67,7 @@
   opacity: 1;
 }
 
-.banner .lab{
-    color: rgb(0, 145, 255);
-    
-}
+
 
 .banner .left-section{
     position: absolute;
@@ -86,6 +83,10 @@
     z-index: 5;
 }
 
+.banner .left-section .logo{
+   max-width: 500px;
+}
+
 .banner .cover{
     position: absolute;
     content: '';
@@ -97,13 +98,6 @@
     z-index: 1;
   }
 
-.banner .left-section .logo-text {
-    align-items: center;
-    font-family: 'Rimouski', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 4em;
-}
 
 .banner .left-section p{
     font-size: 1.2em;
@@ -111,9 +105,7 @@
     margin: 0px;
    
 }
-.banner .left-section img{
-    max-width: 15%;
-}
+
 
 .banner .left-section .arrow-right{
    

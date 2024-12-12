@@ -73,6 +73,7 @@ function CategorieInput({onMutate,isDashboard =false , display, setDisplay , edi
               alt="Annuler"
               width={30}
               height={30}
+              className="icon-icon"
               onClick={() => {
                 resetForm(); // Réinitialiser le formulaire
                 setDisplay(); // Fermer le formulaire

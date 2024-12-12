@@ -5,11 +5,49 @@
     
 }
 :root{
-    --color-primary: rgb(28, 123, 255);
-    --color-primary-glass:  #228dff4b;
+    --color-primary: #00aed6;
+    --color-primary-glass: #00afd668;
+     --color-primary-glass-2: #00afd60e;
 }
 
 body{
     position: relative!important;
     overflow-x: hidden;
+
 }
+
+.btn-primary{
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover{
+    background: transparent;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-primary:hover img{
+  filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(3318%) hue-rotate(161deg) brightness(104%) contrast(101%) !important;
+}
+
+.btn-primary:active{
+    background: transparent !important;
+    color: var(--color-primary) !important;
+    box-shadow: none !important;
+}
+
+input:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow:1px 1px 0px var(--color-primary) !important;;
+}
+
+select:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow:1px 1px 0px var(--color-primary) !important;;
+}
+
+.icon-icon{
+    filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(3318%) hue-rotate(161deg) brightness(104%) contrast(101%) !important;
+}
+

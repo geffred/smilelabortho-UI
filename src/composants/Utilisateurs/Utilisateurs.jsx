@@ -3,12 +3,15 @@ import useSWR, { mutate } from "swr";
 import { useContext, useState } from "react";
 import "./utilisateurs.css";
 import { UserContext } from "../../composants/UserContext";
+import userIconDash from "/image/user-circle-1.svg";
+import { useNavigate } from "react-router-dom";
 
 const Utilisateur = ({ data }) => {
   const [display, setDisplay] = useState(false);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
   const updateUser = async (role) => {
-    // Création d'une nouvelle liste de rôles sans muter les données existantes
     const dataUpdate = { ...data, roles: ["USER", role] };
 
     try {
@@ -25,9 +28,7 @@ const Utilisateur = ({ data }) => {
         throw new Error(errorData);
       }
 
-      // Revalidation des données après mise à jour
       mutate("/api/auth/utilisateurs/");
-      console.log(response.text());
     } catch (err) {
       console.error("Erreur lors de la mise à jour :", err);
       alert("Impossible de mettre à jour le rôle. Veuillez réessayer.");
@@ -38,18 +39,19 @@ const Utilisateur = ({ data }) => {
     <section className="row utilisateur">
       <div className="col-lg-1 col-12">
         <img
-          src="/image/user.png"
+          src={data.thumbnail || userIconDash}
           alt="user"
           width={45}
           className="thumbnail"
+          onClick={() => navigate(`/utilisateurs/${data.id}`)}
         />
       </div>
       <div className="col-lg-1 col-12">{data.nom}</div>
       <div className="col-lg-1 col-12">{data.prenom}</div>
       <div className="col-lg-2 col-12 email">{data.email}</div>
-      <div className="col-lg-1 col-12">{data.dateInscription}</div>
+      <div className="col-lg-2 col-12">{data.dateInscription}</div>
       <div className="col-lg-3 col-12 role">{data.roles.join(", ")}</div>
-      <div className="col-lg-3 col-12 d-flex justify-content-end">
+      <div className="col-lg-2 col-12 d-flex justify-content-end">
         {user.roles.includes("ROLE_SUPER_ADMIN") &&
           data?.id &&
           user.id !== data.id && (
@@ -68,7 +70,7 @@ const Utilisateur = ({ data }) => {
                 key={role}
                 onClick={() => {
                   updateUser(role);
-                  setDisplay(false); // Fermer le menu après la mise à jour
+                  setDisplay(false);
                 }}
               >
                 {role
@@ -90,10 +92,11 @@ const Utilisateur = ({ data }) => {
 function Utilisateurs() {
   const URL = "/api/auth/utilisateurs/";
 
+
   const fetcher = async (url) => {
     const res = await fetch(url, {
       method: "GET",
-      credentials: "include", // Inclure les cookies dans la requête si nécessaire
+      credentials: "include",
     });
 
     if (!res.ok) {
@@ -111,14 +114,53 @@ function Utilisateurs() {
 
   const { data, error, isLoading } = useSWR(URL, fetcher);
 
+  // État pour le filtre
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Filtrer les utilisateurs
+  const filteredData = data?.filter(
+    (utilisateur) =>
+      utilisateur.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      utilisateur.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      utilisateur.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      utilisateur.dateInscription.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   if (isLoading) return <Spinner />;
   if (error)
     return <div className="error-message">Erreur: {error.message}</div>;
 
   return (
     <div className="utilisateurs container-fluid">
-      {data &&
-        data.map((utilisateur) => (
+      {/* Champ de recherche */}
+      <div className="search-bar">
+        <input
+          type="text"
+          className="search"
+          placeholder="Rechercher par Nom, Prénom , Email ou date..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      <section className="row commande" id="head-user">
+        <div className="col-lg-1 col-1">
+          <img
+            src="/image/user-circle.svg"
+            alt="Commande"
+            width={45}
+            className="thumbnail"
+           
+          />
+        </div>
+        <div className="col-lg-1 col-12">Nom</div>
+        <div className="col-lg-1 col-12">Prenom</div>
+        <div className="col-lg-2 col-12">Email</div>
+        <div className="col-lg-2 col-12">Date Inscription</div>
+        <div className="col-lg-3 col-12">Role(s)</div>
+      </section>
+      {filteredData &&
+        filteredData.map((utilisateur) => (
           <Utilisateur data={utilisateur} key={utilisateur.id} />
         ))}
     </div>

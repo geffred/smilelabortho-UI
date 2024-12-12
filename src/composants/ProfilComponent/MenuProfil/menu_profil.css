@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 0px 0px 5px 5px;
+    
 }
 
 .menu_profil a{
@@ -16,15 +17,16 @@
     gap: 8px;
     font-family: calibri;
     font-size: 1.1em;
+    color: var(--color-primary) !important;
 }
 
 .menu_profil a:hover{
-    background:  rgba(28, 123, 255, 0.055);
+    background:  var(--color-primary-glass-2);
     color: var(--color-primary);
 }
 
 .menu_profil-active{
-    background:  rgba(28, 123, 255, 0.055);
+    background:   var(--color-primary-glass-2);
     border-color: var(--color-primary) !important;
     color: var(--color-primary);
 }

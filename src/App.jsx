@@ -15,6 +15,7 @@ import Connexion from "./Pages/Connexion/Connexion";
 
 import { useContext } from "react";
 import { UserContext } from "./composants/UserContext";
+import UtilisateurDetails from "./composants/Utilisateurs/UtilisateurDetails";
 
 // Composant pour les routes privées
 // Composant pour les routes privées
@@ -65,8 +66,23 @@ function App() {
         <Route
           path="/Dashboard"
           element={
-            <PrivateRoutes user={user} requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}>
+            <PrivateRoutes
+              user={user}
+              requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}
+            >
               <Dashboard />
+            </PrivateRoutes>
+          }
+        />
+
+        <Route
+          path="/utilisateurs/:id"
+          element={
+            <PrivateRoutes
+              user={user}
+              requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}
+            >
+              <UtilisateurDetails />
             </PrivateRoutes>
           }
         />

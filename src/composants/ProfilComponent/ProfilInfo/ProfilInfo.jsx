@@ -2,7 +2,7 @@ import Spinner from "../../Spinner/Spinner";
 
 import "./ProfilInfo.css";
 import useSWR from "swr";
-import userIcon from "/image/user.png"
+import userIcon from "/image/user-circle-1.svg";
 import { UserContext } from "../../UserContext";
 import { useContext } from "react";
 import ListAdresses from "../ListAdresses/ListAdresses";
@@ -10,7 +10,7 @@ import ListAdresses from "../ListAdresses/ListAdresses";
 function ProfilInfo() {
 
   const { user } = useContext(UserContext); // Utiliser le contexte
-    const URL = "/api/auth/utilisateurs/" + user.email;
+    const URL = "/api/auth/utilisateurs/" + user.id;
     const fetcher = async (url) => {
       const res = await fetch(url, {
         method: "GET",
@@ -54,7 +54,7 @@ function ProfilInfo() {
         />
 
         <div className="profil-thumbnail">
-          <img src={data && data.thumbnail || userIcon} alt={"user_icon"} />
+          <img src={(data && data.thumbnail) || userIcon} alt={"user_icon"} />
         </div>
       </section>
 
@@ -83,7 +83,7 @@ function ProfilInfo() {
       )}
 
       <div>
-        <ListAdresses />
+        <ListAdresses id={user.id} />
       </div>
     </div>
   );

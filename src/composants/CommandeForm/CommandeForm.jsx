@@ -23,6 +23,9 @@ function CommandeForm({prixTotal}) {
     adresseLivraisonId: Yup.string()
       .required("Veuillez sélectionner une adresse de livraison.")
       .notOneOf([""], "Veuillez sélectionner une adresse valide."),
+    adresseFacturationId: Yup.string()
+      .required("Veuillez sélectionner une adresse de facturation.")
+      .notOneOf([""], "Veuillez sélectionner une adresse valide."),
     dateLivraisonSouhaitee: Yup.date()
       .required("Veuillez sélectionner une date de livraison.")
       .min(
@@ -75,7 +78,7 @@ function CommandeForm({prixTotal}) {
       utilisateurId: user.id, // Ajout de l'utilisateur
       prixTotalPlusTVA: prixTotalPlusTVA,
       statut: "EN_ATTENTE",
-      refPatient: "PAT12345",
+      refPatient: " ",
     };
 
     try {
@@ -95,6 +98,7 @@ function CommandeForm({prixTotal}) {
       <Formik
         initialValues={{
           adresseLivraisonId: "",
+          adresseFacturationId: "",
           dateLivraisonSouhaitee: "",
           commentaire: "",
         }}
@@ -124,6 +128,33 @@ function CommandeForm({prixTotal}) {
               </Field>
               <ErrorMessage
                 name="adresseLivraisonId"
+                component="div"
+                className="error"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="adresseFacturationId">
+                Adresse de Facturation
+              </label>
+              <Field
+                as="select"
+                name="adresseFacturationId"
+                id="adresseFacturationId"
+                className=""
+              >
+                <option value="">Sélectionnez une adresse</option>
+
+                {adresses &&
+                  adresses.map((adress) => (
+                    <option key={adress.id} value={adress.id}>
+                      {adress.entreprise} {adress.rue} {adress.numeroRue}{" "}
+                      {adress.ville} {adress.pays}
+                    </option>
+                  ))}
+              </Field>
+              <ErrorMessage
+                name="adresseFacturationId"
                 component="div"
                 className="error"
               />
@@ -171,7 +202,7 @@ function CommandeForm({prixTotal}) {
             </div>
             <div className="d-flex justify-content-between p-2">
               <span>Prix Total plus TVA (21%) </span>
-              <span> { prixTotalPlusTVA } €</span>
+              <span> {prixTotalPlusTVA} €</span>
             </div>
 
             {/* Boutons de soumission et de réinitialisation */}
@@ -193,7 +224,7 @@ function CommandeForm({prixTotal}) {
               <button
                 type="button"
                 onClick={resetForm}
-                className="btn btn-secondary"
+                className="btn btn-primary"
               >
                 Réinitialiser
               </button>

@@ -17,6 +17,8 @@
     width: 100%;
     object-fit: cover;
     transform: scale(.95);
+    border-radius: 5px;
+
 }
 
 .ImageDisplay .second {
@@ -67,6 +69,11 @@
 .ImageDisplay input{
     width: 100%!important;
     padding: 12.5px !important;
+}
+
+.ImageDisplay .error{
+    position: absolute;
+    left: 5px;
 }
 
 .ImageDisplay button{

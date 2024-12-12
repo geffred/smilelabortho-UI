@@ -16,7 +16,7 @@
     overflow: hidden;
 }
 
-.Categorie::after{
+/*.Categorie::after{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -24,8 +24,8 @@
     left: 0px;
     top: 0px;
     right: 0px;
-    background: rgba(0, 140, 255, 0.066);
-}
+    background:var(--color-primary-glass-2);
+}*/
 
 .Categorie .thumbnail{
     width: 100%;
@@ -91,7 +91,7 @@
 
 .Categorie .dashboard{
     position: absolute;
-    z-index: 2;
+    z-index: 10;
     left: -25px;
     top: 25px;
     display: flex;

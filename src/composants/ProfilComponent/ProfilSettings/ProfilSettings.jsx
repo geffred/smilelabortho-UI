@@ -7,12 +7,12 @@ import Spinner from "../../Spinner/Spinner";
 import { useContext, useState } from "react";
 import { UserContext } from "../../UserContext";
 import useSWR, { mutate } from "swr";
-import { useNavigate } from "react-router-dom";
+
 
 function ProfilSettings() {
   const { user } = useContext(UserContext); // Utiliser le contexte
   const [updateError, setUpdateError] = useState(null); // État pour les erreurs de mise à jour
-  const URL = `/api/auth/utilisateurs/${user.email}`;
+  const URL = `/api/auth/utilisateurs/${user.id}`;
 
 
   // Fetcher pour récupérer les données utilisateur

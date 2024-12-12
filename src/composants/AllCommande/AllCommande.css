@@ -2,6 +2,7 @@
     margin-top: 30px;
     font-family: calibri;
     font-size: 1.1em;
+    margin-bottom: 60px;
 }
 
 
@@ -28,7 +29,7 @@
 }
 
 .commandes .commande:hover{
-    background: rgb(243, 249, 255);
+    background:var(--color-primary-glass-2);
 }
 
 .commandes .commande .email{
@@ -118,31 +119,43 @@
     opacity: .9;
 }
 
-.commandeDetails em{
+.commandeDetails .info-perso em{
     color: var(--color-primary);
+    font-size: 1.5em;
+    
 }
 
 .commandeDetails  .info-perso{
     font-family: calibri;
     font-style: italic;
     margin-bottom: 10px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
 }
 
 .commandeDetails button{
 
     outline: none !important;
-    padding: 10px 35px;
+    padding: 18px 25px 18px 15px;
     border-radius: 5px;
     background: var(--color-primary);
     color: white;
     border: 1px solid var(--color-primary);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .commandeDetails button:hover{
     color: var(--color-primary);
     border-color: var(--color-primary);
     background: transparent !important;;
+}
+
+.commandeDetails button img{
+    filter: none;
 }
 
 /************************************search/********************************/
@@ -158,6 +171,7 @@
 }
 
 .commandes form select{
+
     width: 100%;
     border: 1px solid var(--color-primary) !important;
     background-size: 30px 30px;
@@ -170,6 +184,29 @@
     padding: 10px;
     align-items: center;
   
+}
+
+/***************** adress-info ********************/
+
+.commandeDetails  .adress-info h5{
+    margin-left: 20px;
+    text-align: start;
+    font-family: calibri;
+    font-style: italic;
+    color: var(--color-primary);
+}
+
+.commandeDetails .adresses{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+}
+
+.commandeDetails .commentaire{
+    border: 1px dashed var(--color-primary);
+    padding: 15px;
+    border-radius: 5px;
+   
 }
 
 

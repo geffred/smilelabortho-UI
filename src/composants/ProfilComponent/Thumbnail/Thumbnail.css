@@ -1,4 +1,6 @@
-
+.thumbnailInfo{
+    margin-top: 40px;
+}
 .thumbnailInfo .row{
     display: flex;
     align-items: center;
@@ -17,10 +19,11 @@
 
 .thumbnailInfo .thumbnail{
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
+
 
 .thumbnailInfo .thumbnail .camera{
     position:absolute;

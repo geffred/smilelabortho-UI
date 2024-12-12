@@ -1,7 +1,21 @@
 .utilisateurs {
-    margin-top: 30px;
+    margin-top: 60px;
     font-family: calibri;
     font-size: 1.1em;
+}
+
+ #head-user{
+    padding: 10px;
+    background: black !important;
+    color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+
+#head-user .thumbnail{
+    background: none;
+    border: none;
 }
 
 
@@ -17,7 +31,7 @@
 }
 
 .utilisateurs .utilisateur:hover{
-    background: rgb(243, 249, 255);
+    background:var(--color-primary-glass-2);
 }
 
 .utilisateurs .utilisateur .email{
@@ -25,9 +39,11 @@
 }
 
 .utilisateurs .utilisateur .thumbnail{
-
+    width: 60px;
+    height: 60px;
     border: 1px solid var(--color-primary-glass);
     border-radius: 50%;
+    object-fit: cover;
 }
 
 /****************************** Roles ****************************/
@@ -70,6 +86,25 @@
 .utilisateurs .utilisateur .all-statut li::first-letter{
     text-transform: uppercase;
 }
+
+/************************************search/********************************/
+
+.search-bar  .search{
+    width: 100%;
+    border: 1px solid var(--color-primary);
+    background-image: url('/image/loop2.svg'); 
+    background-repeat: no-repeat; 
+    background-position: right center;
+    background-size: 30px 30px;
+    padding: 10px;
+    margin: 5px 10px;
+    border-radius: 5px;
+     outline: none;
+}
+
+
+
+
 
 
 

@@ -57,7 +57,7 @@ function DashBoardMenu({handleClick , isActive}) {
                             <img src={info.icon} alt="Services" width={40} height={40} />
                         </div>
                         <span>{info.title} </span>
-                        <img src={right} alt="arrow-right" width={20} className="arrow"/>
+                        <img src={right} alt="arrow-right" width={20} className="arrow icon-icon"/>
                     </a>
                     })
                 }

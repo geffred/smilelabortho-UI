@@ -3,7 +3,7 @@
     position: relative;
     width: 100%;
     transition: all .85s ease;
-    background: linear-gradient(45deg , var(--color-primary) , rgb(0, 104, 222));
+    background: linear-gradient(45deg , var(--color-primary) ,#0094b6);
     height: 400px;
    
 

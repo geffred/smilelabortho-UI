@@ -1,10 +1,9 @@
 
 import user_icon from "/image/user-profil.svg"
-import location_profil from "/image/location-profil.svg"
 import order from "/image/order-profil.svg";
 import settings from "/image/settings.svg"
 import "./menu_profil.css"
-import { useState } from "react"
+
 
 function MenuProfil({active , handleClick}){
 
@@ -35,7 +34,7 @@ function MenuProfil({active , handleClick}){
                      key={item.id}
                      className={active === item.title? "line menu_profil-active":"line"}
                      onClick={() =>handleClick(item.title)}>
-                        <img src={item.icon} alt={item.title} width={30} />
+                        <img src={item.icon} alt={item.title} width={30} className="icon-icon" />
                         <span>{item.title}</span>
                     </a>
                 ))

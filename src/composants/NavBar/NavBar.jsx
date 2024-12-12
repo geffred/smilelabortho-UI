@@ -1,7 +1,7 @@
-import logo_smilelab from "/image/logo_smilelab.svg";
 import shop from "/image/shop.svg";
 import arrow from "/image/arrow.svg";
 import "./NavBar.css";
+import smilelab from "/public/image/smilelab_white.svg";
 import usernav from "/image/user.svg";
 import menu from "/image/menu.svg";
 import { useState, useEffect } from "react";
@@ -40,15 +40,10 @@ function NavBar({
       }
       id="form"
     >
-      <NavLink to={"/"} className="left-section">
-        {false && (
-          <div className="logo-container">
-            <img src={logo_smilelab} alt="logo_smilelab" />
-          </div>
-        )}
-        <span>
-          Smile <span className="lab">lab</span>
-        </span>
+      <NavLink to={"/"} className="lesft-section">
+       
+          <img src={smilelab} alt="smilelab_white" width={250} />
+        
       </NavLink>
 
       <div className="center-section">

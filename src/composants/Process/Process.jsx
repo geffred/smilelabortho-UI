@@ -106,7 +106,7 @@ function Process(){
 
                  </div>
                 <div className="process-2">
-                      <img src={processImage} alt="process_image" />
+                      <img src={processImage} alt="process_image" className="icon" />
                 </div>
             </div>
             </div>

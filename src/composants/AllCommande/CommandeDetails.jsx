@@ -6,7 +6,7 @@ import AdressCard from "../ProfilComponent/ListAdresses/AdressCard";
 
 const CommandeDetails = ({ data, id, handleClick }) => {
   const commande = data?.find((cmd) => cmd.id === id);
-  console.log(commande.adresse);
+  console.log(commande);
 
   if (!commande) {
     return (
@@ -23,37 +23,58 @@ const CommandeDetails = ({ data, id, handleClick }) => {
         <div className="col-lg-6 ">Commande #{commande.id}</div>
         <div className="col-lg-6 d-flex justify-content-end">
           <small>
-            {commande.dateCommande} | {commande.heureCommande} 
+            {commande.dateCommande} | {commande.heureCommande}
           </small>
         </div>
       </div>
       <hr />
       <div className="row d-flex align-items-center">
-        <div className="col-lg-12">
+        <div className="col-lg-4 info-perso">
           <em>Informations du clients</em>
-        </div>
-        <div className="col-lg-6 info-perso">
           <div>
-            {commande.utilisateur?.nom || "Inconnu"}{" "}
-            {commande.utilisateur?.prenom || "Inconnu"} <br />
-            {commande.utilisateur.email || "Inconnu"} <br />
-            {commande.utilisateur.tel || "Inconnu"} <br />
+            Nom : {commande.utilisateur?.nom || "Inconnu"} <br />
+            Prenom :{commande.utilisateur?.prenom || "Inconnu"} <br />
+            Email : {commande.utilisateur.email || "Inconnu"} <br />
+            Tel : {commande.utilisateur.tel || "Inconnu"} <br />
           </div>
         </div>
-        <div className="col-lg-6 d-flex justify-content-end">
-          <AdressCard adresse={commande.adresse} cancel={false} />
+        <div className="col-lg-8 adresses">
+          <div className="adress-info">
+            <h5>Adress de facturation</h5>
+            <AdressCard adresse={commande.adresseFacturation} cancel={false} />
+          </div>
+          <div className="adress-info">
+            <h5>Adresse de Livraison</h5>
+            <AdressCard adresse={commande.adresse} cancel={false} />
+          </div>
         </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-12 commentaire"> {commande.commentaire} </div>
       </div>
       <div className="row">
         <div className="col-lg-12">
           {commande.paniers.map((panier) => (
             <div key={panier.id}>
-              <AppareilPanier data={panier} cancel={false} />
+              <AppareilPanier
+                data={panier}
+                cancel={false}
+                link={panier.scan3d}
+              />
             </div>
           ))}
         </div>
       </div>
-      <button onClick={handleClick}>Retour</button>
+      <div className="row px-3 my-3">
+        <div className="col-lg-12 d-flex justify-content-between">
+          <span>Prix Total plus TVA :</span>
+          <span> {commande.prixTotalPlusTVA} € </span>
+        </div>
+      </div>
+      <button onClick={handleClick} className="btn btn-primary">
+        <img src="/public/image/arrow-prev-white.svg " alt="" width={20} />
+        Retour
+      </button>
     </div>
   );
 };

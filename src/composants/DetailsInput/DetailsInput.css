@@ -46,7 +46,7 @@
 
 .AppareilDetails form select:focus{
     
-    box-shadow: 0px 0px 5px rgba(0, 140, 255, 0.699);
+    box-shadow: 0px 0px 5px var(--color-primary);
 }
 
 #quantite{
@@ -82,13 +82,18 @@
     border: 1px solid transparent;
 }
 
+.AppareilDetails #quantite{
+
+   border: 1px dashed var(--color-primary);
+}
+
 a{
     text-decoration: none !important;;
 }
 
 .AppareilDetails .detailsFooter button:hover{
     background:transparent;
-    color: black;
+    color: var(--color-primary);
     border: 1px solid var(--color-primary);
 }
 

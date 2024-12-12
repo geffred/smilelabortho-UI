@@ -8,9 +8,9 @@ import { mutate } from "swr";
 
 
 
-function ListAdresses() {
+function ListAdresses({id , cancel}) {
   const { user } = useContext(UserContext);
-  const url = `/api/adresses/utilisateur/${user.id}`;
+  const url = `/api/adresses/utilisateur/${id}`;
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(url, fetcher);
 
@@ -51,7 +51,11 @@ function ListAdresses() {
         <div className="listAdresses">
           {data.map((adresse) => (
             <div key={adresse.id}>
-              <AdressCard adresse={adresse} handleDelete={handleDelete} />
+              <AdressCard
+                adresse={adresse}
+                handleDelete={handleDelete}
+                cancel={cancel}
+              />
             </div>
           ))}
         </div>
