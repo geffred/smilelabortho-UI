@@ -12,10 +12,13 @@ import ServicePage from "./Pages/ServicePage/ServicePage";
 import Panier from "./Pages/Panier/panier";
 import CompteUtilisateur from "./Pages/Profil/Profil";
 import Connexion from "./Pages/Connexion/Connexion";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 import { useContext } from "react";
 import { UserContext } from "./composants/UserContext";
 import UtilisateurDetails from "./composants/Utilisateurs/UtilisateurDetails";
+import Analytics from "./Pages/Analytics/Analytics";
 
 // Composant pour les routes privées
 // Composant pour les routes privées
@@ -26,9 +29,14 @@ const PrivateRoutes = ({ children, user, requiredRoles }) => {
   return children;
 };
 
+
+
 function App() {
   const { user } = useContext(UserContext);
   console.log(user);
+  const stripePromise = loadStripe(
+    "pk_test_51Q2e0vHhNojQmyZVZ3xB8g12WtbFUxgcxqL7arHDyOF79GNQ4Oo5Y903CzWsE8syae7XXf6gj476REmJCUfEQeit00KIxpUICR"
+  ); 
 
   return (
     <>
@@ -46,7 +54,9 @@ function App() {
           path="/panier"
           element={
             <PrivateRoutes user={user} requiredRoles={["ROLE_USER"]}>
-              <Panier />
+              <Elements stripe={stripePromise}>
+                <Panier />
+              </Elements>
             </PrivateRoutes>
           }
         />
@@ -83,6 +93,18 @@ function App() {
               requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}
             >
               <UtilisateurDetails />
+            </PrivateRoutes>
+          }
+        />
+
+        <Route
+          path="/utilisateurs/:id"
+          element={
+            <PrivateRoutes
+              user={user}
+              requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}
+            >
+              <Analytics/>
             </PrivateRoutes>
           }
         />

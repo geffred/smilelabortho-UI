@@ -1,0 +1,52 @@
+.analytics-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-top: 50px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.analytics-cards {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card {
+  border: 1px solid var(--color-primary);
+  padding: 15px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.analytics-section {
+  margin-bottom: 30px;
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.analytics-section h2 {
+  margin-bottom: 15px;
+  color: var(--color-primary);
+  font-family: calibri;
+}
+
+.analytics-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.analytics-section li {
+  margin-bottom: 10px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid var(--color-primary-glass);
+  border-radius: 5px;
+}

@@ -1,13 +1,9 @@
 import './Appareil.css'
-import cover from '../../assets/process.png'
-import shop from '/image/shop.svg'
 import buy from '/image/buy.svg'
 import edit from "/image/edit.svg"
 import trash from "/image/trash.svg"
-import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import imagepen from "/image/image-pen.svg"
-import { HashLink } from 'react-router-hash-link'
 
 // eslint-disable-next-line react/prop-types
 function Appareil({ data, dashboard = true , handleDelete , handleEdit , handleClick}){

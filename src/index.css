@@ -51,3 +51,50 @@ select:focus {
     filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(3318%) hue-rotate(161deg) brightness(104%) contrast(101%) !important;
 }
 
+/***************************************confirm *************************/
+.confirm-delete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.902);
+    padding: 30px 40px;
+    border-radius: 10px;
+    border: 1px solid var(--color-primary-glass);
+    z-index: 1000;
+    text-align: center;
+}
+ .confirm-delete p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+ .confirm-delete button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.confirm-delete  button:hover {
+    background-color: white;
+    color:#f44336 ;
+    border-color: #f44336;
+}
+ .confirm-delete button:active {
+    outline: none;
+} 
+.confirm-delete .annuler {
+    background-color: var(--color-primary);
+    border: 1px solid transparent;
+}
+.confirm-delete .annuler:hover{
+    background: transparent !important;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+

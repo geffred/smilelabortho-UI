@@ -112,6 +112,10 @@
     border-color: var(--color-primary);
     color: var(--color-primary);
 }
+
+.right-contact button:hover img{
+     filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(3318%) hue-rotate(161deg) brightness(104%) contrast(101%) !important;
+}
 .right-contact .error{
     color: red;
     margin-top: 10px;

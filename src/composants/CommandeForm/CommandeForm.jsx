@@ -1,24 +1,33 @@
+import React, { useContext, useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import buy from "/image/buy.svg";
-import "./CommandeForm.css"
-import { useContext } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
+import emailjs from "emailjs-com";
 import { UserContext } from "../UserContext";
 import useSWR from "swr";
 import { mutate } from "swr";
+import buy from "/image/buy.svg";
+import "./CommandeForm.css";
 
 
+const stripePromise = loadStripe(
+  ""
+);
 
-function CommandeForm({prixTotal}) {
+function CommandeForm({ prixTotal }) {
+  const { user } = useContext(UserContext);
+  const urlAdress = `/api/adresses/utilisateur/${user.id}`;
+  const urlPanier = `/api/paniers/${user.id}`;
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const { data: adresses } = useSWR(urlAdress, fetcher);
+  const { data: paniers } = useSWR(urlPanier, fetcher);
+  const prixTotalPlusTVA = (prixTotal * 21) / 100 + prixTotal;
 
-    const { user } = useContext(UserContext);
-    const urlAdress = `/api/adresses/utilisateur/${user.id}`;
-    const urlPanier = `/api/paniers/${user.id}`;
-    const fetcher = (url) => fetch(url).then((res) => res.json());
-    const { data: adresses } = useSWR(urlAdress, fetcher);
-    const { data: paniers } = useSWR(urlPanier, fetcher);
-    const prixTotalPlusTVA = (prixTotal * 21) / 100 + prixTotal;
-  // Validation des champs avec Yup
+  const stripe = useStripe();
+  const elements = useElements();
+  const [paymentStatus, setPaymentStatus] = useState("");
+
   const validationSchema = Yup.object({
     adresseLivraisonId: Yup.string()
       .required("Veuillez sélectionner une adresse de livraison.")
@@ -38,29 +47,6 @@ function CommandeForm({prixTotal}) {
     ),
   });
 
-  const sendData = async (data) => {
-    try {
-      const response = await fetch("/api/commandes/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(errorData);
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (err) {
-        console.log(err.message);
-    }
-  };
-
-  // Fonction simulée pour envoyer les données
   async function handleSubmit(values, { resetForm }) {
     if (!paniers) {
       alert("Erreur : Aucun panier trouvé.");
@@ -68,27 +54,81 @@ function CommandeForm({prixTotal}) {
     }
 
     const panierIds = paniers
-      .filter((panier) => panier.valider === false)
+      .filter((panier) => !panier.valider)
       .map((panier) => panier.id);
-     // Convertit le tableau des paniers en un tableau plat des IDs
-
     const payload = {
       ...values,
-      panierIds, // Tableau plat directement utilisé ici
-      utilisateurId: user.id, // Ajout de l'utilisateur
-      prixTotalPlusTVA: prixTotalPlusTVA,
+      panierIds,
+      utilisateurId: user.id,
+      prixTotalPlusTVA,
       statut: "EN_ATTENTE",
-      refPatient: " ",
     };
 
     try {
-      console.log("Données envoyées :", payload);
-      await sendData(payload);
+      // Traitement Stripe
+      const { clientSecret } = await fetch(
+        "/api/payments/create-payment-intent",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: prixTotalPlusTVA * 100 }), // Montant en cents
+        }
+      ).then((res) => res.json());
+
+      const cardElement = elements.getElement(CardElement);
+      const { paymentIntent, error } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card: cardElement,
+          },
+        }
+      );
+
+      if (error) {
+        setPaymentStatus("Erreur de paiement : " + error.message);
+        return;
+      }
+
+      setPaymentStatus("Paiement réussi !");
+
+      // Envoi de l'email avec EmailJS
+      emailjs
+        .send(
+          "service_f2vyidp",
+          "template_v5lnqrt",
+          {
+            user_email: user.email,
+            prix_total: prixTotalPlusTVA,
+            date_livraison: values.dateLivraisonSouhaitee,
+            commentaire: values.commentaire,
+            message:"Votre Commande à bien été prise en compte notre equipe se met au travail"
+          },
+          "M-ibIQ1aTjGbVU4OK"
+        )
+        .then(
+          () => {
+            alert("Email envoyé avec succès !");
+          },
+          (error) => {
+            console.error("Erreur lors de l'envoi de l'email :", error);
+          }
+        );
+
+      await fetch("/api/commandes/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
       mutate(`/api/paniers/${user.id}`);
       resetForm();
-      alert("Formulaire soumis avec succès !");
+      alert("Commande soumise avec succès !");
     } catch (error) {
-      console.error("Erreur lors de la soumission :", error.message);
+      console.error(
+        "Erreur lors du traitement de la commande :",
+        error.message
+      );
     }
   }
 
@@ -107,17 +147,14 @@ function CommandeForm({prixTotal}) {
       >
         {({ isSubmitting, isValid, resetForm }) => (
           <Form>
-            {/* Adresse de Livraison */}
             <div className="form-group">
               <label htmlFor="adresseLivraisonId">Adresse de Livraison</label>
               <Field
                 as="select"
                 name="adresseLivraisonId"
                 id="adresseLivraisonId"
-                className=""
               >
                 <option value="">Sélectionnez une adresse</option>
-
                 {adresses &&
                   adresses.map((adress) => (
                     <option key={adress.id} value={adress.id}>
@@ -141,10 +178,8 @@ function CommandeForm({prixTotal}) {
                 as="select"
                 name="adresseFacturationId"
                 id="adresseFacturationId"
-                className=""
               >
                 <option value="">Sélectionnez une adresse</option>
-
                 {adresses &&
                   adresses.map((adress) => (
                     <option key={adress.id} value={adress.id}>
@@ -160,7 +195,6 @@ function CommandeForm({prixTotal}) {
               />
             </div>
 
-            {/* Date de Livraison Souhaitée */}
             <div className="form-group">
               <label htmlFor="dateLivraisonSouhaitee">
                 Date de Livraison Souhaitée
@@ -178,7 +212,6 @@ function CommandeForm({prixTotal}) {
               />
             </div>
 
-            {/* Commentaire */}
             <div className="form-group">
               <label htmlFor="commentaire">Commentaire</label>
               <Field
@@ -205,21 +238,22 @@ function CommandeForm({prixTotal}) {
               <span> {prixTotalPlusTVA} €</span>
             </div>
 
-            {/* Boutons de soumission et de réinitialisation */}
+            <div className="form-group">
+              <label>Paiement</label>
+              <CardElement
+                options={{ style: { base: { fontSize: "16px" } } }}
+                hidePostalCode:true
+              />
+            </div>
 
             <div className="boutton">
               <button
                 type="submit"
-                disabled={isSubmitting || !isValid}
+                disabled={isSubmitting || !isValid || !stripe}
                 className="btn btn-primary"
               >
                 <img src={buy} alt="commander_icon" width={30} />
-
-                {isSubmitting ? (
-                  <span>Envoi en cours...</span>
-                ) : (
-                  <span>Commander</span>
-                )}
+                {isSubmitting ? "Envoi en cours..." : "Commander"}
               </button>
               <button
                 type="button"
@@ -229,6 +263,8 @@ function CommandeForm({prixTotal}) {
                 Réinitialiser
               </button>
             </div>
+
+            {paymentStatus && <p>{paymentStatus}</p>}
           </Form>
         )}
       </Formik>

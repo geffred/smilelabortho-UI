@@ -8,6 +8,7 @@ import AllAppareil from "../../composants/AllAppareil/AllAppareil";
 import AllModelAppaeil from "../../composants/AllModelAppaeil/AllModelAppaeil";
 import Utilisateurs from "../../composants/Utilisateurs/Utilisateurs";
 import AllCommande from "../../composants/AllCommande/AllCommande";
+import Analytics from "../Analytics/Analytics";
 
 function Dashboard(){
     const [active , setActive] = useState("Utilisateurs")
@@ -58,7 +59,10 @@ function Dashboard(){
               </Display>
 
               <Display active={active} label={"Commandes"}>
-                <AllCommande/>
+                <AllCommande />
+              </Display>
+              <Display active={active} label={"Analytics"}>
+                <Analytics/>
               </Display>
             </div>
           </div>

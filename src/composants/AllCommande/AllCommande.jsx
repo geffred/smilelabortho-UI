@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import Commande from "./Commande";
 import CommandeDetails from "./CommandeDetails";
+import {ToastContainer } from "react-toastify";
 
 const Display = ({ children, active }) => {
   return active ? children : null;
@@ -83,6 +84,7 @@ function AllCommande({
 
   return (
     <div>
+      <ToastContainer />
       <Display active={!active}>
         <div className="commandes container-fluid">
           {/* Barre de recherche et filtres */}
