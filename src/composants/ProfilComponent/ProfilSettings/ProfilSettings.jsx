@@ -7,11 +7,12 @@ import Spinner from "../../Spinner/Spinner";
 import { useContext, useState } from "react";
 import { UserContext } from "../../UserContext";
 import useSWR, { mutate } from "swr";
+import { ToastContainer, toast } from "react-toastify"; // Notifications toast
+import "react-toastify/dist/ReactToastify.css"; // Style des notifications toast
 
 
 function ProfilSettings() {
   const { user } = useContext(UserContext); // Utiliser le contexte
-  const [updateError, setUpdateError] = useState(null); // État pour les erreurs de mise à jour
   const URL = `/api/auth/utilisateurs/${user.id}`;
 
 
@@ -60,7 +61,7 @@ function ProfilSettings() {
   const sendData = async (dataUpdate) => {
     try {
       const response = await fetch("/api/auth/update", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -74,23 +75,27 @@ function ProfilSettings() {
       }
 
       const responseData = await response.json();
-      setUpdateError("Mise à jour réussie !");
+      toast("Mise à jour réussie !", {
+        position: "bottom-right",
+        autoClose: 5000, // Notification se ferme après 5 secondes
+      });
       return responseData;
     } catch (err) {
-      setUpdateError("Erreur lors de la mise à jour");
+       toast.error("Erreur lors de la mise à jour", {
+         position: "bottom-right",
+         autoClose: 5000, // Notification se ferme après 5 secondes
+       });
       throw err;
     }
   };
 
   return (
     <div className="profilSettings">
+      <ToastContainer /> {/* Affichage des notifications toast */}
       <Thumbnail
         user={data}
         onMutate={() => mutate(`/api/auth/utilisateurs/${user.email}`)}
       />
-
-      {updateError && <div className="error-message">{updateError}</div>}
-
       <Formik
         initialValues={{
           email: data?.email || "",
@@ -179,7 +184,6 @@ function ProfilSettings() {
           </Form>
         )}
       </Formik>
-
       <AdressesForm />
     </div>
   );

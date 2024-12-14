@@ -5,13 +5,24 @@ import * as Yup from "yup";
 import locationProfil from "/image/location-profil.svg"
 import { useContext} from "react";
 import { UserContext } from "../../UserContext";
+import {  toast } from "react-toastify"; // Notifications toast
+import "react-toastify/dist/ReactToastify.css"; // Style des notifications toast
+import { mutate } from "swr";
 
 
-function AdressesForm(){
+function AdressesForm({ editValue = null, ajouterBtn = true , display = false}) {
   const { user } = useContext(UserContext); // Utiliser le contexte
-  console.log(user)
-  const [updateError, setUpdateError] = useState(null); // État pour les erreurs de mise à jour
-  const [adress, setAdress] = useState(false);
+  const url = `/api/adresses/utilisateur/${user.id}`;
+  console.log(user);
+  const [adress, setAdress] = useState(display);
+  const initialValues = {
+    entreprise: "",
+    rue: "",
+    ville: "",
+    pays: "",
+    codePostal: "",
+    numeroRue: "",
+  };
   const validationSchema = Yup.object({
     entreprise: Yup.string().required("Le nom de l'entreprise est obligatoire"),
     numeroRue: Yup.number()
@@ -43,29 +54,42 @@ function AdressesForm(){
       }
 
       const responseData = await response.json();
-      setUpdateError("Ajout réussie !");
+      toast("Ajout réussie !", {
+        position: "bottom-right",
+        autoClose: 5000, // Notification se ferme après 5 secondes
+      });
+      mutate(url);
       return responseData;
     } catch (err) {
-      setUpdateError("Erreur lors l'ajout de l'adresse");
+      toast.error("Erreur lors l'ajout de l'adresse", {
+        position: "bottom-right",
+        autoClose: 5000, // Notification se ferme après 5 secondes
+      });
       throw err;
     }
   };
 
   return (
     <div className="AdressesForm">
-      <button className="adress-btn" onClick={() => setAdress(!adress)}>
-        <img src={locationProfil} alt="" width={30} className="icon-icon" />
-        <span>Ajouter Une Adresse</span>
-      </button>
+      {ajouterBtn && (
+        <button className="adress-btn" onClick={() => setAdress(!adress)}>
+          <img src={locationProfil} alt="" width={30} className="icon-icon" />
+          <span>Ajouter Une Adresse</span>
+        </button>
+      )}
+      {adress && (
+        <div className="d-flex justify-content-end">
+          <img
+            src="/public/image/cancel.svg"
+            alt="cancel"
+            width={30}
+            className="icon-icon"
+            onClick={() => setAdress(false)}
+          />
+        </div>
+      )}
       <Formik
-        initialValues={{
-          entreprise: "",
-          rue: "",
-          ville: "",
-          pays: "",
-          codePostal: "",
-          numeroRue: "",
-        }}
+        initialValues={editValue || initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           sendData({ ...values, utilisateurId: user.id });
@@ -214,7 +238,6 @@ function AdressesForm(){
           </Form>
         )}
       </Formik>
-      {updateError && <div className="error-message">{updateError}</div>}
     </div>
   );
 }

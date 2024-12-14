@@ -19,7 +19,7 @@ function ContactForm() {
     nom: Yup.string().required("Nom est requis"),
     prenom: Yup.string().required("Prénom est requis"),
     telephone: Yup.string()
-      .min(8, "Le numéro de téléphone doit avoir au moins 8 chiffres")
+      .matches(/^\+?[0-9]{10,15}$/, "Numéro de téléphone invalide")
       .required("Le numéro de téléphone est requis"),
     email: Yup.string().email("Email invalide").required("Email est requis"),
     message: Yup.string().required("Message est requis"),
@@ -38,7 +38,6 @@ function ContactForm() {
         // Message de succès
         toast("Votre message a été envoyé avec succès !", {
           position: "bottom-right",
-          type: "success",
           autoClose: 5000, // Notification se ferme après 5 secondes
         });
       })

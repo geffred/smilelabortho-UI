@@ -84,9 +84,15 @@ select:focus {
     color:#f44336 ;
     border-color: #f44336;
 }
- .confirm-delete button:active {
-    outline: none;
+ .confirm-delete button:focus {
+    outline: none !important;
+
 } 
+
+input{
+    padding: 15px !important;
+}
+
 .confirm-delete .annuler {
     background-color: var(--color-primary);
     border: 1px solid transparent;
@@ -96,5 +102,6 @@ select:focus {
     color: var(--color-primary);
     border-color: var(--color-primary);
 }
+
 
 
