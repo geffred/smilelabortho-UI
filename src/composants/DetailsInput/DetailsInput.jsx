@@ -6,6 +6,9 @@ import * as Yup from "yup";
 import { useState, useContext, useEffect } from "react";
 import PanierBtn from "../PanierBtn/PanierBtn";
 import { UserContext } from "../UserContext";
+import { ToastContainer, toast } from "react-toastify"; // Notifications toast
+import "react-toastify/dist/ReactToastify.css"; // Style des notifications toast
+
 
 function DetailsInput({ data }) {
   const { user } = useContext(UserContext);
@@ -14,6 +17,12 @@ function DetailsInput({ data }) {
   const url = "/api/models/";
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data: models, error, isLoading } = useSWR(url, fetcher);
+  const [uploadMode, setUploadMode] = useState("file"); // "file" ou "url"
+  const [uploadedFilePath, setUploadedFilePath] = useState(null);
+  const [refPatient, setRefPatient] = useState("");
+  const [isUploading, setIsUploading] = useState(false); // Pour la barre de progression
+  const [fileName, setFileName] = useState("Aucun fichier choisi"); // Nom du fichier sélectionné
+  const [file, setFile] = useState(null);
 
   // États locaux
   const [modelId, setModelId] = useState(null);
@@ -21,20 +30,48 @@ function DetailsInput({ data }) {
 
   // Calcul du prix total en fonction du modèle sélectionné et de la quantité
   useEffect(() => {
-    if (models && modelId) {
-      const selectedModel = models.find(
-        (model) => model.id === parseInt(modelId)
-      );
-      if (selectedModel) {
-        const coutSupplementaire =
-          parseInt(selectedModel.coutSupplementaire, 10) || 0;
-        setPrixTotal(parseInt(data.prixUnitaire, 10) + coutSupplementaire);
-      }
+    const selectedModel = models?.find(
+      (model) => model.id === parseInt(modelId)
+    );
+    if (selectedModel) {
+      const coutSupplementaire =
+        parseInt(selectedModel.coutSupplementaire, 10) || 0;
+      setPrixTotal(parseInt(data.prixUnitaire, 10) + coutSupplementaire);
     }
-  }, [modelId, data.prixUnitaire, models]);
+  }, [modelId, models, data.prixUnitaire]);
+
+  // Fonction d'upload de fichier
+  async function uploadFile(file) {
+    try {
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/files/upload/" + refPatient, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || "Erreur lors de l'upload du fichier."
+        );
+      }
+
+      const data = await response.json();
+      setUploadedFilePath(data.path);
+      toast("Fichier téléchargé avec succès !");
+    } catch (error) {
+      toast.error("Erreur de téléchargement : " + error.message);
+    } finally {
+      setIsUploading(false);
+    }
+  }
 
   // Fonction pour envoyer les données au backend
   async function sendData(payload) {
+      
     try {
       const response = await fetch("/api/paniers/", {
         method: "POST",
@@ -47,12 +84,14 @@ function DetailsInput({ data }) {
       }
 
       const responseData = await response.json();
-      console.log("Données envoyées avec succès :", responseData);
-
-      // Actualise les données du panier après l'ajout
+    
+      console.log(responseData);
+      setRefPatient("");
+      setFileName("")
+      toast("Produit ajouté au panier avec succès !");
       mutate(`/api/paniers/${user?.id}`);
     } catch (error) {
-      console.error("Erreur réseau ou serveur :", error.message);
+      toast.error("Erreur réseau ou serveur : " + error.message);
     }
   }
 
@@ -61,12 +100,13 @@ function DetailsInput({ data }) {
     model: Yup.string()
       .required("Le modèle est obligatoire")
       .notOneOf([""], "Veuillez sélectionner un modèle valide."),
-    refPatient: Yup.string().required(
-      "La référence du patient est obligatoire"
-    ),
-    scan3d: Yup.string()
-      .required("Le scan 3D est obligatoire")
-      .url("L'URL doit être valide."),
+    refPatient: Yup.string(),
+    scan3d: Yup.string().when("uploadMode", {
+      is: "url",
+      then: Yup.string()
+        .required("Le scan 3D est obligatoire")
+        .url("L'URL doit être valide."),
+    }),
     quantite: Yup.number()
       .required("La quantité est obligatoire")
       .integer("La quantité doit être un nombre entier.")
@@ -78,7 +118,7 @@ function DetailsInput({ data }) {
   if (error) return <p>Erreur lors du chargement des modèles.</p>;
 
   return (
-    <div>
+    <div> 
       <PanierBtn />
       <div className="row">
         <div className="col-lg-12 details">
@@ -105,9 +145,12 @@ function DetailsInput({ data }) {
               prixUnitaire: data.prixUnitaire,
               thumbnail: data.thumbnail,
               utilisateurId: user?.id,
+              scan3d: uploadedFilePath || values.scan3d,
+              refPatient: refPatient
             };
             sendData(payload);
             resetForm();
+            console.log(payload)
           }}
           enableReinitialize
         >
@@ -138,6 +181,8 @@ function DetailsInput({ data }) {
                 name="refPatient"
                 id="refPatient"
                 placeholder="Référence patient"
+                value={refPatient}
+                onChange={(e) => setRefPatient(e.target.value)}
                 className={`form-control my-2 ${
                   touched.refPatient && errors.refPatient ? "is-invalid" : ""
                 }`}
@@ -148,16 +193,52 @@ function DetailsInput({ data }) {
                 className="error"
               />
 
-              <Field
-                type="text"
-                name="scan3d"
-                id="scan3d"
-                placeholder="Lien drive du scan du patient"
-                className={`form-control my-2 ${
-                  touched.scan3d && errors.scan3d ? "is-invalid" : ""
-                }`}
-              />
-              <ErrorMessage name="scan3d" component="div" className="error" />
+              {uploadMode === "file" ? (
+                <div>
+                  <label htmlFor="fileUpload" className="form-label">
+                    {fileName}
+                  </label>
+                  <Field
+                    type="file"
+                    accept=".stl"
+                    name="scan3d"
+                    id="fileUpload"
+                    className={`form-control ${
+                      touched.scan3d && errors.scan3d ? "is-invalid" : ""
+                    }`}
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        uploadFile(file);
+                        }
+                      setFile(file);
+                      setFileName(file ? file.name : "Aucun fichier choisi");
+                    }}
+                  />
+                  {isUploading && (
+                    <div className="progress my-2">
+                      <div
+                        className="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        style={{ width: "100%" , background:"var(--color-primary)" }}
+                      >
+                        Téléchargement...
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <Field
+                    type="text"
+                    name="scan3d"
+                    placeholder="Lien Google Drive"
+                    className={`form-control ${
+                      touched.scan3d && errors.scan3d ? "is-invalid" : ""
+                    }`}
+                  />
+                </div>
+              )}
 
               <div className="detailsFooter">
                 <label htmlFor="quantite">Quantité</label>
@@ -180,7 +261,7 @@ function DetailsInput({ data }) {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isUploading }
                 >
                   <span>Ajouter au Panier</span>
                   <img src={buy} alt="buy_icon" width={25} />
