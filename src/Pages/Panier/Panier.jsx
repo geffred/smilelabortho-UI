@@ -78,7 +78,7 @@ function Panier() {
               .filter((panier) => panier.valider === false) // Filtrage des paniers non validés
               .map((panier) => (
                 <div key={panier.id}>
-                  <AppareilPanier data={panier} handleDelete={handleDelete} />
+                  <AppareilPanier data={panier} handleDelete={handleDelete} link={data.scan3d} />
                 </div>
               ))}
           </div>

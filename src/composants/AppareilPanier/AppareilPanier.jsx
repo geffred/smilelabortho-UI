@@ -45,7 +45,7 @@ function AppareilPanier({ data, handleDelete, cancel = true, link=null }) {
       {cancel && (
         <img
           src={cancelPanier}
-          className="cancel"
+          className="cancel icon-icon"
           alt="cancel_icon"
           onClick={() => handleDelete(data.id)}
           width={35}

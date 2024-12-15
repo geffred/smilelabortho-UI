@@ -33,7 +33,7 @@ const PrivateRoutes = ({ children, user, requiredRoles }) => {
 
 function App() {
   const { user } = useContext(UserContext);
-  console.log(user);
+
   const stripePromise = loadStripe(
     "pk_test_51Q2e0vHhNojQmyZVZ3xB8g12WtbFUxgcxqL7arHDyOF79GNQ4Oo5Y903CzWsE8syae7XXf6gj476REmJCUfEQeit00KIxpUICR"
   ); 

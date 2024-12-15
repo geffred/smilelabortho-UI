@@ -45,7 +45,7 @@ function AppareilDetails(){
 
                         <div className='col-lg-12'>
                             <div className='similaire'>
-                                <h1>Appareils Similaires </h1>
+                                <h1 style={{textAlign:"start"}}>Appareils Similaires </h1>
                                 <hr />
                             </div>
                             <AllAppareil isDashboard={false} url={'/api/appareils/categories/'+data.categorie} />

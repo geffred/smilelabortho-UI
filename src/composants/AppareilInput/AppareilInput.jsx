@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import categorie from '../Categorie/Categorie';
 import useSWR from "swr";
+import { toast, ToastContainer } from 'react-toastify';
 
 function AppareilInput({onMutate,isDashboard =false , display, setDisplay , editData , reinitialiser }){
 
@@ -44,12 +45,15 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
       if (response.ok) {
         const responseData = await response.json(); // Extraire la réponse JSON du serveur
         onMutate()
+        toast("Données envoyées avec succès !");
         console.log('Données envoyées avec succès:', responseData);
       } else {
         console.error('Erreur lors de l\'envoi des données:', response.statusText);
+        toast.error("Erreur lors de l'envoi des données !");
       }
     } catch (error) {
       console.error('Erreur réseau:', error);
+      toast.error("Erreur réseau , veillez réessayer!");
     }
   }
 
@@ -57,6 +61,7 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
   if (!isDashboard) return null
   return (
     <div className="container-fluid AppareilInput">
+     
       <button
        onClick={() => {  
         setDisplay()

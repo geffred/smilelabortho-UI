@@ -11,9 +11,6 @@ import buy from "/image/buy.svg";
 import "./CommandeForm.css";
 
 
-const stripePromise = loadStripe(
-  ""
-);
 
 function CommandeForm({ prixTotal }) {
   const { user } = useContext(UserContext);
@@ -75,6 +72,8 @@ function CommandeForm({ prixTotal }) {
         }
       ).then((res) => res.json());
 
+      console.log(clientSecret);
+
       const cardElement = elements.getElement(CardElement);
       const { paymentIntent, error } = await stripe.confirmCardPayment(
         clientSecret,
@@ -102,7 +101,8 @@ function CommandeForm({ prixTotal }) {
             prix_total: prixTotalPlusTVA,
             date_livraison: values.dateLivraisonSouhaitee,
             commentaire: values.commentaire,
-            message:"Votre Commande à bien été prise en compte notre equipe se met au travail"
+            message:
+              "Votre Commande à bien été prise en compte notre equipe se met au travail",
           },
           "M-ibIQ1aTjGbVU4OK"
         )

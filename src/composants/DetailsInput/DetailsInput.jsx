@@ -17,12 +17,11 @@ function DetailsInput({ data }) {
   const url = "/api/models/";
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data: models, error, isLoading } = useSWR(url, fetcher);
-  const [uploadMode, setUploadMode] = useState("file"); // "file" ou "url"
   const [uploadedFilePath, setUploadedFilePath] = useState(null);
   const [refPatient, setRefPatient] = useState("");
   const [isUploading, setIsUploading] = useState(false); // Pour la barre de progression
-  const [fileName, setFileName] = useState("Aucun fichier choisi"); // Nom du fichier sélectionné
-  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("choisir un fichier .Stl"); // Nom du fichier sélectionné
+
 
   // États locaux
   const [modelId, setModelId] = useState(null);
@@ -40,11 +39,17 @@ function DetailsInput({ data }) {
     }
   }, [modelId, models, data.prixUnitaire]);
 
+  const resetFileInput = () => {
+    const fileInput = document.getElementById("fileUpload");
+    if (fileInput) {
+      fileInput.value = ""; // Réinitialiser le champ de fichier
+    }
+  };
   // Fonction d'upload de fichier
-  async function uploadFile(file) {
+  async function uploadFile(file, setFieldValue) {
+     const formData = new FormData();
     try {
       setIsUploading(true);
-      const formData = new FormData();
       formData.append("file", file);
 
       const response = await fetch("/api/files/upload/" + refPatient, {
@@ -53,6 +58,7 @@ function DetailsInput({ data }) {
       });
 
       if (!response.ok) {
+        console.log(formData);
         const errorData = await response.json();
         throw new Error(
           errorData.error || "Erreur lors de l'upload du fichier."
@@ -63,7 +69,9 @@ function DetailsInput({ data }) {
       setUploadedFilePath(data.path);
       toast("Fichier téléchargé avec succès !");
     } catch (error) {
-      toast.error("Erreur de téléchargement : " + error.message);
+      toast.error("Veillez entrer la reférence du patient ! ");
+      setFileName("choisir un fichier .Stl");
+      resetFileInput();
     } finally {
       setIsUploading(false);
     }
@@ -87,8 +95,9 @@ function DetailsInput({ data }) {
     
       console.log(responseData);
       setRefPatient("");
-      setFileName("")
+      setFileName("choisir un fichier .Stl");
       toast("Produit ajouté au panier avec succès !");
+      setUploadedFilePath(null);
       mutate(`/api/paniers/${user?.id}`);
     } catch (error) {
       toast.error("Erreur réseau ou serveur : " + error.message);
@@ -101,12 +110,21 @@ function DetailsInput({ data }) {
       .required("Le modèle est obligatoire")
       .notOneOf([""], "Veuillez sélectionner un modèle valide."),
     refPatient: Yup.string(),
-    scan3d: Yup.string().when("uploadMode", {
-      is: "url",
-      then: Yup.string()
-        .required("Le scan 3D est obligatoire")
-        .url("L'URL doit être valide."),
-    }),
+    scan3d: Yup.mixed()
+      .required("Le fichier est obligatoire") // Rendre le champ obligatoire
+      .test(
+        "fileType",
+        "Le fichier doit être au format .stl",
+        (value) =>
+          !value || // Pas d'erreur si la valeur est vide (autre test gère l'obligation)
+          (value && value.name && value.name.endsWith(".stl")) // Vérifie l'extension du fichier
+      )
+      .test(
+        "fileSize",
+        "La taille du fichier ne doit pas dépasser 50 Mo",
+        (value) => !value || (value && value.size <= 50 * 1024 * 1024) // Limite de taille
+      ),
+
     quantite: Yup.number()
       .required("La quantité est obligatoire")
       .integer("La quantité doit être un nombre entier.")
@@ -118,7 +136,7 @@ function DetailsInput({ data }) {
   if (error) return <p>Erreur lors du chargement des modèles.</p>;
 
   return (
-    <div> 
+    <div>
       <PanierBtn />
       <div className="row">
         <div className="col-lg-12 details">
@@ -146,11 +164,11 @@ function DetailsInput({ data }) {
               thumbnail: data.thumbnail,
               utilisateurId: user?.id,
               scan3d: uploadedFilePath || values.scan3d,
-              refPatient: refPatient
+              refPatient: refPatient,
             };
             sendData(payload);
             resetForm();
-            console.log(payload)
+            console.log(payload);
           }}
           enableReinitialize
         >
@@ -180,65 +198,67 @@ function DetailsInput({ data }) {
                 type="text"
                 name="refPatient"
                 id="refPatient"
+                required
                 placeholder="Référence patient"
                 value={refPatient}
                 onChange={(e) => setRefPatient(e.target.value)}
+                disabled={uploadedFilePath} // Correct
                 className={`form-control my-2 ${
                   touched.refPatient && errors.refPatient ? "is-invalid" : ""
                 }`}
               />
+
               <ErrorMessage
                 name="refPatient"
                 component="div"
                 className="error"
               />
 
-              {uploadMode === "file" ? (
-                <div>
-                  <label htmlFor="fileUpload" className="form-label">
-                    {fileName}
-                  </label>
-                  <Field
-                    type="file"
-                    accept=".stl"
-                    name="scan3d"
-                    id="fileUpload"
-                    className={`form-control ${
-                      touched.scan3d && errors.scan3d ? "is-invalid" : ""
-                    }`}
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        uploadFile(file);
-                        }
-                      setFile(file);
-                      setFileName(file ? file.name : "Aucun fichier choisi");
-                    }}
+              <div>
+                <label htmlFor="fileUpload" className="form-label-upload">
+                  {fileName}
+                  <img
+                    src={"/public/image/upload-image.svg"}
+                    alt="upload"
+                    width={20}
+                    className="icon-icon"
                   />
-                  {isUploading && (
-                    <div className="progress my-2">
-                      <div
-                        className="progress-bar progress-bar-striped progress-bar-animated"
-                        role="progressbar"
-                        style={{ width: "100%" , background:"var(--color-primary)" }}
-                      >
-                        Téléchargement...
-                      </div>
+                </label>
+                <input
+                  type="file"
+                  accept=".stl"
+                  id="fileUpload"
+                  className={`form-control ${
+                    touched.scan3d && errors.scan3d ? "is-invalid" : ""
+                  }`}
+                  onChange={(e) => {
+                   
+                    const file = e.target.files[0];
+                    if (file) {
+                      setFileName(file.name); // Affichez le nom du fichier
+                      uploadFile(file); // Téléchargez le fichier
+                      setFieldValue("scan3d", file); // Mettez à jour Formik
+                    }
+                  }}
+                />
+                {touched.scan3d && errors.scan3d && (
+                  <div className="invalid-feedback">{errors.scan3d}</div>
+                )}
+                {isUploading && (
+                  <div className="progress my-2">
+                    <div
+                      className="progress-bar progress-bar-striped progress-bar-animated"
+                      role="progressbar"
+                      style={{
+                        width: "100%",
+                        background: "var(--color-primary)",
+                      }}
+                    >
+                      Téléchargement...
                     </div>
-                  )}
-                </div>
-              ) : (
-                <div>
-                  <Field
-                    type="text"
-                    name="scan3d"
-                    placeholder="Lien Google Drive"
-                    className={`form-control ${
-                      touched.scan3d && errors.scan3d ? "is-invalid" : ""
-                    }`}
-                  />
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
 
               <div className="detailsFooter">
                 <label htmlFor="quantite">Quantité</label>
@@ -261,7 +281,7 @@ function DetailsInput({ data }) {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  disabled={isSubmitting || isUploading }
+                  disabled={isSubmitting || isUploading}
                 >
                   <span>Ajouter au Panier</span>
                   <img src={buy} alt="buy_icon" width={25} />
