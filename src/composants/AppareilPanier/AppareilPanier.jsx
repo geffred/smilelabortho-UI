@@ -53,7 +53,7 @@ function AppareilPanier({ data, handleDelete, cancel = true, link=null }) {
         />
       )}
       {link && (
-        <a href={link}>
+        <a href={link} download>
           <img
             src="https://www.svgrepo.com/show/506465/download.svg"
             alt=""
