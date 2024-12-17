@@ -65,6 +65,10 @@ function Panier() {
   const totalPrix = data
     .filter((panier) => panier.valider === false) // Filtrage des paniers non validés
     .reduce((acc, panier) => acc + (panier.prixTotal || 0), 0); // Additionne les prixTotal des paniers
+  
+    const panierContent = data
+    .filter((panier) => panier.valider === false) // Filtrage des paniers non validés
+    
 
   return (
     <div className="panier">
@@ -74,7 +78,7 @@ function Panier() {
       <div className="content container-fluid">
         <div className="row">
           <div className="col-lg-7">
-            {data.length === 0 ? (
+            {panierContent.length === 0 ? (
               <div className="card panier-vide">Panier vide</div>
             ) : (
               data
