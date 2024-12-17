@@ -142,7 +142,7 @@ function CommandeForm({ prixTotal }) {
 
   return (
     <div className="CommandeForm">
-      <ToastContainer/>
+      <ToastContainer />
       <h2>Formulaire de Commande</h2>
       <Formik
         initialValues={{
@@ -250,8 +250,14 @@ function CommandeForm({ prixTotal }) {
             <div className="form-group">
               <label>Paiement</label>
               <CardElement
-                options={{ style: { base: { fontSize: "16px" } } }}
-                hidePostalCode:true
+                options={{
+                  style: {
+                    base: {
+                      fontSize: "16px",
+                    },
+                  },
+                  hidePostalCode: true,
+                }}
               />
             </div>
 
