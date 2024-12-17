@@ -12,7 +12,6 @@ function AllModelAppaeil() {
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const url = `/api/models/`;
   const { data, error, isLoading } = useSWR(url, fetcher);
-
   const [display, setDisplay] = useState(false);
   const [editData, setEditData] = useState({ nom: "", coutSupplementaire: "" });
   const [confirmDelete, setConfirmDelete] = useState(null); // Gestion de la confirmation de suppression

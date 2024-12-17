@@ -1,0 +1,68 @@
+.Avis {
+    padding: 50px 100px;
+    background-color: black;
+    position: relative;
+    
+}
+
+.Avis .each-slide-effect h2{
+    color: var(--color-primary);
+    font-family: calibri;
+    font-weight: bold;
+    font-family: 'Rimouski', sans-serif;
+}
+
+.img-avis{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .2;
+}
+
+.Avis .each-slide-effect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 20px;
+    width: 100%;
+    border-color: transparent ;
+    color: black;
+    border-radius: 0px;
+    height: 100%;
+    background:transparent;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.2em;
+    max-width:800px;
+    margin: 0px auto;
+    gap: 5px;
+}
+
+.Avis  button{
+    background-color: transparent !important;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7498%) hue-rotate(166deg) brightness(122%) contrast(100%);
+}
+
+.Avis  h1{
+    padding: 20px 0px;
+    position: relative;
+    z-index: 5;
+    color: white;
+}
+
+
+
+@media screen and ( max-width: 768px ) {
+
+    .Avis .each-slide-effect {
+        padding: 10px ;
+        font-size: 1em;
+    }
+
+    .Avis {
+    padding: 10px;    
+}
+}

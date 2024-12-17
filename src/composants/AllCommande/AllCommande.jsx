@@ -148,17 +148,18 @@ function AllCommande({
             </div>
           </section>
           {/* Liste des commandes filtrées */}
-          {filteredCommandes?.map((commande) => (
-            <Commande
-              isDashboard={isDashboard}
-              data={commande}
-              key={commande.id}
-              handleClick={() => {
-                setActive(true);
-                setId(commande.id);
-              }}
-            />
-          ))}
+          {filteredCommandes &&
+            filteredCommandes.reverse().map((commande) => (
+              <Commande
+                isDashboard={isDashboard}
+                data={commande}
+                key={commande.id}
+                handleClick={() => {
+                  setActive(true);
+                  setId(commande.id);
+                }}
+              />
+            ))}
         </div>
       </Display>
       <Display active={active}>

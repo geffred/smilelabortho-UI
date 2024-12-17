@@ -118,13 +118,18 @@ function Utilisateurs() {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Filtrer les utilisateurs
-  const filteredData = data?.filter(
-    (utilisateur) =>
-      utilisateur.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      utilisateur.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      utilisateur.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      utilisateur.dateInscription.toLowerCase().includes(searchTerm.toLowerCase())
+const filteredData = data?.filter((utilisateur) => {
+  const searchLower = searchTerm.toLowerCase();
+  return (
+    (utilisateur.nom && utilisateur.nom.toLowerCase().includes(searchLower)) ||
+    (utilisateur.prenom &&
+      utilisateur.prenom.toLowerCase().includes(searchLower)) ||
+    (utilisateur.email &&
+      utilisateur.email.toLowerCase().includes(searchLower)) ||
+    (utilisateur.dateInscription &&
+      utilisateur.dateInscription.toLowerCase().includes(searchLower))
   );
+});
 
   if (isLoading) return <Spinner />;
   if (error)

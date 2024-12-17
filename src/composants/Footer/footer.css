@@ -28,18 +28,11 @@ footer .left-section{
 }
 
 footer .left-section img{
-    width: 80px;
+    width:150px;
+    margin-bottom: 10px;
 }
 
-footer  .left-section img{
-    max-width: 50px;
-    position: absolute;
-    left: 50%;
-    bottom: -25px;
-    transform: translateX(-45%) scale(1.2);
-    transform-origin:center ;
-    transition: all .2s ease;
-}
+
 
 footer  .left-section .logo-container{
     width: 65px;

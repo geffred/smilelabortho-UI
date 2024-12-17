@@ -27,56 +27,63 @@ function Services(){
         }
     ]
     return (
-        <div className="services">
-             <Navbar/>
-             <SectionBanner
-              image={bg}
-              title={"Servives"}
-              style={{height:"300px"}}
+      <div className="services">
+        <Navbar />
+        <SectionBanner
+          image={bg}
+          title={"Servives"}
+          style={{ height: "300px" }}
         />
-             
-             <div className="service-wrap">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-lg-5 col-12">
-                            <NavLink to={"/services/fritage-laser"}>
-                                <SectionCard
-                                title={services[0].title}
-                                description={services[0].description}
-                                />
-                            </NavLink>
-                            
-                            <NavLink to={"/services/service-digital"}>
-                                <SectionCard
-                                title={services[2].title}
-                                description={services[2].description}
-                                />
-                            </NavLink>
 
-                            <NavLink to={"/services/"+2}>
-                                <SectionCard
-                                title={services[1].title}
-                                description={services[1].description}
-                                />
-                            </NavLink>
-                           
-                        </div>
-                        <div className="col-lg-7 col-12">
-                            <div className="logo">
-                                <img src={logo_smilelab} alt="logo_icon" />
-                                <span>Smile <span className="lab">lab</span></span>
-                            </div>
-                            <img src={"https://cdn.prod.website-files.com/650d7a01e78ac2553e602055/650edb3ead757160aa91eaf3_3d-printing.jpeg"} alt="banner" className="section-banner" />
-                        </div>
-                    </div>
-                    
+        <div className="service-wrap">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-5 col-12">
+                <NavLink to={"/services/fritage-laser"}>
+                  <SectionCard
+                    title={services[0].title}
+                    description={services[0].description}
+                  />
+                </NavLink>
+
+                <NavLink to={"/services/service-digital"}>
+                  <SectionCard
+                    title={services[2].title}
+                    description={services[2].description}
+                  />
+                </NavLink>
+
+                {false && (
+                  <NavLink to={"/services/" + 2}>
+                    <SectionCard
+                      title={services[1].title}
+                      description={services[1].description}
+                    />
+                  </NavLink>
+                )}
+              </div>
+              <div className="col-lg-7 col-12">
+                <div className="logo">
+                  <img src={logo_smilelab} alt="logo_icon" className="mascotte" />
+                  <span>
+                   <img src="/public/image/smilelab_simple.svg" alt="smile lab" width={200} />
+                  </span>
                 </div>
-             </div>
-
-             <Footer/>
-
+                <img
+                  src={
+                    "https://cdn.prod.website-files.com/650d7a01e78ac2553e602055/650edb3ead757160aa91eaf3_3d-printing.jpeg"
+                  }
+                  alt="banner"
+                  className="section-banner"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-    )
+
+        <Footer />
+      </div>
+    );
 }
 
 export default Services;

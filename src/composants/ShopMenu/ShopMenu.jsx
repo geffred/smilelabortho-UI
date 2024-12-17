@@ -33,7 +33,7 @@ function ShopMenu({handleClick , isActive}){
                             <img src={teeth} alt="Services" width={40} height={40} />
                         </div>
                         <span>{info.titre} </span>
-                        <img src={right} alt="arrow-right" width={20} className="arrow"/>
+                        <img src={right} alt="arrow-right" width={20} className="arrow icon-icon"/>
                     </a>
                     })
                 }

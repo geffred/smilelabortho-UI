@@ -53,3 +53,9 @@
 .panier .boutton button:hover{
     background: rgb(22, 107, 255);
 }
+
+.panier-vide{
+    width: 100%;
+    background: transparent;
+    border-color: var(--color-primary-glass);
+}

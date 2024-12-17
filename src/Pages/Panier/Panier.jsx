@@ -74,17 +74,21 @@ function Panier() {
       <div className="content container-fluid">
         <div className="row">
           <div className="col-lg-7">
-            {data
-              .filter((panier) => panier.valider === false) // Filtrage des paniers non validés
-              .map((panier) => (
-                <div key={panier.id}>
-                  <AppareilPanier
-                    data={panier}
-                    handleDelete={handleDelete}
-                    link={`http://localhost:8080/api/files/download/${data.scan3d}`}
-                  />
-                </div>
-              ))}
+            {data.length === 0 ? (
+              <div className="card panier-vide">Panier vide</div>
+            ) : (
+              data
+                .filter((panier) => panier.valider === false) // Filtrage des paniers non validés
+                .map((panier) => (
+                  <div key={panier.id}>
+                    <AppareilPanier
+                      data={panier}
+                      handleDelete={handleDelete}
+                      link={`http://localhost:8080/api/files/download/${panier.scan3d}`} // Correction potentielle du lien
+                    />
+                  </div>
+                ))
+            )}
           </div>
           <div className="col-lg-5 commandes">
             <CommandeForm prixTotal={totalPrix} />

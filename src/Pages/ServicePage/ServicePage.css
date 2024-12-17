@@ -37,7 +37,7 @@
 
 .ServicePage .service-1 .block-2{
     padding: 100px 0px;
-    background: rgba(116, 194, 250, 0.046);
+    background: var(--color-primary-glass-3);
     margin-top: 40px;
 }
 
@@ -46,7 +46,7 @@
     height: 350px;
     overflow: hidden;
     transform: translateY(-70px);
-    box-shadow: 0px 0px 10px rgba(0, 106, 255, 0.32);
+    box-shadow: 0px 0px 10px var(--color-primary-glass-2);
     border-radius: 10px;
     margin: 20px auto;
 }
@@ -104,7 +104,7 @@
     width: 90%;
     height: 300px;
     overflow: hidden;
-    box-shadow: 0px 0px 5px rgba(0, 56, 135, 0.29);
+    box-shadow: 0px 0px 5px var(--color-primary-glass-2);
     border-radius: 10px;
     margin: 20px auto;
 }
@@ -119,7 +119,7 @@
     width: 90%;
     overflow: hidden;
     height: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 106, 255, 0.32);
+    box-shadow: 0px 0px 10px var(--color-primary-glass-2);
     border-radius: 10px;
     margin: 20px auto;
 }
@@ -143,11 +143,11 @@
     padding: 10px 30px !important;
     border-radius:5px;
     margin: 10px 0px;
-    background: rgba(0, 85, 255, 0.03);
+    background: var(--color-primary-glass-3);
     cursor: pointer;
 
 }
 
 .ServicePage .archive ul li:hover{
-    background: rgba(0, 140, 255, 0.082);
+    background: var(--color-primary-glass-2);
 }

@@ -75,7 +75,7 @@
     
 }
 
-.service-wrap .row>div:nth-child(2) .logo img{
+.service-wrap .row>div:nth-child(2) .logo .mascotte{
     position: absolute;
     left: 51%;
     top: 0px;
@@ -83,7 +83,7 @@
     transition: all .3s ease;
 }
 
-.service-wrap .row>div:nth-child(2) .logo:hover img{
+.service-wrap .row>div:nth-child(2) .logo:hover .mascotte{
     transform: translateX(-51%) scale(1.5) translateY(150px);
 }
 

@@ -220,15 +220,15 @@ function ServicePage(){
                                 <p className=" archive px-4">
                                     <ul>
                                         <li className="py-1">
-                                            <img src={archive} alt="archive" width={40}/>
+                                            <img src={archive} alt="archive" width={40} className="icon-icon" />
                                             <span>Nous récupérons gratuitement tous vos modèles.</span>
                                         </li>
                                         <li className="py-1">
-                                            <img src={archive} alt="archive" width={40}/>
+                                            <img src={archive} alt="archive" width={40} className="icon-icon" />
                                             <span>Chaque ensemble de modèles est numérisé à l’aide de notre logiciel, créant ainsi une représentation 3D précise du modèle d’origine.</span>
                                         </li>
                                         <li className="py-1">
-                                            <img src={archive} alt="archive" width={40}/>
+                                            <img src={archive} alt="archive" width={40} className="icon-icon" />
                                             <span>Les fichiers numériques sont ensuite envoyés via un lien sécurisé ou une clé USB, vous permettant d’y accéder et de les visualiser avec <em><b>orthoviewer</b></em> </span>
                                         </li>
                                     </ul>

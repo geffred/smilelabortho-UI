@@ -9,6 +9,8 @@ import useSWR from "swr";
 import { mutate } from "swr";
 import buy from "/image/buy.svg";
 import "./CommandeForm.css";
+import { ToastContainer, toast } from "react-toastify"; // Notifications toast
+import "react-toastify/dist/ReactToastify.css"; // Style des notifications toast
 
 
 
@@ -102,16 +104,20 @@ function CommandeForm({ prixTotal }) {
             date_livraison: values.dateLivraisonSouhaitee,
             commentaire: values.commentaire,
             message:
-              "Votre Commande à bien été prise en compte notre equipe se met au travail",
+              "Votre Commande a bien été prise en compte notre équipe se met au travail !",
           },
           "M-ibIQ1aTjGbVU4OK"
         )
         .then(
           () => {
-            alert("Email envoyé avec succès !");
+            toast("Email de confirmation envoyé avec succès !", {
+              autoClose: 3000,
+            });
           },
           (error) => {
-            console.error("Erreur lors de l'envoi de l'email :", error);
+            toast.error("Erreur lors de l'envoi de l'email "+error, {
+              autoClose: 3000,
+            });
           }
         );
 
@@ -123,17 +129,20 @@ function CommandeForm({ prixTotal }) {
 
       mutate(`/api/paniers/${user.id}`);
       resetForm();
-      alert("Commande soumise avec succès !");
+      toast("Commande soumise avec succès !", {
+        autoClose: 3000,
+      });
     } catch (error) {
-      console.error(
-        "Erreur lors du traitement de la commande :",
-        error.message
-      );
+      console.error("Erreur lors du traitement de la commande :", error.message);
+      toast.error("Erreur lors du traitement de la commande Votre panier est vide ", {
+        autoClose: 3000, 
+      });
     }
   }
 
   return (
     <div className="CommandeForm">
+      <ToastContainer/>
       <h2>Formulaire de Commande</h2>
       <Formik
         initialValues={{
@@ -250,7 +259,7 @@ function CommandeForm({ prixTotal }) {
               <button
                 type="submit"
                 disabled={isSubmitting || !isValid || !stripe}
-                className="btn btn-primary"
+                className="btn-commande"
               >
                 <img src={buy} alt="commander_icon" width={30} />
                 {isSubmitting ? "Envoi en cours..." : "Commander"}
@@ -258,7 +267,7 @@ function CommandeForm({ prixTotal }) {
               <button
                 type="button"
                 onClick={resetForm}
-                className="btn btn-primary"
+                className="btn-commande"
               >
                 Réinitialiser
               </button>

@@ -74,7 +74,6 @@ function NavBar({
           </li>
         </ul>
       </div>
-
       <div className={"right-section"}>
         <div>
           <img src={usernav} alt="user" width={25} className="user" />

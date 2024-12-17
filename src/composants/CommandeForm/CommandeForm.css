@@ -23,3 +23,20 @@
 }
 
 
+.CommandeForm  .btn-commande{
+
+    border: 1px solid transparent !important;
+}
+
+
+.CommandeForm  .btn-commande:hover{
+    background: transparent !important;
+    color: var(--color-primary);
+    border-color: var(--color-primary) !important;
+}
+
+.CommandeForm  .btn-commande:hover img{
+     filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(3318%) hue-rotate(161deg) brightness(104%) contrast(101%) !important;
+}
+
+

@@ -30,7 +30,6 @@ function Shop(){
     if(select === 0) setUrl("/api/appareils/")
   }
   const handleChange = (e) => {
-    console.log(e.target.value)
     if(e.target.value === "") {setUrl("/api/appareils/") ; setActive(0)}
     else setUrl("/api/appareils/search/"+e.target.value)
   }

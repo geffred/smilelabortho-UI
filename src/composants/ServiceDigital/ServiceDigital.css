@@ -11,7 +11,7 @@
 }
 
 .digitalItem:hover{
-    background: rgba(0, 85, 255, 0.03);
+    background: var(--color-primary-glass-2);
 }
 
 .digitalItem>div{

@@ -55,13 +55,11 @@ function Footer(){
             <div className="sectionList  social col-lg-3 col-12">
               <div className="logo">
                 <div className="left-section">
-                  {false && (
-                    <div className="logo-container">
-                      <img src={logo_smilelab} alt="logo_smilelab" />
-                    </div>
-                  )}
                   <span>
-                    Smile <span className="lab">lab</span>{" "}
+                    <img
+                      src="/public/image/smilelab_white.svg"
+                      alt=""
+                    />
                   </span>
                 </div>
                 <div className="socialNetwork">

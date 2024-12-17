@@ -10,7 +10,7 @@ const DigitalItem = ({icon , title , text})=>{
     return(
         <div className="digitalItem">
             <div>
-                <img src={icon} alt="pc_icon" width={35} />
+                <img src={icon} alt="pc_icon" width={35} className="icon-icon" />
                 <h1> {title} </h1>
             </div>
             <p>

@@ -9,6 +9,7 @@ import AllCategorie from "../../composants/AllCategorie/AllCategorie"
 import About from "../../composants/About/About"
 import PanierBtn from "../../composants/PanierBtn/PanierBtn"
 import CompteUtilisateur from "../Profil/Profil"
+import Avis from "../../composants/Avis/Avis"
 
 
 const cards = [
@@ -49,7 +50,8 @@ function Acceuil(){
             style={{borderColor:"transparent",backgroundColor:" rgba(30, 144, 255,.03)"}}
         />
         <About/>
-        <Map/> 
+        <Avis/>
+        
         <Footer/> 
      </div>
     )
