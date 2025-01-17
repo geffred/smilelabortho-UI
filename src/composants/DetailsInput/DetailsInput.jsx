@@ -20,7 +20,7 @@ function DetailsInput({ data }) {
   const [uploadedFilePath, setUploadedFilePath] = useState(null);
   const [refPatient, setRefPatient] = useState("");
   const [isUploading, setIsUploading] = useState(false); // Pour la barre de progression
-  const [fileName, setFileName] = useState("choisir un fichier .Stl"); // Nom du fichier sélectionné
+  const [fileName, setFileName] = useState("choisir un fichier .Stl ou .Zip"); // Nom du fichier sélectionné
 
 
   // États locaux
@@ -63,14 +63,16 @@ function DetailsInput({ data }) {
         throw new Error(
           errorData.error || "Erreur lors de l'upload du fichier."
         );
+        
       }
 
       const data = await response.json();
+      console.log(data)
       setUploadedFilePath(data.path);
       toast("Fichier téléchargé avec succès !");
     } catch (error) {
       toast.error("Veillez entrer la reférence du patient ! ");
-      setFileName("choisir un fichier .Stl");
+      setFileName("choisir un fichier .Stl ou .Zip");
       resetFileInput();
     } finally {
       setIsUploading(false);
@@ -79,7 +81,7 @@ function DetailsInput({ data }) {
 
   // Fonction pour envoyer les données au backend
   async function sendData(payload) {
-      
+      console.log(payload);
     try {
       const response = await fetch("/api/paniers/", {
         method: "POST",
@@ -95,12 +97,14 @@ function DetailsInput({ data }) {
     
       console.log(responseData);
       setRefPatient("");
-      setFileName("choisir un fichier .Stl");
+      setFileName("choisir un fichier .Stl ou .Zip");
       toast("Produit ajouté au panier avec succès !");
       setUploadedFilePath(null);
       mutate(`/api/paniers/${user?.id}`);
     } catch (error) {
       toast.error("Erreur réseau ou serveur : " + error.message);
+      setUploadedFilePath(null);
+      setFileName("choisir un fichier .Stl ou .Zip");
     }
   }
 
@@ -117,12 +121,12 @@ function DetailsInput({ data }) {
         "Le fichier doit être au format .stl",
         (value) =>
           !value || // Pas d'erreur si la valeur est vide (autre test gère l'obligation)
-          (value && value.name && value.name.endsWith(".stl")) // Vérifie l'extension du fichier
+          (value && value.name && value.name.endsWith(".stl") || (value && value.name && value.name.endsWith(".zip") )) // Vérifie l'extension du fichier
       )
       .test(
         "fileSize",
-        "La taille du fichier ne doit pas dépasser 50 Mo",
-        (value) => !value || (value && value.size <= 50 * 1024 * 1024) // Limite de taille
+        "La taille du fichier ne doit pas dépasser 500 Mo",
+        (value) => !value || (value && value.size <= 500 * 1024 * 1024) // Limite de taille
       ),
 
     quantite: Yup.number()
@@ -226,7 +230,7 @@ function DetailsInput({ data }) {
                 </label>
                 <input
                   type="file"
-                  accept=".stl"
+                  accept=".stl,.zip"
                   id="fileUpload"
                   className={`form-control ${
                     touched.scan3d && errors.scan3d ? "is-invalid" : ""
@@ -235,6 +239,11 @@ function DetailsInput({ data }) {
                    
                     const file = e.target.files[0];
                     if (file) {
+                      if (file.size > 500 * 1024 * 1024) {
+                        toast.error("La taille du fichier dépasse 500 Mo.");
+                        resetFileInput();
+                        return;
+                      }
                       setFileName(file.name); // Affichez le nom du fichier
                       uploadFile(file); // Téléchargez le fichier
                       setFieldValue("scan3d", file); // Mettez à jour Formik
