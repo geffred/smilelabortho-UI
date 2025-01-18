@@ -22,6 +22,7 @@ function CommandeForm({ prixTotal }) {
   const { data: adresses } = useSWR(urlAdress, fetcher);
   const { data: paniers } = useSWR(urlPanier, fetcher);
   const prixTotalPlusTVA = (prixTotal * 21) / 100 + prixTotal;
+  const [payment , setPayment] = useState(true);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -38,7 +39,7 @@ function CommandeForm({ prixTotal }) {
       .required("Veuillez sélectionner une date de livraison.")
       .min(
         new Date(),
-        "La date de livraison souhaitée ne peut pas être dans le passé."
+        "La date de livraison souhaitée ne peut pas être aujourd'hui ou dans le passé."
       ),
     commentaire: Yup.string().max(
       500,
@@ -46,99 +47,120 @@ function CommandeForm({ prixTotal }) {
     ),
   });
 
-  async function handleSubmit(values, { resetForm }) {
-    if (!paniers) {
-      alert("Erreur : Aucun panier trouvé.");
-      return;
-    }
+  console.log(payment)
 
-    const panierIds = paniers
-      .filter((panier) => !panier.valider)
-      .map((panier) => panier.id);
-    const payload = {
-      ...values,
-      panierIds,
-      utilisateurId: user.id,
-      prixTotalPlusTVA,
-      statut: "EN_ATTENTE",
-    };
-
-    try {
-      // Traitement Stripe
-      const { clientSecret } = await fetch(
-        "/api/payments/create-payment-intent",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: prixTotalPlusTVA * 100 }), // Montant en cents
-        }
-      ).then((res) => res.json());
-
-      console.log(clientSecret);
-
-      const cardElement = elements.getElement(CardElement);
-      const { paymentIntent, error } = await stripe.confirmCardPayment(
-        clientSecret,
-        {
-          payment_method: {
-            card: cardElement,
-          },
-        }
-      );
-
-      if (error) {
-        setPaymentStatus("Erreur de paiement : " + error.message);
+    async function handleSubmit(values, { resetForm }) {
+      // Vérifiez si le panier contient des articles
+      if (
+        !paniers ||
+        paniers.filter((panier) => !panier.valider).length === 0
+      ) {
+        toast.error(
+          "Votre panier est vide. Vous ne pouvez pas passer de commande.",
+          {
+            autoClose: 3000,
+          }
+        );
         return;
       }
 
-      setPaymentStatus("Paiement réussi !");
-
-      // Envoi de l'email avec EmailJS
-      emailjs
-        .send(
-          "service_f2vyidp",
-          "template_v5lnqrt",
+      // Vérifiez si le paiement est obligatoire
+      if (payment && !stripe) {
+        toast.error(
+          "Veuillez effectuer le paiement pour valider votre commande.",
           {
-            user_email: user.email,
-            prix_total: prixTotalPlusTVA,
-            date_livraison: values.dateLivraisonSouhaitee,
-            commentaire: values.commentaire,
-            message:
-              "Votre Commande a bien été prise en compte notre équipe se met au travail !",
-          },
-          "M-ibIQ1aTjGbVU4OK"
-        )
-        .then(
-          () => {
-            toast("Email de confirmation envoyé avec succès !", {
-              autoClose: 3000,
-            });
-          },
-          (error) => {
-            toast.error("Erreur lors de l'envoi de l'email "+error, {
-              autoClose: 3000,
-            });
+            autoClose: 3000,
           }
         );
+        return;
+      }
 
-      await fetch("/api/commandes/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const panierIds = paniers
+        .filter((panier) => !panier.valider)
+        .map((panier) => panier.id);
+      const payload = {
+        ...values,
+        panierIds,
+        utilisateurId: user.id,
+        prixTotalPlusTVA,
+        statut: "EN_ATTENTE",
+        payer: payment,
+      };
 
-      mutate(`/api/paniers/${user.id}`);
-      resetForm();
-      toast("Commande soumise avec succès !", {
-        autoClose: 3000,
-      });
-    } catch (error) {
-      console.error("Erreur lors du traitement de la commande :", error.message);
-      toast.error("Erreur lors du traitement de la commande Votre panier est vide ", {
-        autoClose: 3000, 
-      });
+      try {
+        if (payment) {
+          const { clientSecret } = await fetch(
+            "/api/payments/create-payment-intent",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ amount: prixTotalPlusTVA * 100 }), // Montant en cents
+            }
+          ).then((res) => res.json());
+
+          const cardElement = elements.getElement(CardElement);
+          const { paymentIntent, error } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+              payment_method: {
+                card: cardElement,
+              },
+            }
+          );
+
+          if (error) {
+            setPaymentStatus("Erreur de paiement : " + error.message);
+            return;
+          }
+
+          setPaymentStatus("Paiement réussi !");
+        }
+
+        emailjs
+          .send(
+            "service_f2vyidp",
+            "template_v5lnqrt",
+            {
+              user_email: user.email,
+              prix_total: prixTotalPlusTVA,
+              date_livraison: values.dateLivraisonSouhaitee,
+              commentaire: values.commentaire,
+              message:
+                "Votre Commande a bien été prise en compte notre équipe se met au travail !",
+            },
+            "M-ibIQ1aTjGbVU4OK"
+          )
+          .then(
+            () =>
+              toast("Email de confirmation envoyé avec succès !", {
+                autoClose: 3000,
+              }),
+            (error) =>
+              toast.error("Erreur lors de l'envoi de l'email " + error, {
+                autoClose: 3000,
+              })
+          );
+
+        await fetch("/api/commandes/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        mutate(`/api/paniers/${user.id}`);
+        resetForm();
+        toast("Commande soumise avec succès !", { autoClose: 3000 });
+      } catch (error) {
+        console.error(
+          "Erreur lors du traitement de la commande :",
+          error.message
+        );
+        toast.error("Erreur lors du traitement de la commande.", {
+          autoClose: 3000,
+        });
+      }
     }
-  }
+
 
   return (
     <div className="CommandeForm">
@@ -247,18 +269,31 @@ function CommandeForm({ prixTotal }) {
               <span> {prixTotalPlusTVA} €</span>
             </div>
 
-            <div className="form-group">
-              <label>Paiement</label>
-              <CardElement
-                options={{
-                  style: {
-                    base: {
-                      fontSize: "16px",
+            {payment && (
+              <div className="form-group">
+                <label>Paiement</label>
+                <CardElement
+                  options={{
+                    style: {
+                      base: {
+                        fontSize: "16px",
+                      },
                     },
-                  },
-                  hidePostalCode: true,
-                }}
+                    hidePostalCode: true,
+                  }}
+                />
+              </div>
+            )}
+
+            <div className="form-group payer-group">
+              <input
+                type="checkbox"
+                className="check"
+                id="payer"
+                value={false}
+                onChange={(e) => setPayment(!e.target.checked)}
               />
+              <label htmlFor="payer"> Payer plus tard ?</label>
             </div>
 
             <div className="boutton">

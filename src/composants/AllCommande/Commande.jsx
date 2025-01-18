@@ -115,29 +115,33 @@ const Commande = ({ data, handleClick, isDashboard }) => {
     <>
       {confirmationVisible && (
         <div className="confirm-delete">
-    
-            <p>
-              Voulez-vous vraiment changer le statut de la commande #{data.id}{" "}
-              en "
-              {statutToUpdate
-                ?.split("_")
-                .map(
-                  (word) =>
-                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-                )
-                .join(" ")}
-              " ?
-            </p>
-            <button onClick={confirmUpdate} >
-              Confirmer
-            </button>
-            <button onClick={cancelUpdate} className="annuler" >
-              Annuler
-            </button>
-         
+          <p>
+            Voulez-vous vraiment changer le statut de la commande #{data.id} en
+            "
+            {statutToUpdate
+              ?.split("_")
+              .map(
+                (word) =>
+                  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+              )
+              .join(" ")}
+            " ?
+          </p>
+          <button onClick={confirmUpdate}>Confirmer</button>
+          <button onClick={cancelUpdate} className="annuler">
+            Annuler
+          </button>
         </div>
       )}
-      <section className="row commande">
+      <section
+        className={`row commande ${
+          data.statut === "ANNULEE"
+            ? "commandeBorderError"
+            : data.statut === "TERMINEE"
+            ? "commandeBorderOk"
+            : ""
+        }`}
+      >
         <div className="col-lg-1 col-12" onClick={handleClick}>
           <img
             src="/image/order.svg"
@@ -153,10 +157,19 @@ const Commande = ({ data, handleClick, isDashboard }) => {
         <div className="col-lg-1 col-12">
           {data.utilisateur?.prenom || "Inconnu"}
         </div>
-        <div className="col-lg-3 col-12">{data.refPatient}</div>
+        <div className="col-lg-2 col-12">{data.refPatient}</div>
+        <div className="col-lg-1 col-12">{data.payer ? "Oui" : "non"}</div>
         <div className="col-lg-1 col-12">{data.dateLivraisonSouhaitee}</div>
         <div className="col-lg-1 col-12 d-flex justify-content-center">
-          <span className="statut">
+          <span
+            className={`statut ${
+              data.statut === "ANNULEE"
+                ? "bg-danger"
+                : data.statut === "TERMINEE"
+                ? "bg-success"
+                : ""
+            }`}
+          >
             {data.statut
               .split("_")
               .map(
@@ -177,7 +190,13 @@ const Commande = ({ data, handleClick, isDashboard }) => {
           )}
           {display && (
             <ul className="all-statut" onMouseLeave={() => setDisplay(false)}>
-              {["EN_COURS", "TERMINEE", "EXPEDIEE"].map((statut) => (
+              {[
+                "EN_ATTENTE",
+                "EN_COURS",
+                "TERMINEE",
+                "EXPEDIEE",
+                "ANNULEE",
+              ].map((statut) => (
                 <li
                   key={statut}
                   onClick={() => {

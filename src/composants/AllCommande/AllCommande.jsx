@@ -141,7 +141,8 @@ function AllCommande({
             <div className="col-lg-1 col-1">#</div>
             <div className="col-lg-1 col-2">Nom</div>
             <div className="col-lg-1 col-2">Prenom</div>
-            <div className="col-lg-3 col-2">Refs Patients</div>
+            <div className="col-lg-2 col-2">Refs Patients</div>
+            <div className="col-lg-1 col-2">Payer</div>
             <div className="col-lg-1 col-2">Dateline</div>
             <div className="col-lg-1 col-2 d-flex justify-content-center">
               Statut

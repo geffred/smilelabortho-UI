@@ -1,11 +1,23 @@
-.CommandeForm form input{
+.CommandeForm form input:not(input[type="checkbox"]){
     padding: 15px;
     border-color: var(--color-primary-glass);
+}
+
+.CommandeForm input[type="checkbox"] {
+  box-shadow: none !important;
+}
+
+
+
+.CommandeForm  form .payer-group label{
+    margin-left: 5px;
+    color: gray;
 }
 
 .CommandeForm form textarea{
     padding: 15px;
     border-color: var(--color-primary-glass);
+
 }
 
 .CommandeForm form select{
