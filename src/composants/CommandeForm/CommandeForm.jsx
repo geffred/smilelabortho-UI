@@ -94,7 +94,7 @@ function CommandeForm({ prixTotal }) {
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ amount: prixTotalPlusTVA * 100 }), // Montant en cents
+              body: JSON.stringify({ amount: prixTotalPlusTVA}), // Montant en cents
             }
           ).then((res) => res.json());
 
@@ -107,6 +107,8 @@ function CommandeForm({ prixTotal }) {
               },
             }
           );
+
+          console.log(clientSecret);
 
           if (error) {
             setPaymentStatus("Erreur de paiement : " + error.message);
