@@ -1,10 +1,11 @@
 import "./AllCommande.css";
 import AppareilPanier from "../AppareilPanier/AppareilPanier";
 import AdressCard from "../ProfilComponent/ListAdresses/AdressCard";
+import { Link } from "react-router-dom";
 
 
 
-const CommandeDetails = ({ data, id, handleClick }) => {
+const CommandeDetails = ({ data, id, handleClickBack, handleClickForm }) => {
   const commande = data?.find((cmd) => cmd.id === id);
   console.log(commande);
 
@@ -12,7 +13,7 @@ const CommandeDetails = ({ data, id, handleClick }) => {
     return (
       <div className="commandeDetails container py-5">
         <p>Commande introuvable</p>
-        <button onClick={handleClick}>Retour</button>
+        <button onClick={handleClickBack}>Retour</button>
       </div>
     );
   }
@@ -71,10 +72,20 @@ const CommandeDetails = ({ data, id, handleClick }) => {
           <span> {commande.prixTotalPlusTVA} € </span>
         </div>
       </div>
-      <button onClick={handleClick} className="btn btn-primary">
-        <img src="/public/image/arrow-prev-white.svg " alt="" width={20} />
-        Retour
-      </button>
+      <div className="d-flex justify-content-between">
+        <button onClick={handleClickBack} className="btn btn-primary">
+          <img src="/public/image/arrow-prev-white.svg " alt="" width={20} />
+          Retour
+        </button>
+        <button onClick={handleClickForm} className="btn btn-primary ml-3">
+          Créer une un certificat de Conformité
+        </button>
+      </div>
+      <div className="row my-3">
+        <Link to="/declarations/2" onClick={handleClickForm} className="btn btn-primary ml-3">
+          Afficher le certificat de Conformité
+        </Link>
+      </div>
     </div>
   );
 };

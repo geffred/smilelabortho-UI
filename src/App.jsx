@@ -14,7 +14,7 @@ import CompteUtilisateur from "./Pages/Profil/Profil";
 import Connexion from "./Pages/Connexion/Connexion";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-
+import CertificatConformiteDocument from "./Pages/CertificatConformiteDocument/CertificatConformiteDocument";
 import { useContext } from "react";
 import { UserContext } from "./composants/UserContext";
 import UtilisateurDetails from "./composants/Utilisateurs/UtilisateurDetails";
@@ -86,6 +86,18 @@ function App() {
         />
 
         <Route
+          path="/declarations/:id"
+          element={
+            <PrivateRoutes
+              user={user}
+              requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}
+            >
+              <CertificatConformiteDocument />
+            </PrivateRoutes>
+          }
+        />
+
+        <Route
           path="/utilisateurs/:id"
           element={
             <PrivateRoutes
@@ -104,7 +116,7 @@ function App() {
               user={user}
               requiredRoles={["ROLE_SUPER_ADMIN", "ROLE_ADMIN"]}
             >
-              <Analytics/>
+              <Analytics />
             </PrivateRoutes>
           }
         />

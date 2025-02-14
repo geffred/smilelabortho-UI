@@ -6,9 +6,10 @@ import { UserContext } from "../UserContext";
 import Commande from "./Commande";
 import CommandeDetails from "./CommandeDetails";
 import {ToastContainer } from "react-toastify";
+import CertificatConformiteForm from "../CertificatConformiteForm/CertificatConformiteForm";
 
-const Display = ({ children, active }) => {
-  return active ? children : null;
+const Display = ({ label , children, active }) => {
+  return active === label ? children : null;
 };
 
 function AllCommande({
@@ -16,7 +17,7 @@ function AllCommande({
   isDashboard = true,
  
 }) {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState("commandes");
   const [id, setId] = useState(null);
   const [searchTerm, setSearchTerm] = useState(""); // État pour la barre de recherche
   const [filterDate, setFilterDate] = useState(""); // État pour le filtre de date
@@ -85,7 +86,7 @@ function AllCommande({
   return (
     <div>
       <ToastContainer />
-      <Display active={!active}>
+      <Display active={active} label={"commandes"}>
         <div className="commandes container-fluid">
           {/* Barre de recherche et filtres */}
           <form className="row">
@@ -156,18 +157,24 @@ function AllCommande({
                 data={commande}
                 key={commande.id}
                 handleClick={() => {
-                  setActive(true);
+                  setActive("details");
                   setId(commande.id);
                 }}
               />
             ))}
         </div>
       </Display>
-      <Display active={active}>
+      <Display active={active} label={"details"}>
         <CommandeDetails
           data={nouvellesCommandes}
           id={id}
-          handleClick={() => setActive(false)}
+          handleClickBack={() => setActive("commandes")} // Retour à la liste des commandes
+          handleClickForm={() => setActive("certificatConformiteForm")} // Affichage du formulaire de modification
+        />
+      </Display>
+      <Display active={active} label={"certificatConformiteForm"}>
+        <CertificatConformiteForm
+          handleClickBack={() => setActive("details")}
         />
       </Display>
     </div>
