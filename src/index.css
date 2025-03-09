@@ -22,6 +22,12 @@ body{
     border-color: var(--color-primary);
 }
 
+.btn-primary:focus{
+    box-shadow: none;
+}
+
+.btn-primary:blur
+
 .btn-primary:hover{
     background: transparent;
     border-color: var(--color-primary);
@@ -69,6 +75,7 @@ select:focus {
     margin-bottom: 10px;
     font-size: 18px;
 }
+
  .confirm-delete button {
     margin: 5px;
     padding: 10px 20px;

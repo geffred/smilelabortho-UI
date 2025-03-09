@@ -39,6 +39,8 @@ export default defineConfig({
       "/api/payments/create-payment-intent": "http://localhost:8080",
       "/api/files/upload/": "http://localhost:8080",
       "/api/files/download/": "http://localhost:8080",
+      "/api/declarations/": "http://localhost:8080",
+      "/api/declarations/{id}": "http://localhost:8080",
     },
   },
 });

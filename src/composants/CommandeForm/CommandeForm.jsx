@@ -87,6 +87,8 @@ function CommandeForm({ prixTotal }) {
         payer: payment,
       };
 
+      console.log(values);
+
       try {
         if (payment) {
           const { clientSecret } = await fetch(

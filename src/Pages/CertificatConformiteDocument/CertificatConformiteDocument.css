@@ -1,0 +1,101 @@
+.aucunCertificat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: calibri;
+    color:var(--color-primary);
+    text-align: center;
+    background-color:var(--background-color);
+    border-radius: 5px;
+    margin: 10px 0px;
+    padding: 15px;
+    border: 1px dashed var( --color-primary-glass);
+}
+
+.certificat-document-container {
+font-family: calibri;
+}
+.certificat-header-start p{
+    text-align: start;
+    margin: 2px;
+    font-size: 1.3rem;
+}
+
+.certificat-document-container span{
+    font-size: 1.3rem;
+    font-weight: none !important;
+    display: inline-block;
+}
+
+.certificat-document-container button:hover{
+    color: var(--color-primary) !important;
+}
+
+.certificat-header-start em{
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: none !important;
+    display: inline-block;
+}
+
+.certificat-header-end p{
+    text-align: end;
+    margin: 2px;
+    font-size: 1.3rem;
+}
+
+.certificat-header-end em{
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: none !important;
+    display: inline-block;
+}
+
+.certificat-body p{
+    text-align: justify;
+    margin: 2px;
+    font-size: 1.3rem;
+}
+
+.certificat-body em{
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: none !important;
+    display: inline-block;
+}
+
+
+.certificat-document-container h1{
+    text-align: start;
+    margin: 10px 0px;
+    font-family:  calibri;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.certificat-document-container h2{
+    text-align: start;
+    margin: 0px 0px 5px 0px;
+    font-family:  calibri;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+}
+
+.certificat-document-container a{
+    padding: 15px 30px;
+    margin: 5px 0px 40px 0px;
+    border: 1px solid var(--color-primary);
+    color: white;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+    display: inline-block;
+    &&:hover{
+        background-color:transparent !important;
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+    }
+}

@@ -156,10 +156,10 @@
     flex-direction: column;
 }
 
-.commandeDetails button{
+.commandeDetails button:not(.Toastify__toast button,.annuler button,.confirm-delete button){
 
     outline: none !important;
-    padding: 18px 25px 18px 15px;
+    padding: 18px 25px 18px 25px;
     border-radius: 5px;
     background: var(--color-primary);
     color: white;
@@ -168,9 +168,10 @@
     display: flex;
     align-items: center;
     gap: 5px;
+   
 }
 
-.commandeDetails button:hover{
+.commandeDetails button:not(.Toastify__toast button):hover{
     color: var(--color-primary);
     border-color: var(--color-primary);
     background: transparent !important;;

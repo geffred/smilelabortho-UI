@@ -5,19 +5,30 @@ import cancel from "/image/cancel.svg"; // Assurez-vous d'avoir cette image dans
 import { ToastContainer, toast } from "react-toastify"; // Importation de la librairie de notification
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
+import { mutate } from "swr";
 
-function CertificatConformiteForm({ handleClickBack }) {
-  const url = "http://localhost:8080/api/declarations";
-
+function CertificatConformiteForm({
+  id,
+  handleClickBack,
+  displayCertificat,
+  refPatient,
+  url,
+  methode,
+}) {
+  
+  const idUnique =
+    new Date().getFullYear() +
+    String(new Date().getMonth() + 1).padStart(2, "0") +
+    String(new Date().getDate()).padStart(2, "0") +
+    id;
 
   const validationSchema = Yup.object({
     nomTechnicien: Yup.string()
       .min(3, "Le nom du technicien doit contenir au moins 3 caractères")
       .required("Le nom du technicien est obligatoire"),
-    reference: Yup.string().required("La référence est obligatoire"),
-    dateDeclaration: Yup.date().required(
-      "La date de déclaration est obligatoire"
-    ),
+    dateDeclaration: Yup.date()
+      .required("La date de déclaration est obligatoire")
+      .max(new Date(), "La date de déclaration ne peut pas être dans le futur"),
     identifiantDispositif: Yup.string().required(
       "L'identifiant du dispositif est obligatoire"
     ),
@@ -35,7 +46,7 @@ function CertificatConformiteForm({ handleClickBack }) {
   async function sendData(data) {
     try {
       const response = await fetch(url, {
-        method: "POST", // Type de la requête HTTP
+        method: methode, // Type de la requête HTTP
         headers: {
           "Content-Type": "application/json", // On précise que l'on envoie des données JSON
         },
@@ -48,6 +59,7 @@ function CertificatConformiteForm({ handleClickBack }) {
           position: "bottom-right",
           autoClose: 5000, // Notification se ferme après 5 secondes
         });
+        mutate(`http://localhost:8080/api/declarations/${id}`);
       } else {
         toast(
           "Une erreur s'est produite lors de l'ajout, veuillez réessayer !",
@@ -65,171 +77,156 @@ function CertificatConformiteForm({ handleClickBack }) {
 
   return (
     <>
-      <div className="container-fluid CertificatConformiteForm">
-       
-        <Formik
-          initialValues={{
-            nomTechnicien: "",
-            reference: "",
-            dateDeclaration: "",
-            identifiantDispositif: "",
-            descriptionDispositif: "",
-            refPatient: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={(values, { resetForm }) => {
-            sendData(values);
-            resetForm(); // Réinitialise le formulaire après la soumission
-            
-          }}
-        >
-          {({ errors, touched, isSubmitting, resetForm }) => (
-            <Form >
-              {/* Ajout de resetForm dans l'événement onClick de l'image */}
-              <img
-                src={cancel}
-                alt="Annuler"
-                width={30}
-                height={30}
-                className="icon-icon"
-                onClick={() => {
-                  resetForm(); // Réinitialiser le formulaire
-                 
-                }}
-              />
+      {displayCertificat ? (
+        <div className="container-fluid CertificatConformiteForm">
+          <Formik
+            initialValues={{
+              commandeId: id,
+              nomTechnicien: "",
+              dateDeclaration: "",
+              identifiantDispositif: idUnique,
+              descriptionDispositif: "",
+              refPatient: refPatient,
+            }}
+            validationSchema={validationSchema}
+            onSubmit={(values, { resetForm }) => {
+              console.log(values);
+              sendData(values);
+              resetForm(); // Réinitialise le formulaire après la soumission
+            }}
+          >
+            {({ errors, touched, isSubmitting, resetForm }) => (
+              <Form>
+                {/* Ajout de resetForm dans l'événement onClick de l'image */}
+                <img
+                  src={cancel}
+                  alt="Annuler"
+                  width={30}
+                  height={30}
+                  className="icon-icon"
+                  onClick={handleClickBack}
+                />
 
-              <div className="row">
-                <div className="col-lg-6">
-                  <Field
-                    type="text"
-                    name="nomTechnicien"
-                    id="nomTechnicien"
-                    placeholder="Nom du technicien"
-                    className={`form-control my-2 ${
-                      touched.nomTechnicien && errors.nomTechnicien
-                        ? "is-invalid"
-                        : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="nomTechnicien"
-                    component="div"
-                    className="error"
-                  />
+                <div className="row">
+                  <div className="col-lg-6">
+                    <label htmlFor="nomTechnicien">Nom du Technicien</label>
+                    <Field
+                      type="text"
+                      name="nomTechnicien"
+                      id="nomTechnicien"
+                      placeholder="Nom du technicien"
+                      className={`form-control my-2 ${
+                        touched.nomTechnicien && errors.nomTechnicien
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="nomTechnicien"
+                      component="div"
+                      className="error"
+                    />
+                  </div>
+
+                  <div className="col-lg-6">
+                    <label htmlFor="dateDeclaration">Date de déclaration</label>
+                    <Field
+                      type="date"
+                      name="dateDeclaration"
+                      placeholder="Date de déclaration"
+                      className={`form-control my-2 ${
+                        touched.dateDeclaration && errors.dateDeclaration
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="dateDeclaration"
+                      component="div"
+                      className="error"
+                    />
+                  </div>
+
+                  <div className="col-lg-6">
+                    <label htmlFor="identifiantDispositif">
+                      Identifiant du Dispositif
+                    </label>
+                    <Field
+                      type="text"
+                      name="identifiantDispositif"
+                      placeholder="Identifiant du dispositif"
+                      className={`form-control my-2 ${
+                        touched.identifiantDispositif &&
+                        errors.identifiantDispositif
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="identifiantDispositif"
+                      component="div"
+                      className="error"
+                    />
+                  </div>
+
+                  <div className="col-lg-6">
+                    <label htmlFor="refPatient">Référence du Patient</label>
+                    <Field
+                      type="text"
+                      name="refPatient"
+                      placeholder="Référence du patient"
+                      className={`form-control my-2 ${
+                        touched.refPatient && errors.refPatient
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="refPatient"
+                      component="div"
+                      className="error"
+                    />
+                  </div>
+
+                  <div className="col-lg-6">
+                    <label htmlFor="descriptionDispositif">
+                      Description du Dispositif
+                    </label>
+                    <Field
+                      as="textarea"
+                      rows="10"
+                      name="descriptionDispositif"
+                      placeholder="Description du dispositif"
+                      className={`form-control my-2 ${
+                        touched.descriptionDispositif &&
+                        errors.descriptionDispositif
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+
+                    <ErrorMessage
+                      name="descriptionDispositif"
+                      component="div"
+                      className="error"
+                    />
+                  </div>
                 </div>
 
-                <div className="col-lg-6">
-                  <Field
-                    type="text"
-                    name="reference"
-                    placeholder="Référence"
-                    className={`form-control my-2 ${
-                      touched.reference && errors.reference ? "is-invalid" : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="reference"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-
-                <div className="col-lg-6">
-                  <Field
-                    type="date"
-                    name="dateDeclaration"
-                    placeholder="Date de déclaration"
-                    className={`form-control my-2 ${
-                      touched.dateDeclaration && errors.dateDeclaration
-                        ? "is-invalid"
-                        : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="dateDeclaration"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-
-                <div className="col-lg-6">
-                  <Field
-                    type="text"
-                    name="identifiantDispositif"
-                    placeholder="Identifiant du dispositif"
-                    className={`form-control my-2 ${
-                      touched.identifiantDispositif &&
-                      errors.identifiantDispositif
-                        ? "is-invalid"
-                        : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="identifiantDispositif"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-
-                <div className="col-lg-6">
-                  <Field
-                    type="text"
-                    name="descriptionDispositif"
-                    placeholder="Description du dispositif"
-                    className={`form-control my-2 ${
-                      touched.descriptionDispositif &&
-                      errors.descriptionDispositif
-                        ? "is-invalid"
-                        : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="descriptionDispositif"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-
-                <div className="col-lg-6">
-                  <Field
-                    type="text"
-                    name="refPatient"
-                    placeholder="Référence du patient"
-                    className={`form-control my-2 ${
-                      touched.refPatient && errors.refPatient
-                        ? "is-invalid"
-                        : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="refPatient"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-              </div>
-
-              <div>
                 <button
                   type="submit"
                   className="btn btn-primary"
+                  style={{ padding: "15px 30px" }}
                   disabled={isSubmitting}
                 >
-                  Ajouter
+                  Créer
                 </button>
-                <a
-                href="#"
-                  onClick={handleClickBack}
-                  className="btn btn-dark ml-2"
-                >
-                  Retour
-                </a>
-              </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
-      <ToastContainer />
+              </Form>
+            )}
+          </Formik>
+          {/*<ToastContainer /> */}
+        </div>
+      ) : null}
     </>
   );
 }

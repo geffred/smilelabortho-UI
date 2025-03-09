@@ -169,14 +169,9 @@ function AllCommande({
           data={nouvellesCommandes}
           id={id}
           handleClickBack={() => setActive("commandes")} // Retour à la liste des commandes
-          handleClickForm={() => setActive("certificatConformiteForm")} // Affichage du formulaire de modification
         />
       </Display>
-      <Display active={active} label={"certificatConformiteForm"}>
-        <CertificatConformiteForm
-          handleClickBack={() => setActive("details")}
-        />
-      </Display>
+      
     </div>
   );
 }
