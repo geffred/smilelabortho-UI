@@ -3,7 +3,9 @@ import useSWR, { mutate } from "swr";
 import "./CertificatConformiteDocument.css";
 import NavBar from "../../composants/NavBar/NavBar";
 import { ToastContainer, toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../composants/UserContext";
+
 import {
   Page,
   Text,
@@ -46,6 +48,9 @@ const styles = StyleSheet.create({
 
 // Composant PDF
 const CertificatPDF = ({ data }) => (
+
+  
+
   <Document>
     <Page size="A4" style={styles.page}>
       <Text style={styles.title}>Certificat de Conformité</Text>
@@ -109,6 +114,8 @@ function CertificatConformiteDocument({
   handleEditForm,
 }) {
 
+  const { user } = useContext(UserContext);  // Utiliser le contexte
+
   const { data, error } = useSWR(
     `http://localhost:8080/api/declarations/${id}`,
     (url) => fetch(url).then((res) => res.json())
@@ -159,9 +166,20 @@ function CertificatConformiteDocument({
     return (
       <div className="bg-light p-3 my-3" style={{ borderRadius: "5px" }}>
         <div className="aucunCertificat"> Aucun Certificat </div>
-        <button onClick={handleClickForm} className="btn btn-primary ml-3">
-          Créer une un certificat de Conformité
-        </button>
+        {user?.roles &&
+          ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(user.role) && (
+            <button onClick={handleClickForm} className="btn btn-primary ml-3">
+              Créer un certificat de Conformité
+            </button>
+          )}
+
+        {user?.roles?.some((role) =>
+          ["ROLE_ADMIN", "SUPER_ADMIN"].includes(role)
+        ) && (
+          <button onClick={handleClickForm} className="btn btn-primary ml-3">
+            Créer un certificat de Conformité
+          </button>
+        )}
       </div>
     );
   if (!data) return <div>Chargement en cours...</div>;
@@ -239,14 +257,18 @@ function CertificatConformiteDocument({
         </p>
       </section>
 
-      <div className="edit d-flex justify-start">
-        <button className="btn btn-primary mr-2" onClick={handleEditForm}>
-          Modifier
-        </button>
-        <button className="btn btn-primary" onClick={handleDelete}>
-          Supprimer les données dynamiques
-        </button>
-      </div>
+      {user?.roles?.some((role) =>
+        ["ROLE_ADMIN", "SUPER_ADMIN"].includes(role)
+      ) && (
+        <div className="edit d-flex justify-start">
+          <button className="btn btn-primary mr-2" onClick={handleEditForm}>
+            Modifier
+          </button>
+          <button className="btn btn-primary" onClick={handleDelete}>
+            Supprimer les données dynamiques
+          </button>
+        </div>
+      )}
 
       {/* Bouton pour télécharger le PDF */}
       <PDFDownloadLink
