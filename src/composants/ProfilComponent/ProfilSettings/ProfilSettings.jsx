@@ -14,7 +14,8 @@ import "react-toastify/dist/ReactToastify.css"; // Style des notifications toast
 function ProfilSettings() {
   const { user } = useContext(UserContext); // Utiliser le contexte
   const URL = `/api/auth/utilisateurs/${user.id}`;
-
+  
+  console.log( user)
 
   // Fetcher pour récupérer les données utilisateur
   const fetcher = async (url) => {
@@ -105,7 +106,8 @@ function ProfilSettings() {
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          sendData({ ...values }); // Envoi des données
+          sendData({ ...values, roles: user.roles.map(r => r.replace("ROLE_", "")) }); // Envoi des données
+          console.log({ ...values, roles: user.roles });
           mutate();
           setSubmitting(false); // Arrête le spinner de soumission
         }}

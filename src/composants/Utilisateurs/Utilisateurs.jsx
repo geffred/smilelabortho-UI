@@ -65,7 +65,7 @@ const Utilisateur = ({ data }) => {
 
         {display && (
           <ul className="all-statut" onMouseLeave={() => setDisplay(false)}>
-            {["ADMIN", "SUPER_ADMIN"].map((role) => (
+            {["ADMIN", "SUPER_ADMIN","USER"].map((role) => (
               <li
                 key={role}
                 onClick={() => {

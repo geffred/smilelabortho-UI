@@ -62,20 +62,32 @@ function AllCommande({
   // Tri et filtrage des commandes
   const filteredCommandes = nouvellesCommandes?.filter((commande) => {
     const utilisateur = commande.utilisateur || {};
-    const fullName = `${utilisateur.nom || ""} ${
-      utilisateur.prenom || ""
+
+    // Construction du nom complet avec nom, prénom et identifiant du dispositif
+    const fullName = `${utilisateur.nom || ""} ${utilisateur.prenom || ""} ${
+      commande.identifiantDispositif || ""
     }`.toLowerCase();
+
+    // Vérification si le terme de recherche correspond au nom complet, à la date de livraison souhaitée, ou à la référence du patient
     const matchesSearch =
       fullName.includes(searchTerm.toLowerCase()) ||
-      (commande.dateLivraisonSouhaitee || "").includes(searchTerm);
+      (commande.dateLivraisonSouhaitee || "").includes(searchTerm) ||
+      (commande.refPatient || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+    // Vérification si la date de livraison souhaitée correspond à la date filtrée
     const matchesDate =
       !filterDate || commande.dateLivraisonSouhaitee === filterDate;
+
+    // Vérification si la référence du patient correspond à la référence filtrée
     const matchesRefPatient =
       !filterRefPatient ||
       (commande.refPatient || "")
         .toLowerCase()
         .includes(filterRefPatient.toLowerCase());
 
+    // Retourne true si toutes les conditions sont remplies
     return matchesSearch && matchesDate && matchesRefPatient;
   });
 
@@ -140,6 +152,7 @@ function AllCommande({
               />
             </div>
             <div className="col-lg-1 col-1">#</div>
+            <div className="col-lg-2 col-1">Identifiant Dispositif</div>
             <div className="col-lg-1 col-2">Nom</div>
             <div className="col-lg-1 col-2">Prenom</div>
             <div className="col-lg-2 col-2">Refs Patients</div>
@@ -171,7 +184,6 @@ function AllCommande({
           handleClickBack={() => setActive("commandes")} // Retour à la liste des commandes
         />
       </Display>
-      
     </div>
   );
 }

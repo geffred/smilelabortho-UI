@@ -151,6 +151,7 @@ const Commande = ({ data, handleClick, isDashboard }) => {
           />
         </div>
         <div className="col-lg-1 col-12">#{data.id}</div>
+        <div className="col-lg-2 col-12">{data.identifiantDispositif}</div>
         <div className="col-lg-1 col-12">
           {data.utilisateur?.nom || "Inconnu"}
         </div>
@@ -179,7 +180,7 @@ const Commande = ({ data, handleClick, isDashboard }) => {
               .join(" ")}
           </span>
         </div>
-        <div className="col-lg-3 col-12 d-flex justify-content-end menu">
+        <div className="col-lg-1 col-12 d-flex justify-content-end menu">
           {isDashboard && (
             <img
               src="/image/menu-dots.svg"
