@@ -1,0 +1,124 @@
+/* Container principal */
+.message-sender-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 5;
+    border-top: 1px solid #ddd;
+  }
+  
+  /* Formulaire de message */
+  .message-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Styles pour les icônes/fichiers */
+  .file-icon,
+  .file-upload-label {
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  
+  .file-icon:hover,
+  .file-upload-label:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  /* Champ de saisie */
+  .message-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    resize: none;
+    max-height: 100px;
+    font-size: 1rem;
+    outline: none;
+    background-color: #f5f5f5;
+  }
+  
+  /* Bouton d'envoi */
+  .send-button {
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.2s;
+    background:var(--color-primary-glass);
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .send-button:hover {
+    background-color: var(--color-primary);
+  }
+  
+  .send-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Prévisualisation des fichiers */
+  .file-preview-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 0.3rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .file-preview-item {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+  }
+  
+  .file-name {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .delete-file {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem;
+  }
+  
+  /* Message d'erreur */
+  .error-message {
+    color: #ff4444;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }

@@ -1,5 +1,29 @@
 import useSWR from "swr";
 import "./Analytics.css";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+} from "chart.js";
+import { Bar, Line } from "react-chartjs-2";
+
+// Enregistrer les composants nécessaires de Chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Analytics() {
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -27,6 +51,19 @@ function Analytics() {
   const totalCategories = categories.length;
   const totalAppareils = appareils.length;
   const totalModels = models.length;
+
+  // Évolution des utilisateurs par mois (exemple)
+  const utilisateursParMois = utilisateurs.reduce((acc, utilisateur) => {
+    const mois = new Date(utilisateur.dateInscription).toLocaleString(
+      "default",
+      {
+        month: "long",
+        year: "numeric",
+      }
+    );
+    acc[mois] = (acc[mois] || 0) + 1;
+    return acc;
+  }, {});
 
   // Montant total des commandes classé par mois
   const commandesParMois = commandes.reduce((acc, commande) => {
@@ -65,6 +102,21 @@ function Analytics() {
       };
     });
 
+  // Préparation des données pour les graphiques
+  const moisUtilisateurs = Object.keys(utilisateursParMois);
+  const dataUtilisateurs = Object.values(utilisateursParMois);
+
+  const moisCommandes = Object.keys(commandesParMois);
+  const dataMontantCommandes = moisCommandes.map(
+    (mois) => commandesParMois[mois].total
+  );
+  const dataNombreCommandes = moisCommandes.map(
+    (mois) => commandesParMois[mois].count
+  );
+
+  const topUtilisateursLabels = meilleursUtilisateurs.map((u) => u.nom);
+  const topUtilisateursData = meilleursUtilisateurs.map((u) => u.commandes);
+
   return (
     <div className="analytics-container">
       <div className="analytics-cards">
@@ -89,32 +141,93 @@ function Analytics() {
           <span>{totalModels}</span>
         </div>
       </div>
-      <div className="analytics-section">
-        <h2>Montant des Commandes par Mois</h2>
-        <ul>
-          {Object.entries(commandesParMois).map(([mois, { count, total }]) => (
-            <li key={mois}>
-              {mois}: {count} commandes, {total.toFixed(2)} €
-            </li>
-          ))}
-        </ul>
+
+      <div className="chart-container">
+        <h2>Évolution du nombre d'utilisateurs</h2>
+        <Line
+          data={{
+            labels: moisUtilisateurs,
+            datasets: [
+              {
+                label: "Nombre d'utilisateurs",
+                data: dataUtilisateurs,
+                borderColor: "rgb(75, 192, 192)",
+                tension: 0.1,
+                fill: true,
+              },
+            ],
+          }}
+          options={{
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+              },
+            },
+          }}
+        />
       </div>
+
+      <div className="chart-container">
+        <h2>Montant des Commandes par Mois</h2>
+        <Bar
+          data={{
+            labels: moisCommandes,
+            datasets: [
+              {
+                label: "Montant total (€)",
+                data: dataMontantCommandes,
+                backgroundColor: "rgba(54, 162, 235, 0.5)",
+              },
+              {
+                label: "Nombre de commandes",
+                data: dataNombreCommandes,
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+              },
+            ],
+          }}
+          options={{
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+              },
+            },
+          }}
+        />
+      </div>
+
+      <div className="chart-container">
+        <h2>Top 5 Utilisateurs</h2>
+        <Bar
+          data={{
+            labels: topUtilisateursLabels,
+            datasets: [
+              {
+                label: "Nombre de commandes",
+                data: topUtilisateursData,
+                backgroundColor: "rgba(153, 102, 255, 0.5)",
+              },
+            ],
+          }}
+          options={{
+            indexAxis: "y",
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+              },
+            },
+          }}
+        />
+      </div>
+
       <div className="analytics-section">
         <h2>Appareils les Plus Ajoutés au Panier</h2>
         <ul>
           {appareilsLesPlusAjoutes.map(([nom, quantite]) => (
             <li key={nom}>
               {nom}: {quantite} fois
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="analytics-section">
-        <h2>Top 5 Utilisateurs</h2>
-        <ul>
-          {meilleursUtilisateurs.map((utilisateur, index) => (
-            <li key={index}>
-              {utilisateur.nom}: {utilisateur.commandes} commandes
             </li>
           ))}
         </ul>

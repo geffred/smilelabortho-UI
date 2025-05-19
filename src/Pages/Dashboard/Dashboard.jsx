@@ -9,6 +9,7 @@ import AllModelAppaeil from "../../composants/AllModelAppaeil/AllModelAppaeil";
 import Utilisateurs from "../../composants/Utilisateurs/Utilisateurs";
 import AllCommande from "../../composants/AllCommande/AllCommande";
 import Analytics from "../Analytics/Analytics";
+import Messages from "../../composants/Messages/Messages";
 
 function Dashboard(){
     const [active , setActive] = useState("Utilisateurs")
@@ -24,7 +25,7 @@ function Dashboard(){
         <NavBar bgColor="#262626" />
         <div className="Dashboard container-fluid">
           <div className="row">
-            <div className="col-lg-3 col-12 px-1">
+            <div className="col-lg-3 col-12 px-1 " id="menu">
               <DashBoardMenu isActive={active} handleClick={handleClick} />
             </div>
             <div className="col-lg-9 px-1 content-data">
@@ -61,8 +62,13 @@ function Dashboard(){
               <Display active={active} label={"Commandes"}>
                 <AllCommande />
               </Display>
+
               <Display active={active} label={"Analytics"}>
-                <Analytics/>
+                <Analytics />
+              </Display>
+
+              <Display active={active} label={"Messages"}>
+                <Messages />
               </Display>
             </div>
           </div>

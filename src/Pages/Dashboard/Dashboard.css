@@ -11,6 +11,16 @@
     padding-top: 20px;
 }
 
+.content-data{
+    padding: 0px 10px !important;
+    margin: 0px !important;
+    background: rgba(192, 192, 192, 0.062) !important;
+    box-sizing: border-box;
+}
+
+.Dashboard #menu{
+    background: rgba(9, 9, 9, 0.95) !important;
+}
 
 .Dashboard .content-data::-webkit-scrollbar{
     width: 5px;

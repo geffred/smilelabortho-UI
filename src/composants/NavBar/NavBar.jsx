@@ -41,15 +41,13 @@ function NavBar({
       id="form"
     >
       <NavLink to={"/"} className="lesft-section">
-       
-          <img src={smilelab} alt="smilelab_white" width={250} />
-        
+        <img src={smilelab} alt="smilelab_white" width={250} />
       </NavLink>
 
       <div className="center-section">
         <ul>
           <li>
-            <NavLink to="/">Acceuil</NavLink>
+            <NavLink to="/">Accueil</NavLink>
           </li>
           <li>
             <NavLink to="/services">

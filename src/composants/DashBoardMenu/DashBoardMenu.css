@@ -1,59 +1,68 @@
-.DashBoardMenu{
+/* Conteneur principal - IMPORTANT */
+.DashBoardMenu {
     position: relative;
-    width:100%;
-    padding: 20px 10px;
-    border: 1px solid rgba(192, 192, 192, 0.062);
+    width: 100%;
+    padding: 60px 10px;
+    background: #161616 !important; /* Priorité à l'arrière-plan */
     border-radius: 10px;
-    background:#161616 ;
-    height: 100vh;
-}
-
-.DashBoardMenu .line{
-    padding: 15px 15px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    text-decoration: none;
-    display: flex;
+    border: 1px solid rgba(192, 192, 192, 0.062);
+    
+    overflow-y: auto !important; /* Permet le scroll si nécessaire */
+  }
+  
+  /* Éléments de menu - IMPORTANT */
+  .DashBoardMenu .line {
+    padding: 15px !important;
+    display: flex !important;
     align-items: center;
-    border-radius: 5px;
-    margin: 3px 0px;
-    font-size: .9em;
+    margin: 8px 0 !important; /* Marge augmentée */
     background: rgba(255, 255, 255, 0.023);
-}
-
-.DashBoardMenu .line .arrow{
-    position: absolute;
-    right: 20px;
-}
-
-.DashBoardMenu .line .icon{
-    width: 50px;
-    height: 50px;
-    background: var(--color-primary-glass);
-    display: flex;
+    border-radius: 5px;
+    color: white !important;
+    text-decoration: none !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+  }
+  
+  /* Premier élément spécifique - IMPORTANT */
+  .DashBoardMenu .line:first-child {
+    margin-top: 0 !important;
+  }
+  
+  /* Icône - IMPORTANT */
+  .DashBoardMenu .line .icon {
+    width: 50px !important;
+    height: 50px !important;
+    background: var(--color-primary-glass) !important;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-}
-
-.DashBoardMenu span{
-    opacity: .6;
-}
-
-.DashBoardMenu .line span{
-    
-    margin-left: 10px;
-   
-}
-
-.DashBoardMenu .active{
-    background: var(--color-primary-glass);
-    opacity: 1;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.397);
-}
-
-.DashBoardMenu a:hover{
-    background: var(--color-primary-glass);
-    opacity: 1;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.397);
-}
+    flex-shrink: 0;
+  }
+  
+  /* Texte - IMPORTANT */
+  .DashBoardMenu .line span {
+    margin-left: 10px !important;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Flèche - IMPORTANT */
+  .DashBoardMenu .line .arrow {
+    position: absolute !important;
+    right: 20px !important;
+  }
+  
+  /* États actifs - IMPORTANT */
+  .DashBoardMenu .line:hover,
+  .DashBoardMenu .line.active {
+    background: var(--color-primary-glass) !important;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  .DashBoardMenu .line:hover span,
+  .DashBoardMenu .line.active span {
+    opacity: 1 !important;
+  }
