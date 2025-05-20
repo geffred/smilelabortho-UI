@@ -23,7 +23,7 @@ const MessageSender = ({ currentUser, destinataireId, onMessageSent }) => {
           },
           body: JSON.stringify({
             expediteur: { id: currentUser.id },
-            destinataireId,
+            destinataireId: destinataireId,
             messageText: values.messageText,
           }),
         });
