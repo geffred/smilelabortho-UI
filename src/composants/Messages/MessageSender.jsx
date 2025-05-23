@@ -38,7 +38,7 @@ const MessageSender = ({ currentUser, destinataireId, onMessageSent }) => {
           files.forEach((file) => formData.append("files", file));
 
           const uploadResponse = await fetch(
-            `/api/files/message/${messageData.id}`, // <-- Mise à jour ici
+            `/api/files/upload/${messageData.id}`, // <-- Mise à jour ici
             {
               method: "POST",
               body: formData,

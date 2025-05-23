@@ -3,6 +3,7 @@ import user_icon from "/image/user-profil.svg"
 import order from "/image/order-profil.svg";
 import settings from "/image/settings.svg"
 import "./menu_profil.css"
+import message_icon from "/image/chat.svg";
 
 
 function MenuProfil({active , handleClick}){
@@ -23,6 +24,11 @@ function MenuProfil({active , handleClick}){
         id: 2,
         title: "Commandes",
         icon: order,
+      },
+      {
+        id: 3,
+        title: "Messages",
+        icon: message_icon,
       },
     ];
 

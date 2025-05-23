@@ -8,6 +8,7 @@ import ProfilSettings from "../../composants/ProfilComponent/ProfilSettings/Prof
 import AllCommande from "../../composants/AllCommande/AllCommande";
 import { UserContext } from "../../composants/UserContext";
 import Footer from "../../composants/Footer/Footer"
+import Messages from "../../composants/Messages/Messages";
 
 function Profil(){
     const [active,setActive] = useState("profil");
@@ -33,12 +34,18 @@ function Profil(){
                 <ProfilSettings />
               </Display>
               <Display label={"Commandes"} active={active}>
-                <AllCommande url={"api/commandes/utilisateur/"+user.id} isDashboard ={false} />
+                <AllCommande
+                  url={"api/commandes/utilisateur/" + user.id}
+                  isDashboard={false}
+                />
+              </Display>
+              <Display label={"Messages"} active={active}>
+                <Messages/>
               </Display>
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </main>
     );
 }
