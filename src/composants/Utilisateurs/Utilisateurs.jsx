@@ -6,7 +6,7 @@ import { UserContext } from "../../composants/UserContext";
 import userIconDash from "/image/user-circle-1.svg";
 import { useNavigate } from "react-router-dom";
 
-const Utilisateur = ({ data }) => {
+const Utilisateur = ({ data, handleClick }) => {
   const [display, setDisplay] = useState(false);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -51,6 +51,14 @@ const Utilisateur = ({ data }) => {
       <div className="col-lg-2 col-12 email">{data.email}</div>
       <div className="col-lg-2 col-12">{data.dateInscription}</div>
       <div className="col-lg-3 col-12 role">{data.roles.join(", ")}</div>
+      <div className="col-lg-1 col-12">
+        <button
+          onClick={() => handleClick(data)} // Passer les données de l'utilisateur
+          className="btn btn-primary"
+        >
+          Envoyer un message
+        </button>
+      </div>
       <div className="col-lg-2 col-12 d-flex justify-content-end">
         {user.roles.includes("ROLE_SUPER_ADMIN") &&
           data?.id &&
@@ -65,7 +73,7 @@ const Utilisateur = ({ data }) => {
 
         {display && (
           <ul className="all-statut" onMouseLeave={() => setDisplay(false)}>
-            {["ADMIN", "SUPER_ADMIN","USER"].map((role) => (
+            {["ADMIN", "SUPER_ADMIN", "USER"].map((role) => (
               <li
                 key={role}
                 onClick={() => {
@@ -89,9 +97,8 @@ const Utilisateur = ({ data }) => {
   );
 };
 
-function Utilisateurs() {
+function Utilisateurs({ handleClick }) {
   const URL = "/api/auth/utilisateurs/";
-
 
   const fetcher = async (url) => {
     const res = await fetch(url, {
@@ -114,22 +121,23 @@ function Utilisateurs() {
 
   const { data, error, isLoading } = useSWR(URL, fetcher);
 
-  // État pour le filtre
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filtrer les utilisateurs
-const filteredData = data?.filter((utilisateur) => {
-  const searchLower = searchTerm.toLowerCase();
-  return (
-    (utilisateur.nom && utilisateur.nom.toLowerCase().includes(searchLower)) ||
-    (utilisateur.prenom &&
-      utilisateur.prenom.toLowerCase().includes(searchLower)) ||
-    (utilisateur.email &&
-      utilisateur.email.toLowerCase().includes(searchLower)) ||
-    (utilisateur.dateInscription &&
-      utilisateur.dateInscription.toLowerCase().includes(searchLower))
-  );
-});
+  const filteredData = data?.filter((utilisateur) => {
+    if (!searchTerm) return true; // Si pas de terme de recherche, afficher tous les utilisateurs
+    
+    const searchLower = searchTerm.toLowerCase();
+    
+    // Vérifier chaque propriété avant d'appeler toLowerCase()
+    return (
+      (utilisateur.nom && utilisateur.nom.toLowerCase().includes(searchLower)) ||
+      (utilisateur.prenom && utilisateur.prenom.toLowerCase().includes(searchLower)) ||
+      (utilisateur.email && utilisateur.email.toLowerCase().includes(searchLower)) ||
+      (utilisateur.dateInscription && 
+       typeof utilisateur.dateInscription === 'string' && 
+       utilisateur.dateInscription.toLowerCase().includes(searchLower))
+    );
+  });
 
   if (isLoading) return <Spinner />;
   if (error)
@@ -137,14 +145,13 @@ const filteredData = data?.filter((utilisateur) => {
 
   return (
     <div className="utilisateurs container-fluid">
-      {/* Champ de recherche */}
       <div className="search-bar">
         <input
           type="text"
           className="search"
-          placeholder="Rechercher par Nom, Prénom , Email ou date..."
+          placeholder="Rechercher par Nom, Prénom, Email ou date..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)} // Correction: e.target.value au lieu de e.value
         />
       </div>
 
@@ -155,7 +162,6 @@ const filteredData = data?.filter((utilisateur) => {
             alt="Commande"
             width={45}
             className="thumbnail"
-           
           />
         </div>
         <div className="col-lg-1 col-12">Nom</div>
@@ -166,10 +172,15 @@ const filteredData = data?.filter((utilisateur) => {
       </section>
       {filteredData &&
         filteredData.map((utilisateur) => (
-          <Utilisateur data={utilisateur} key={utilisateur.id} />
+          <Utilisateur
+            data={utilisateur}
+            key={utilisateur.id}
+            handleClick={handleClick}
+          />
         ))}
     </div>
   );
 }
+
 
 export default Utilisateurs;

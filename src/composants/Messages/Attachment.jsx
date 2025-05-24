@@ -23,7 +23,6 @@ const Attachment = ({ attachment }) => {
   if (isImage) {
     return (
       <div className="attachment-container image-container">
-        1111111111111111111
         <img
           src={fileUrl}
           alt="Pièce jointe"
@@ -60,7 +59,23 @@ const Attachment = ({ attachment }) => {
     return (
       <div className="attachment-container file">
         <a href={fileUrl} download className="file-download">
-          <div className="file-icon">{isZip ? "📦" : "🖨️"}</div>
+          <div className="file-icon">
+            {isZip ? (
+              <img
+                src="https://www.svgrepo.com/show/362091/file-zip.svg"
+                alt="zip"
+                width={30}
+                height={30}
+              />
+            ) : (
+              <img
+                src="https://www.svgrepo.com/show/371189/cube.svg"
+                alt="zip"
+                width={30}
+                height={30}
+              />
+            )}
+          </div>
           <div className="file-info">
             <span className="file-name">{fileName}</span>
             <span className="file-type">

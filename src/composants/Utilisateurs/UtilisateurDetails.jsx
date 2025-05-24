@@ -67,10 +67,18 @@ function UtilisateurDetails() {
 
         {data && (
           <aside className="infoBox">
-            <button className="btn btn-primary " onClick={() => navigate(-1)}>
-              <img src="/public/image/arrow-prev-white.svg" alt="" width={20} />
-              Retour
-            </button>
+            <div className="profil-btn">
+              <button className="btn btn-primary " onClick={() => navigate(-1)}>
+                <img
+                  src="/public/image/arrow-prev-white.svg"
+                  alt=""
+                  width={20}
+                />
+                Retour
+              </button>
+
+              
+            </div>
             <h1>Données personnelles</h1>
             <ul className="row">
               <li className="col-lg-12">
@@ -93,10 +101,7 @@ function UtilisateurDetails() {
           </aside>
         )}
         <div>
-          <ListAdresses
-            id={id}
-            cancel={parseInt(id) === parseInt(user.id) }
-          />
+          <ListAdresses id={id} cancel={parseInt(id) === parseInt(user.id)} />
         </div>
       </main>
       <Footer />

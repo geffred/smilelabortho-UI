@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import useSWR, { mutate } from "swr";
 import "./CertificatConformiteDocument.css";
 import NavBar from "../../composants/NavBar/NavBar";
 import { ToastContainer, toast } from "react-toastify";
-import { useState, useContext } from "react";
 import { UserContext } from "../../composants/UserContext";
 
 import {
@@ -14,7 +13,6 @@ import {
   StyleSheet,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
-
 
 // Styles pour le document PDF
 const styles = StyleSheet.create({
@@ -48,9 +46,6 @@ const styles = StyleSheet.create({
 
 // Composant PDF
 const CertificatPDF = ({ data }) => (
-
-  
-
   <Document>
     <Page size="A4" style={styles.page}>
       <Text style={styles.title}>Certificat de Conformité</Text>
@@ -73,19 +68,14 @@ const CertificatPDF = ({ data }) => (
       <View style={styles.sectionEnd}>
         <Text style={styles.label}>Identifiant du Dispositif</Text>
         <Text style={styles.value}>{data.identifiantDispositif}</Text>
-        <Text style={styles.value}>Date de Livraison</Text>
+        <Text style={styles.label}>Date de Livraison</Text>
         <Text style={styles.value}>{data.dateDeclaration}</Text>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>
           Ce dispositif est conforme aux exigences essentielles énoncées à
-          l'annexe I de l'A.R. du 18/03/1999 relatif aux dispositifs médicaux.
-          Les produits utilisés répondent aux obligations et le dispositif a été
-          conçu de manière à ne présenter aucun danger pour le patient lorsqu'il
-          est utilisé selon les prescriptions du praticien de l'art dentaire.
-          Attention: Il peut exister une incompatibilité possible avec des
-          métaux ou alliages déja présents en bouche.
+          l'annexe I de l'A.R. du 18/03/1999 relatif aux dispositifs médicaux...
         </Text>
       </View>
 
@@ -108,13 +98,8 @@ const CertificatPDF = ({ data }) => (
 );
 
 // Composant principal
-function CertificatConformiteDocument({
-  id,
-  handleClickForm,
-  handleEditForm,
-}) {
-
-  const { user } = useContext(UserContext);  // Utiliser le contexte
+function CertificatConformiteDocument({ id, handleClickForm, handleEditForm }) {
+  const { user } = useContext(UserContext);
 
   const { data, error } = useSWR(
     `http://localhost:8080/api/declarations/${id}`,
@@ -123,23 +108,22 @@ function CertificatConformiteDocument({
 
   const [confirmDelete, setConfirmDelete] = useState(null);
 
-  const handleDelete = async (id) => {
-    if (confirmDelete === id) {
+  const handleDelete = async (deleteId) => {
+    if (confirmDelete === deleteId) {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/declarations/${data.id}`,
+          `http://localhost:8080/api/declarations/${deleteId}`,
           {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
             },
-            credentials: "include", // Inclut le cookie de session
+            credentials: "include",
           }
         );
 
         if (response.ok) {
-          // Rafraîchit les données après suppression
-          mutate(`http://localhost:8080/api/declarations/${data.id}`);
+          mutate(`http://localhost:8080/api/declarations/${deleteId}`);
           toast("Déclaration supprimée avec succès", {
             position: "bottom-right",
             autoClose: 5000,
@@ -156,25 +140,18 @@ function CertificatConformiteDocument({
           autoClose: 5000,
         });
       }
-      setConfirmDelete(null); // Réinitialiser après la suppression
+      setConfirmDelete(null);
     } else {
-      setConfirmDelete(id); // Si pas encore confirmé, afficher la demande de confirmation
+      setConfirmDelete(deleteId);
     }
   };
 
-  if (error)
+  if (error) {
     return (
       <div className="bg-light p-3 my-3" style={{ borderRadius: "5px" }}>
-        <div className="aucunCertificat"> Aucun Certificat </div>
-        {user?.roles &&
-          ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(user.role) && (
-            <button onClick={handleClickForm} className="btn btn-primary ml-3">
-              Créer un certificat de Conformité
-            </button>
-          )}
-
+        <div className="aucunCertificat">Aucun Certificat</div>
         {user?.roles?.some((role) =>
-          ["ROLE_ADMIN", "SUPER_ADMIN"].includes(role)
+          ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(role)
         ) && (
           <button onClick={handleClickForm} className="btn btn-primary ml-3">
             Créer un certificat de Conformité
@@ -182,14 +159,15 @@ function CertificatConformiteDocument({
         )}
       </div>
     );
+  }
+
   if (!data) return <div>Chargement en cours...</div>;
 
   return (
     <div className="certificat-document-container">
-      <ToastContainer />
+  
       <h1>Certificat de Conformité</h1>
 
-      {/* Afficher les données */}
       <section className="certificat-header-start">
         <p>
           <em>Fabricant</em>
@@ -210,7 +188,6 @@ function CertificatConformiteDocument({
         <p>
           <em>TVA : BE0794998835</em>
         </p>
-
         <p className="my-3">
           <em>Technicien responsable</em> <br />
           <span>{data.nomTechnicien}</span>
@@ -227,6 +204,7 @@ function CertificatConformiteDocument({
           <span>{data.dateDeclaration}</span>
         </p>
       </section>
+
       <section className="certificat-body my-5">
         <p>
           <span>
@@ -253,7 +231,7 @@ function CertificatConformiteDocument({
       <section className="certificat-header-end">
         <p>
           <em>Date de Déclaration</em> <br />
-          <span> {data.dateDeclaration}</span>
+          <span>{data.dateDeclaration}</span>
         </p>
       </section>
 
@@ -264,13 +242,15 @@ function CertificatConformiteDocument({
           <button className="btn btn-primary mr-2" onClick={handleEditForm}>
             Modifier
           </button>
-          <button className="btn btn-primary" onClick={handleDelete}>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleDelete(data.id)}
+          >
             Supprimer les données dynamiques
           </button>
         </div>
       )}
 
-      {/* Bouton pour télécharger le PDF */}
       <PDFDownloadLink
         document={<CertificatPDF data={data} />}
         fileName="certificat_conformite.pdf"
@@ -280,10 +260,9 @@ function CertificatConformiteDocument({
         }
       </PDFDownloadLink>
 
-      {/* Message de confirmation de suppression */}
       {confirmDelete !== null && (
         <div className="confirm-delete">
-          <p>Êtes-vous sûr de vouloir supprimer cette declaration ?</p>
+          <p>Êtes-vous sûr de vouloir supprimer cette déclaration ?</p>
           <button onClick={() => handleDelete(confirmDelete)}>Oui</button>
           <button className="annuler" onClick={() => setConfirmDelete(null)}>
             Annuler

@@ -102,7 +102,23 @@
      outline: none;
 }
 
+/********************************/
+.utilisateurs  .btn-primary:hover{
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
 
+.utilisateurs  .btn-primary{
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.utilisateurs  .profil-btn{
+    display: flex;
+    gap: 5px;
+}
 
 
 

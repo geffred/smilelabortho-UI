@@ -126,6 +126,7 @@ const CommandeDetails = ({ data, id, handleClickBack }) => {
         )}
       </div>
       <ToastContainer />
+      <div style={{"fontSize":"205px"}}> {id} </div>
     </>
   );
 };

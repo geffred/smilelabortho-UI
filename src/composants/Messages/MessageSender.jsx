@@ -74,7 +74,13 @@ const MessageSender = ({ currentUser, destinataireId, onMessageSent }) => {
     <div className="message-sender-bar">
       <form onSubmit={formik.handleSubmit} className="message-form">
         <label className="file-icon">
-          📎
+          <img
+            src="https://www.svgrepo.com/show/283318/attached-attach.svg"
+            alt=""
+            width={20}
+            height={20}
+            className="trombone"
+          />
           <input
             type="file"
             multiple
@@ -88,7 +94,7 @@ const MessageSender = ({ currentUser, destinataireId, onMessageSent }) => {
           name="messageText"
           className="message-input"
           placeholder="Écrire un message..."
-          rows={2}
+          rows={1}
           {...formik.getFieldProps("messageText")}
         />
 
@@ -111,7 +117,12 @@ const MessageSender = ({ currentUser, destinataireId, onMessageSent }) => {
                 onClick={() => removeFile(index)}
                 className="delete-file"
               >
-                ❌
+                <img
+                  src="https://www.svgrepo.com/show/410349/cancel.svg"
+                  alt="cancel"
+                  width={15}
+                  height={15}
+                />
               </button>
             </div>
           ))}

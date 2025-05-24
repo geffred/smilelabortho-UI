@@ -67,7 +67,8 @@
   width: 50px;
   height: 50px;
   margin-right: 12px;
-  filter: brightness(0) saturate(100%) invert(66%) sepia(74%) saturate(3707%) hue-rotate(150deg) brightness(88%) contrast(106%);
+  border-radius: 50px;
+
 }
 
 .message-header div {
@@ -94,7 +95,7 @@
   align-self: flex-end;
   background: none;
   border: none;
-  color: #ff4444;
+  color: #00aed6;
   cursor: pointer;
   font-size: 12px;
   margin-top: 4px;
@@ -177,10 +178,11 @@
 }
 
 .conversation-avatar {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-right: 15px;
+
 }
 
 .message-bubble-container {
@@ -201,8 +203,8 @@
 .message-avatar-small {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
   margin: 0 8px;
+  border-radius: 50px;
 }
 
 .message-bubble {
@@ -251,4 +253,79 @@
 
 /* Reste des styles existants... */
 
+.newMessage{
+  text-align: center;
+  font-size: .9em;
+  color: gray;
+  font-weight: bold;
+  font-family: calibri;
+}
+
+.newMessage span{
+  display: inline-block;
+  padding: 2px 15px;
+  background: white;
+  border-radius: 10px;
+}
+
+/* Nouveaux styles pour la fonctionnalité de démarrage de conversation */
+.new-conversation-btn-container {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.new-conversation-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #4a6fa5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: 1px solid transparent;
+}
+
+.new-conversation-btn:hover {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.admins-list {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+
+.admins-list h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.admin-items {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.admin-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.admin-item:hover {
+  background-color: #e9ecef;
+}
+
+.admin-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
 

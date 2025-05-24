@@ -62,6 +62,8 @@ export default defineConfig({
       // ✅ Routes pour les fichiers liés aux messages
       "/api/files/message/": "http://localhost:8080",
       "/api/files/images/": "http://localhost:8080",
+
+
     },
   },
 });

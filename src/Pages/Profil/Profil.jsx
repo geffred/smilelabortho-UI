@@ -40,12 +40,12 @@ function Profil(){
                 />
               </Display>
               <Display label={"Messages"} active={active}>
-                <Messages/>
+                <Messages />
               </Display>
             </div>
           </div>
         </div>
-        <Footer />
+        {/*<Footer >*/}
       </main>
     );
 }
