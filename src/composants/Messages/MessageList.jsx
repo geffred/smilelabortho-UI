@@ -8,6 +8,9 @@ import Attachment from "./Attachment";
 import ConversationHeader from "./ConversationHeader";
 import MessageGroup from "./MessageGroup";
 
+
+
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const MessageList = ({ currentUser }) => {
@@ -23,6 +26,7 @@ const MessageList = ({ currentUser }) => {
   const { data: receivedMessages = [], mutate } = useSWR(url, fetcher);
   const messageEndRef = useRef(null);
   const conversationRef = useRef(null);
+
 
   // Fonction pour récupérer le thumbnail d'un utilisateur
   const fetchUserThumbnail = async (userId) => {
@@ -211,6 +215,7 @@ const MessageList = ({ currentUser }) => {
 
           return (
             <MessageGroup
+              user={currentUser}
               key={senderId}
               senderId={Number(senderId)}
               msgs={msgs}

@@ -1,4 +1,6 @@
 // MessageGroup.jsx
+
+ 
 const MessageGroup = ({
   senderId,
   msgs,
@@ -8,6 +10,7 @@ const MessageGroup = ({
   thumbnail,
   onSelect,
   onDelete,
+  user,
 }) => (
   <div
     className={`message-group ${unread ? "unread" : ""} ${
@@ -45,15 +48,24 @@ const MessageGroup = ({
         />
       )}
     </p>
-    <button
-      className="message-delete-btn"
-      onClick={(e) => {
-        e.stopPropagation();
-        onDelete(msgs);
-      }}
-    >
-      Supprimer
-    </button>
+    {user.roles.includes("ROLE_ADMIN") && (
+      <button
+        className="message-delete-btn"
+        onClick={(e) => {
+          e.stopPropagation();
+
+          const confirmation = window.confirm(
+            "Êtes-vous sûr de vouloir supprimer tous les messages de cette discussion ? Cette action est irréversible."
+          );
+
+          if (confirmation) {
+            onDelete(msgs);
+          }
+        }}
+      >
+        Supprimer
+      </button>
+    )}
   </div>
 );
 

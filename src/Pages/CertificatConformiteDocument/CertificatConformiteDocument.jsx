@@ -75,7 +75,12 @@ const CertificatPDF = ({ data }) => (
       <View style={styles.section}>
         <Text style={styles.label}>
           Ce dispositif est conforme aux exigences essentielles énoncées à
-          l'annexe I de l'A.R. du 18/03/1999 relatif aux dispositifs médicaux...
+          l'annexe I de l'A.R. du 18/03/1999 relatif aux dispositifs médicaux.
+          Les produits utilisés répondent aux obligations et le dispositif a été
+          conçu de manière à ne présenter aucun danger pour le patient lorsqu'il
+          est utilisé selon les prescriptions du praticien de l'art dentaire.
+          Attention: Il peut exister une incompatibilité possible avec des
+          métaux ou alliages déja présents en bouche.
         </Text>
       </View>
 
@@ -123,7 +128,7 @@ function CertificatConformiteDocument({ id, handleClickForm, handleEditForm }) {
         );
 
         if (response.ok) {
-          mutate(`http://localhost:8080/api/declarations/${deleteId}`);
+          mutate(`http://localhost:8080/api/declarations/${id}`);
           toast("Déclaration supprimée avec succès", {
             position: "bottom-right",
             autoClose: 5000,

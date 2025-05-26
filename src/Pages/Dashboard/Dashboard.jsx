@@ -47,7 +47,8 @@ function Dashboard() {
       // mutate('/api/messages/recus');
     } catch (error) {
       console.error("Erreur lors de l'envoi du message:", error);
-      alert("Une erreur est survenue lors de l'envoi du message");
+      alert("Vous ne pouvez pas vous envoyer un message à vous-même.");
+      return null;
     }
 
     try {
