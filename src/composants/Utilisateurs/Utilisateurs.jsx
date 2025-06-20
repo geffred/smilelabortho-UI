@@ -21,6 +21,10 @@ const Utilisateur = ({ data, handleClick }) => {
     const dataUpdate = {
       id: data.id, // Inclure l'ID
       email: data.email, // Inclure l'email (requis pour la recherche dans le backend)
+      nom: data.nom, // Inclure le nom
+      prenom: data.prenom, // Inclure le prénom
+      tel: data.tel, // Inclure le téléphone
+      thumbnail: data.thumbnail, // Inclure la miniature
       roles: ["USER", role], // Mettre à jour les rôles
     };
 
