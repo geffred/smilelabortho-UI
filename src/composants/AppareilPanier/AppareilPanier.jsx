@@ -10,7 +10,7 @@ function AppareilPanier({ data, handleDelete, cancel = true, link=null }) {
   return (
     <div className="AppareilPanier">
       <div className="cover">
-        <img src={data.thumbnail} alt="appareil_icon" />
+        <img src={data.thumbnail} alt="Icône de l'appareil" />
       </div>
       <div className="data-appareil">
         <h1>
@@ -26,15 +26,15 @@ function AppareilPanier({ data, handleDelete, cancel = true, link=null }) {
           <span> {data.quantite} </span>
         </div>
         <div>
-          <span>Prix Unitaire </span>
+          <span>Prix unitaire </span>
           <span>{data.prixUnitaire}€</span>
         </div>
         <div>
-          <span>Prix du model </span>
+          <span>Prix du modèle </span>
           <span> {model && model.coutSupplementaire} € </span>
         </div>
         <div>
-          <span>Total </span>
+          <span>Total TTC</span>
           <span>
             {`( ${data.prixUnitaire}€ + ${
               model && model.coutSupplementaire

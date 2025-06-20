@@ -39,7 +39,7 @@ function Connexion() {
         const responseData = await response.json(); // Extraire la réponse JSON du serveur
         loginUser(responseData); // Mettez à jour le contexte avec l'utilisateur connecté
         console.log("Données envoyées avec succès:", responseData);
-        navigate("/profil"); // Rediriger vers la page profil après connexion
+        navigate("/profil/"); // Rediriger vers la page profil après connexion
       } else {
         const errorData = await response.text();
         setErrorMessage(errorData || "Erreur lors de la connexion"); // Gérer les erreurs côté serveur
@@ -59,7 +59,7 @@ function Connexion() {
           <div className="col-lg-6 content-1 col-12">
             <div>
               <h1>Connectez-vous</h1>
-              <p>ou en utilisant votre adresse email</p>
+              <p>en utilisant votre adresse email</p>
               {errorMessage && (
                 <div className="error-message">{errorMessage}</div>
               )}{" "}
@@ -145,7 +145,7 @@ function Connexion() {
                 Remplissez vos informations personnelles et commencez votre
                 voyage avec nous.
               </p>
-              <NavLink to="/connexion">Connexion</NavLink>
+              <NavLink to="/inscription">Inscription</NavLink>
             </div>
           </div>
         </div>

@@ -5,14 +5,24 @@ import "./utilisateurs.css";
 import { UserContext } from "../../composants/UserContext";
 import userIconDash from "/image/user-circle-1.svg";
 import { useNavigate } from "react-router-dom";
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Utilisateur = ({ data, handleClick }) => {
   const [display, setDisplay] = useState(false);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(null);
 
   const updateUser = async (role) => {
-    const dataUpdate = { ...data, roles: ["USER", role] };
+    // Créer un objet avec seulement les champs nécessaires pour la mise à jour
+    const dataUpdate = {
+      id: data.id, // Inclure l'ID
+      email: data.email, // Inclure l'email (requis pour la recherche dans le backend)
+      roles: ["USER", role], // Mettre à jour les rôles
+    };
 
     try {
       const response = await fetch(`/api/auth/update`, {
@@ -24,19 +34,71 @@ const Utilisateur = ({ data, handleClick }) => {
       });
 
       if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(errorData);
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Erreur lors de la mise à jour");
       }
 
       mutate("/api/auth/utilisateurs/");
+      toast(`Rôle modifié avec succès en ${role}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+      });
     } catch (err) {
       console.error("Erreur lors de la mise à jour :", err);
-      alert("Impossible de mettre à jour le rôle. Veuillez réessayer.");
+      toast.error(
+        err.message ||
+          "Impossible de mettre à jour le rôle. Veuillez réessayer.",
+        {
+          position: "bottom-right",
+          autoClose: 5000,
+        }
+      );
+    } finally {
+      setShowConfirmation(false);
+      setSelectedRole(null);
     }
+  };
+
+  const handleRoleClick = (role) => {
+    setSelectedRole(role);
+    setShowConfirmation(true);
+    setDisplay(false);
+  };
+
+  const confirmRoleChange = () => {
+    if (selectedRole) {
+      updateUser(selectedRole);
+    }
+  };
+
+  const cancelRoleChange = () => {
+    setShowConfirmation(false);
+    setSelectedRole(null);
   };
 
   return (
     <section className="row utilisateur">
+      {/* Modal de confirmation */}
+      {showConfirmation && (
+        <div className="confirmation-modal">
+          <div className="confirm-delete">
+            <h4>Confirmer la modification</h4>
+            <p>
+              Êtes-vous sûr de vouloir modifier le rôle de {data.prenom}{" "}
+              {data.nom} en {selectedRole} ?
+            </p>
+            <div className="confirmation-buttons">
+              <button className="annuler" onClick={cancelRoleChange}>
+                Annuler
+              </button>
+              <button onClick={confirmRoleChange}>
+                Confirmer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="col-lg-1 col-12">
         <img
           src={data.thumbnail || userIconDash}
@@ -50,12 +112,9 @@ const Utilisateur = ({ data, handleClick }) => {
       <div className="col-lg-1 col-12">{data.prenom}</div>
       <div className="col-lg-2 col-12 email">{data.email}</div>
       <div className="col-lg-2 col-12">{data.dateInscription}</div>
-      <div className="col-lg-3 col-12 role">{data.roles.join(", ")}</div>
+      <div className="col-lg-2 col-12 role">{data.roles.join(", ")}</div>
       <div className="col-lg-1 col-12">
-        <button
-          onClick={() => handleClick(data)} // Passer les données de l'utilisateur
-          className="btn btn-primary"
-        >
+        <button onClick={() => handleClick(data)} className="btn btn-primary">
           Envoyer un message
         </button>
       </div>
@@ -74,13 +133,7 @@ const Utilisateur = ({ data, handleClick }) => {
         {display && (
           <ul className="all-statut" onMouseLeave={() => setDisplay(false)}>
             {["ADMIN", "SUPER_ADMIN", "USER"].map((role) => (
-              <li
-                key={role}
-                onClick={() => {
-                  updateUser(role);
-                  setDisplay(false);
-                }}
-              >
+              <li key={role} onClick={() => handleRoleClick(role)}>
                 {role
                   .split("_")
                   .map(
@@ -124,18 +177,20 @@ function Utilisateurs({ handleClick }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredData = data?.filter((utilisateur) => {
-    if (!searchTerm) return true; // Si pas de terme de recherche, afficher tous les utilisateurs
-    
+    if (!searchTerm) return true;
+
     const searchLower = searchTerm.toLowerCase();
-    
-    // Vérifier chaque propriété avant d'appeler toLowerCase()
+
     return (
-      (utilisateur.nom && utilisateur.nom.toLowerCase().includes(searchLower)) ||
-      (utilisateur.prenom && utilisateur.prenom.toLowerCase().includes(searchLower)) ||
-      (utilisateur.email && utilisateur.email.toLowerCase().includes(searchLower)) ||
-      (utilisateur.dateInscription && 
-       typeof utilisateur.dateInscription === 'string' && 
-       utilisateur.dateInscription.toLowerCase().includes(searchLower))
+      (utilisateur.nom &&
+        utilisateur.nom.toLowerCase().includes(searchLower)) ||
+      (utilisateur.prenom &&
+        utilisateur.prenom.toLowerCase().includes(searchLower)) ||
+      (utilisateur.email &&
+        utilisateur.email.toLowerCase().includes(searchLower)) ||
+      (utilisateur.dateInscription &&
+        typeof utilisateur.dateInscription === "string" &&
+        utilisateur.dateInscription.toLowerCase().includes(searchLower))
     );
   });
 
@@ -145,13 +200,14 @@ function Utilisateurs({ handleClick }) {
 
   return (
     <div className="utilisateurs container-fluid">
+      <ToastContainer /> {/* Affichage des notifications Toast */}
       <div className="search-bar">
         <input
           type="text"
           className="search"
           placeholder="Rechercher par Nom, Prénom, Email ou date..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)} // Correction: e.target.value au lieu de e.value
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
@@ -181,6 +237,5 @@ function Utilisateurs({ handleClick }) {
     </div>
   );
 }
-
 
 export default Utilisateurs;

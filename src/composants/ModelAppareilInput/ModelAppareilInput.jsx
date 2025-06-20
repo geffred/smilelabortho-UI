@@ -96,7 +96,7 @@ function ModelAppareilInput({onMutate,isDashboard =false , display, setDisplay ,
 
                         <div className="col-lg-12">
                             <button type="submit"disabled={isSubmitting}>
-                                Submit
+                                Ajouter
                             </button>
                         </div>
                     </Form>

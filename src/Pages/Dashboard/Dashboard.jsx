@@ -88,7 +88,7 @@ function Dashboard() {
             <DashBoardMenu isActive={active} handleClick={handleTabChange} />
           </div>
           <div className="col-lg-9 px-1 content-data">
-            <Display active={active} label={"Categories"}>
+            <Display active={active} label={"Catégories"}>
               <AllCategorie
                 isDashboard={true}
                 style={{
@@ -110,7 +110,7 @@ function Dashboard() {
               />
             </Display>
 
-            <Display active={active} label={"Model Appaeil"}>
+            <Display active={active} label={"Modèles d'appareils"}>
               <AllModelAppaeil />
             </Display>
 

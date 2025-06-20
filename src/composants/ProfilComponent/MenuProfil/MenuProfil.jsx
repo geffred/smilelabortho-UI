@@ -11,13 +11,13 @@ function MenuProfil({active , handleClick}){
     const menu = [
       {
         id: 1,
-        title: "profil",
+        title: "Profil",
         icon: user_icon,
       },
 
       {
         id: 3,
-        title: "paramètres",
+        title: "Paramètres",
         icon: settings,
       },
       {

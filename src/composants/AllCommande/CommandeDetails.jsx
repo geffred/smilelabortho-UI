@@ -38,24 +38,24 @@ const CommandeDetails = ({ data, id, handleClickBack }) => {
         <hr />
         <div className="row d-flex align-items-center">
           <div className="col-lg-4 info-perso">
-            <em>Informations du clients</em>
+            <em>Informations du client</em>
             <div>
               Nom : {commande.utilisateur?.nom || "Inconnu"} <br />
-              Prenom :{commande.utilisateur?.prenom || "Inconnu"} <br />
+              Prénom :{commande.utilisateur?.prenom || "Inconnu"} <br />
               Email : {commande.utilisateur.email || "Inconnu"} <br />
-              Tel : {commande.utilisateur.tel || "Inconnu"} <br />
+              Téléphone : {commande.utilisateur.tel || "Inconnu"} <br />
             </div>
           </div>
           <div className="col-lg-8 adresses">
             <div className="adress-info">
-              <h5>Adress de facturation</h5>
+              <h5>Adresse de facturation</h5>
               <AdressCard
                 adresse={commande.adresseFacturation}
                 cancel={false}
               />
             </div>
             <div className="adress-info">
-              <h5>Adresse de Livraison</h5>
+              <h5>Adresse de livraison</h5>
               <AdressCard adresse={commande.adresse} cancel={false} />
             </div>
           </div>
@@ -78,7 +78,7 @@ const CommandeDetails = ({ data, id, handleClickBack }) => {
         </div>
         <div className="row px-3 my-3">
           <div className="col-lg-12 d-flex justify-content-between">
-            <span>Prix Total plus TVA :</span>
+            <span>Prix total avec TVA :</span>
             <span> {commande.prixTotalPlusTVA} € </span>
           </div>
         </div>
@@ -91,7 +91,7 @@ const CommandeDetails = ({ data, id, handleClickBack }) => {
             className="btn btn-primary "
             onClick={() => setShowCertificat(!showCertificat)}
           >
-            Certificat de Conformité
+            Certificat de conformité
           </button>
         </div>
         <div className="row my-3"></div>
@@ -126,7 +126,6 @@ const CommandeDetails = ({ data, id, handleClickBack }) => {
         )}
       </div>
       <ToastContainer />
-     
     </>
   );
 };

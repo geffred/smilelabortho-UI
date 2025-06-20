@@ -11,7 +11,7 @@ import Footer from "../../composants/Footer/Footer"
 import Messages from "../../composants/Messages/Messages";
 
 function Profil(){
-    const [active,setActive] = useState("profil");
+    const [active,setActive] = useState("Profil");
     const {user} = useContext(UserContext)
     const handleClick = (label) =>{
       setActive(label)
@@ -27,10 +27,10 @@ function Profil(){
             </div>
 
             <div className="col-lg-9">
-              <Display label={"profil"} active={active}>
+              <Display label={"Profil"} active={active}>
                 <ProfilInfo />
               </Display>
-              <Display label={"paramètres"} active={active}>
+              <Display label={"Paramètres"} active={active}>
                 <ProfilSettings />
               </Display>
               <Display label={"Commandes"} active={active}>

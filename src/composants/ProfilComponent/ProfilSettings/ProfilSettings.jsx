@@ -148,6 +148,7 @@ function ProfilSettings() {
               <div className="form-group col-lg-6 col-12">
                 <label htmlFor="email">Email</label>
                 <Field
+                disabled
                   type="email"
                   name="email"
                   className={`form-control ${

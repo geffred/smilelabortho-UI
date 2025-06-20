@@ -241,7 +241,7 @@ function CertificatConformiteDocument({ id, handleClickForm, handleEditForm }) {
       </section>
 
       {user?.roles?.some((role) =>
-        ["ROLE_ADMIN", "SUPER_ADMIN"].includes(role)
+        ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(role)
       ) && (
         <div className="edit d-flex justify-start">
           <button className="btn btn-primary mr-2" onClick={handleEditForm}>

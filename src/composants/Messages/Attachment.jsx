@@ -4,7 +4,7 @@ const BACKEND_URL = "http://localhost:8080"; // ou ton URL backend réelle
 
 const Attachment = ({ attachment }) => {
   const fileName = attachment.path.split("/").pop();
-  const fileUrl = `${BACKEND_URL}/api/files/download/${fileName}`;
+  const fileUrl = `${BACKEND_URL}/api/files/messages/download/${fileName}`;
   const fileExtension = fileName.split(".").pop().toLowerCase();
   const isImage = ["jpg", "jpeg", "png", "gif"].includes(fileExtension);
   const isZip = fileExtension === "zip";

@@ -130,7 +130,7 @@ function CommandeForm({ prixTotal }) {
               date_livraison: values.dateLivraisonSouhaitee,
               commentaire: values.commentaire,
               message:
-                "Votre Commande a bien été prise en compte notre équipe se met au travail !",
+                "Votre commande a bien été prise en compte notre équipe se met au travail !",
             },
             "M-ibIQ1aTjGbVU4OK"
           )
@@ -183,7 +183,7 @@ function CommandeForm({ prixTotal }) {
         {({ isSubmitting, isValid, resetForm }) => (
           <Form>
             <div className="form-group">
-              <label htmlFor="adresseLivraisonId">Adresse de Livraison</label>
+              <label htmlFor="adresseLivraisonId">Adresse de livraison</label>
               <Field
                 as="select"
                 name="adresseLivraisonId"
@@ -207,7 +207,7 @@ function CommandeForm({ prixTotal }) {
 
             <div className="form-group">
               <label htmlFor="adresseFacturationId">
-                Adresse de Facturation
+                Adresse de facturation
               </label>
               <Field
                 as="select"
@@ -232,7 +232,7 @@ function CommandeForm({ prixTotal }) {
 
             <div className="form-group">
               <label htmlFor="dateLivraisonSouhaitee">
-                Date de Livraison Souhaitée
+                Date de livraison souhaitée
               </label>
               <Field
                 type="date"
@@ -265,11 +265,11 @@ function CommandeForm({ prixTotal }) {
             </div>
 
             <div className="d-flex justify-content-between p-2">
-              <span>Prix Total </span>
+              <span>Prix total </span>
               <span> {prixTotal} €</span>
             </div>
             <div className="d-flex justify-content-between p-2">
-              <span>Prix Total plus TVA (21%) </span>
+              <span>Prix total plus TVA (21%) </span>
               <span> {prixTotalPlusTVA} €</span>
             </div>
 
@@ -297,7 +297,7 @@ function CommandeForm({ prixTotal }) {
                 value={false}
                 onChange={(e) => setPayment(!e.target.checked)}
               />
-              <label htmlFor="payer"> Payer plus tard ?</label>
+              <label htmlFor="payer"> Souhaitez-vous payer plus tard ?</label>
             </div>
 
             <div className="boutton">

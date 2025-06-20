@@ -52,7 +52,7 @@ function DetailsInput({ data }) {
       setIsUploading(true);
       formData.append("file", file);
 
-      const response = await fetch("/api/files/upload/" + refPatient, {
+      const response = await fetch("/api/files/upload/patient/" + refPatient, {
         method: "POST",
         body: formData,
       });

@@ -17,7 +17,7 @@ const data = [
     title: "Messages",
     icon: chat,
   },
-  
+
   {
     id: crypto.randomUUID(),
     title: "Utilisateurs",
@@ -25,7 +25,7 @@ const data = [
   },
   {
     id: crypto.randomUUID(),
-    title: "Categories",
+    title: "Catégories",
     icon: teeth,
   },
   {
@@ -35,7 +35,7 @@ const data = [
   },
   {
     id: crypto.randomUUID(),
-    title: "Model Appaeil",
+    title: "Modèles d'appareils",
     icon: circle,
   },
   {
