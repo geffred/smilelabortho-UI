@@ -1,4 +1,4 @@
-.navBar{
+.navBar {
     display: flex;
     z-index: 10;
     width: 100%;
@@ -7,32 +7,39 @@
     padding: 10px;
     color: rgb(255, 255, 255);
     align-items: center;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
     left: 0px;
     top: 0px;
-}
-
-.navBar *{
+  }
+  
+  .navBar * {
     opacity: 1;
-}
-
-
-
-.navBar .left-section{
-
+  }
+  
+  .mobile-header {
     display: flex;
     align-items: center;
-    width: 20%; 
-    cursor: pointer;     
-}
-
- .navBar .left-section img{
-      width: 50px;
-}
-
-
-
-.navBar .center-section ul{
+    gap: 15px;
+  }
+  
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .navBar .left-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .navBar .left-section img {
+    max-width: 200px;
+  }
+  
+  .navBar .center-section ul {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -48,63 +55,59 @@
     border: 1px solid rgba(255, 255, 255, 0.21);
     border-radius: 10px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.525);
-    background:var(--color-primary-glass);
+    background: var(--color-primary-glass);
     top: 50%;
-}
-
-.navBar .center-section ul a{
+  }
+  
+  .navBar .center-section ul a {
     text-decoration: none;
     color: white;
-    background: var(--color-primary) ;
+    background: var(--color-primary);
     padding: 10px 25px;
     border-radius: 5px;
-    transition: all .2s ease;
-    
-}
-
-.navBar .center-section ul a:hover{
-    background:rgb(14, 14, 14);
+    transition: all 0.2s ease;
+  }
+  
+  .navBar .center-section ul a:hover {
+    background: rgb(14, 14, 14);
     padding: 10px 50px;
-}
-
-.navBar .center-section a{
+  }
+  
+  .navBar .center-section a {
     display: flex;
     align-items: center;
-}
-.navBar .center-section .shop img{
+  }
+  .navBar .center-section .shop img {
     max-width: 20px;
-}
-
-.navBar .right-section{
+  }
+  
+  .navBar .right-section {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 45px;
     height: 45px;
     border-radius: 25px;
-    background: var(--color-primary) ;
+    background: var(--color-primary);
     position: relative;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     border: 1px solid transparent;
-   
-   
-}
-.navBar .right-section:hover{
+  }
+  
+  .navBar .right-section:hover {
     background: transparent;
     border-color: white;
-}
-
-.navBar .right-section:hover ul{
+  }
+  
+  .navBar .right-section:hover ul {
     display: flex !important;
-}
-
-
-
-.navBar .right-section ul:hover{
+  }
+  
+  .navBar .right-section ul:hover {
     display: flex !important;
-} 
-
-.navBar .right-section ul{
+  }
+  
+  .navBar .right-section ul {
     display: none !important;
     position: absolute;
     display: flex;
@@ -117,16 +120,14 @@
     list-style: none;
     width: 200px;
     padding: 15px 5px;
-    background: var(--color-primary-glass);;
-    box-sizing:content-box !important;
+    background: var(--color-primary-glass);
+    box-sizing: content-box !important;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.251);
-}
-
-
-
-/*bordure de delimitation du curseur*/
-.navBar .right-section ul::before{
+  }
+  
+  /*bordure de delimitation du curseur*/
+  .navBar .right-section ul::before {
     content: "";
     position: absolute;
     width: 160px;
@@ -134,16 +135,15 @@
     top: -35%;
     right: 0px;
     z-index: -10;
-}
-
-.navBar .right-section ul li a{
+  }
+  
+  .navBar .right-section ul li a {
     text-decoration: none;
     font-family: calibri;
     color: white;
-
-}
-
-.navBar .right-section ul li{
+  }
+  
+  .navBar .right-section ul li {
     position: relative;
     z-index: 1;
     text-align: center;
@@ -151,80 +151,212 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    background: var(--color-primary) ;
+    background: var(--color-primary);
     font-size: 1em;
     transition: all 0.2s ease;
-    width:70%;
+    width: 70%;
     border: 1px solid rgba(255, 255, 255, 0.183);
+  }
   
-   
-}
-
-.navBar .right-section ul li a{
+  .navBar .right-section ul li a {
     padding: 10px 20px;
     border-radius: 5px;
     display: inline-block;
     height: 100%;
     width: 100%;
-}
-
-.navBar .right-section ul li:hover{
-    border-color:white ;
-    
-}
-
-.show{
+  }
+  
+  .navBar .right-section ul li:hover {
+    border-color: white;
+  }
+  
+  .show {
     visibility: visible;
-}
-
-.navBar .opt-show{
+  }
+  
+  .navBar .opt-show {
     display: block;
-}
-
-.navBar .opt-hide{
+  }
+  
+  .navBar .opt-hide {
     display: none;
-}
+  }
 
-@media screen and (max-width:1500px) {
-    .navBar .center-section{
-        display: none;
+  /* Ajoutez ces styles à votre fichier NavBar.css */
+
+/* Version mobile */
+@media screen and (max-width: 1024px) {
+    .navBar .right-section {
+      display: none; /* Cache le bouton rond de connexion en mobile */
     }
+  
+    /* Styles pour les liens d'authentification dans le menu mobile */
+    .navBar .center-section ul li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .navBar .center-section ul li a img {
+      width: 20px;
+    }
+  }
+  
+  /* Version desktop */
+  @media screen and (min-width: 1025px) {
+    /* Cache les liens d'authentification dans le menu principal en desktop */
+    .navBar .center-section ul li:last-child,
+    .navBar .center-section ul li:nth-last-child(2) {
+      display: none;
+    }
+  }
+  
+  /* Version mobile */
+  @media screen and (max-width: 1024px) {
 
     
-.navBar .left-section{
-    gap: 10px;
-    font-size: 1.5em;
-    width: 50%; 
-}
-
-
-}
-
-@media screen and (max-width:1500px) {
-    .navBar{
-        position: relative;
-        background: rgb(29, 29, 29)!important;
+    .menu-toggle {
+      display: block;
     }
-
-    .right-section .user{
-        max-width: 20px;
-        transform: translateY(-1px);
+  
+    .navBar {
+      flex-wrap: wrap;
+      padding: 10px 15px;
+      background: rgb(29, 29, 29) !important;
     }
-
-    .navBar .right-section{
-        width: 35px;
-        height: 35px;
-        
+  
+    .mobile-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
-
-
-    .navBar .left-section span{
-        font-size: .9em;
-    }
-
-    .navBar .left-section img{
+  
+    .navBar .left-section img {
       width: 100px;
     }
+  
+    .navBar .center-section {
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+  
+    .navBar .center-section.open {
+      max-height: 500px;
+    }
+  
+    .navBar .center-section ul {
+      position: relative;
+      left: auto;
+      transform: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 0;
+      margin-top: 10px;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      top: auto;
+    }
+  
+    .navBar .center-section ul li {
+      width: 100%;
+    }
+  
+    .navBar .center-section ul a {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  
+    .navBar .center-section ul a:hover {
+      padding: 15px 20px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  
+    .navBar .right-section {
+      position: static;
+      margin-left: auto;
+    }
+  
+    .navBar .right-section ul {
+      right: 0;
+      top: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .navBar .left-section img {
+      width: 150px;
+    }
+  
+    .navBar .right-section {
+      width: 35px;
+      height: 35px;
+    }
+  
+    .right-section .user {
+      max-width: 20px;
+    }
+  }
+
+  /* Ajoutez ces styles à votre fichier NavBar.css */
+
+/* Cache les éléments en fonction de la version */
+.mobile-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: block;
+  }
+  
+  /* Version mobile */
+  @media screen and (max-width: 1024px) {
+    .navBar .right-section {
+      display: none; /* Cache le bouton rond de connexion en mobile */
+    }
+  
+    .mobile-only {
+      display: block; /* Affiche les liens auth en mobile */
+    }
+  
+    .desktop-only {
+      display: none; /* Cache le menu déroulant en mobile */
+    }
+  
+    /* Styles pour les liens d'authentification dans le menu mobile */
+    .mobile-auth-links{
+        display: flex;
+        width: 100%;
+    }
+
+    .mobile-auth-links a{
+        display: flex;
+        justify-content: center;
+    }
+
+    .mobile-auth-links li{
     
-}
+    width: 100%!important;}
+    
+
+    .mobile-auth-links li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  /* Version desktop */
+  @media screen and (min-width: 1025px) {
+    .mobile-only {
+      display: none; /* Cache les liens auth dans le menu principal en desktop */
+    }
+  
+    .desktop-only {
+      display: block; /* Affiche le menu déroulant en desktop */
+    }
+  }

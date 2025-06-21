@@ -16,17 +16,17 @@ function MenuProfil({active , handleClick}){
       },
 
       {
-        id: 3,
+        id: 2,
         title: "Paramètres",
         icon: settings,
       },
       {
-        id: 2,
+        id: 3,
         title: "Commandes",
         icon: order,
       },
       {
-        id: 3,
+        id: 4,
         title: "Messages",
         icon: message_icon,
       },

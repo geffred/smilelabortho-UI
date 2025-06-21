@@ -4,6 +4,7 @@ import "./NavBar.css";
 import smilelab from "/public/image/smilelab_white.svg";
 import usernav from "/image/user.svg";
 import menu from "/image/menu.svg";
+import close from "/image/close.svg";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
@@ -17,103 +18,211 @@ function NavBar({
   logoTextColor,
 }) {
   const [scrolling, setScrolling] = useState(false);
-  const { user, logoutUser } = useContext(UserContext); // Utiliser le contexte utilisateur
-
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const { user, logoutUser } = useContext(UserContext);
 
   const handleScroll = () => {
     setScrolling(window.scrollY > 100);
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const toggleUserMenu = () => {
+    setUserMenuOpen(!userMenuOpen);
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <nav
-      className="navBar"
-      style={
-        scrolling ? { background: bgColorScroll } : { background: bgColor }
-      }
-      id="form"
-    >
-      <NavLink to={"/"} className="lesft-section">
-        <img src={smilelab} alt="smilelab_white" width={250} />
-      </NavLink>
+    <>
+      <nav
+        className="navBar"
+        style={
+          scrolling ? { background: bgColorScroll } : { background: bgColor }
+        }
+        id="form"
+      >
+        <div className="mobile-header">
+          <button className="menu-toggle" onClick={toggleMobileMenu}>
+            <img src={mobileMenuOpen ? close : menu} alt="menu" width={25} />
+          </button>
 
-      <div className="center-section">
-        <ul>
-          <li>
-            <NavLink to="/">Accueil</NavLink>
-          </li>
-          <li>
-            <NavLink to="/services">
-              <span>Services</span>
-              <img src={arrow} alt="arrow" width={15} />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/appareils">
-              <span>Appareils</span>
-              <img src={arrow} alt="arrow" width={15} />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/contact">Contact</NavLink>
-          </li>
-          <li>
-            <NavLink to="/shop" className="shop">
-              <img src={shop} alt="shop" />
-              <span>Shop</span>
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-      <div className={"right-section"}>
-        <div>
-          <img src={usernav} alt="user" width={25} className="user" />
+          <NavLink to={"/"} className="left-section">
+            <img src={smilelab} alt="smilelab_white" width={250} />
+          </NavLink>
+        </div>
+
+        <div className={`center-section ${mobileMenuOpen ? "open" : ""}`}>
           <ul>
-            {/* Afficher le lien vers le Dashboard si l'utilisateur a le rôle ROLE_ADMIN */}
-            {user &&
-              user.roles.some((role) =>
-                ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(role)
-              ) && (
-                <li>
-                  <NavLink to={"/dashboard"}>Dashbord</NavLink>
-                </li>
-              )}
+            <li>
+              <NavLink to="/" onClick={() => setMobileMenuOpen(false)}>
+                Accueil
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/services" onClick={() => setMobileMenuOpen(false)}>
+                <span>Services</span>
+              {  /*<img src={arrow} alt="arrow" width={15} />*/}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/appareils" onClick={() => setMobileMenuOpen(false)}>
+                <span>Appareils</span>
+                { /*<img src={arrow} alt="arrow" width={15} />*/}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                Contact
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/shop"
+                className="shop"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <img src={shop} alt="shop" />
+                <span>Shop</span>
+              </NavLink>
+            </li>
 
-            {/* Afficher les options de connexion/déconnexion en fonction de l'état de l'utilisateur */}
-            {!user ? (
-              <>
-                <li>
-                  <NavLink to="/inscription">Inscription</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/connexion">Connexion</NavLink>
-                </li>
-              </>
-            ) : (
-              <>
-                {/* Afficher le lien vers le compte */}
-                <li>
-                  <NavLink to="/profil">Compte</NavLink>
-                </li>
-                {/* Afficher le lien de déconnexion */}
-                <li>
-                  <NavLink to="/" onClick={logoutUser}>
-                    Déconnexion
-                  </NavLink>
-                </li>
-              </>
-            )}
+            {/* Liens d'authentification uniquement visibles en mobile */}
+            <div className="mobile-auth-links">
+              {!user ? (
+                <>
+                  <li className="mobile-only">
+                    <NavLink
+                      to="/inscription"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Inscription
+                    </NavLink>
+                  </li>
+                  <li className="mobile-only">
+                    <NavLink
+                      to="/connexion"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Connexion
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  {user.roles.some((role) =>
+                    ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(role)
+                  ) && (
+                    <li className="mobile-only">
+                      <NavLink
+                        to="/dashboard"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Dashboard
+                      </NavLink>
+                    </li>
+                  )}
+                  <li className="mobile-only">
+                    <NavLink
+                      to="/profil"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Compte
+                    </NavLink>
+                  </li>
+                  <li className="mobile-only">
+                    <NavLink
+                      to="/"
+                      onClick={() => {
+                        logoutUser();
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Déconnexion
+                    </NavLink>
+                  </li>
+                </>
+              )}
+            </div>
           </ul>
         </div>
-      </div>
-    </nav>
+
+        {/* Menu utilisateur pour la version desktop (toujours caché en mobile) */}
+        <div
+          className={`right-section desktop-only ${userMenuOpen ? "open" : ""}`}
+        >
+          <div onClick={toggleUserMenu}>
+            <img src={usernav} alt="user" width={25} className="user" />
+            <ul>
+              {user &&
+                user.roles.some((role) =>
+                  ["ROLE_ADMIN", "ROLE_SUPER_ADMIN"].includes(role)
+                ) && (
+                  <li>
+                    <NavLink
+                      to={"/dashboard"}
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                )}
+
+              {!user ? (
+                <>
+                  <li>
+                    <NavLink
+                      to="/inscription"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Inscription
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/connexion"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Connexion
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <NavLink
+                      to="/profil"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Compte
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/"
+                      onClick={() => {
+                        logoutUser();
+                        setUserMenuOpen(false);
+                      }}
+                    >
+                      Déconnexion
+                    </NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 }
 

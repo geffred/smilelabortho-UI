@@ -42,6 +42,7 @@ export default defineConfig({
       "/api/adresses/utilisateur/": "http://localhost:8080",
 
       "/api/commandes/": "http://localhost:8080",
+      "/api/commandes/utilisateur/{id}": "http://localhost:8080",
 
       "/api/payments/create-payment-intent": "http://localhost:8080",
       "/api/files/upload/": "http://localhost:8080",

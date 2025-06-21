@@ -32,8 +32,8 @@
 }
 
 .card img {
-  width: 42px;
-  height: 42px;
+  max-width: 150px;
+  max-width: 150px;
   object-fit: contain;
 }
 

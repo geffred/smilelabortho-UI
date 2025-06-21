@@ -35,7 +35,10 @@ function Profil(){
               </Display>
               <Display label={"Commandes"} active={active}>
                 <AllCommande
-                  url={"api/commandes/utilisateur/" + user.id}
+                  url={
+                    "http://localhost:8080/api/commandes/utilisateur/" +
+                    user.id
+                  }
                   isDashboard={false}
                 />
               </Display>
