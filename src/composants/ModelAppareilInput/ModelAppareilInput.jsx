@@ -2,6 +2,7 @@ import "./ModelAppareilInput.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import cancel from "/image/cancel.svg";
+import { toast } from "react-toastify"; // Toastify pour les notifications
 
 function ModelAppareilInput({onMutate,isDashboard =false , display, setDisplay , editData , reinitialiser }) {
     
@@ -30,6 +31,10 @@ function ModelAppareilInput({onMutate,isDashboard =false , display, setDisplay ,
             const responseData = await response.json(); // Extraire la réponse JSON du serveur
             onMutate()
             console.log('Données envoyées avec succès:', responseData);
+            toast('Modèle Appareil ajouté avec succès', {
+              position: "bottom-right",
+              autoClose: 5000, // Notification se ferme après 5 secondes
+            });
           } else {
             console.error('Erreur lors de l\'envoi des données:', response.statusText);
           }
@@ -44,7 +49,7 @@ function ModelAppareilInput({onMutate,isDashboard =false , display, setDisplay ,
             onClick={() => {setDisplay()} }
             className={display ? "modelAppareil-disable" : ""}
             >
-                Ajouter Un Nouveau Model
+                Ajouter un nouveau modèle
             </button>
             <Formik
                 validationSchema={validationSchema}

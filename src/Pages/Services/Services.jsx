@@ -6,6 +6,7 @@ import './Services.css'
 import Footer from "../../composants/Footer/Footer"
 import { NavLink } from "react-router-dom";
 import logo_smilelab from "/image/logo_smilelab.svg"
+import PanierBtn from "../../composants/PanierBtn/PanierBtn";
 
 
 function Services(){
@@ -29,6 +30,7 @@ function Services(){
     return (
       <div className="services">
         <Navbar />
+        <PanierBtn />
         <SectionBanner
           image={bg}
           title={"Servives"}
@@ -64,9 +66,17 @@ function Services(){
               </div>
               <div className="col-lg-7 col-12">
                 <div className="logo">
-                  <img src={logo_smilelab} alt="logo_icon" className="mascotte" />
+                  <img
+                    src={logo_smilelab}
+                    alt="logo_icon"
+                    className="mascotte"
+                  />
                   <span>
-                   <img src="/public/image/smilelab_simple.svg" alt="smile lab" width={200} />
+                    <img
+                      src="/public/image/smilelab_simple.svg"
+                      alt="smile lab"
+                      width={200}
+                    />
                   </span>
                 </div>
                 <img

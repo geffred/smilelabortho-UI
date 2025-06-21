@@ -68,7 +68,7 @@ function UtilisateurDetails() {
         {data && (
           <aside className="infoBox">
             <div className="profil-btn">
-              <button className="btn btn-primary " onClick={() => navigate(-1)}>
+              <button className="btn btn-primary " id="back" onClick={() => navigate(-1)}>
                 <img
                   src="/public/image/arrow-prev-white.svg"
                   alt=""

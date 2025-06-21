@@ -59,6 +59,7 @@ function CommandeForm({ prixTotal }) {
           "Votre panier est vide. Vous ne pouvez pas passer de commande.",
           {
             autoClose: 3000,
+            position: "bottom-right"
           }
         );
         return;
@@ -70,6 +71,7 @@ function CommandeForm({ prixTotal }) {
           "Veuillez effectuer le paiement pour valider votre commande.",
           {
             autoClose: 3000,
+            position: "bottom-right"
           }
         );
         return;
@@ -125,12 +127,12 @@ function CommandeForm({ prixTotal }) {
             "service_f2vyidp",
             "template_v5lnqrt",
             {
-              user_email: user.email,
+              email: user.email,
+              nom: user.nom,
+              prenom: user.prenom,
               prix_total: prixTotalPlusTVA,
               date_livraison: values.dateLivraisonSouhaitee,
               commentaire: values.commentaire,
-              message:
-                "Votre commande a bien été prise en compte notre équipe se met au travail !",
             },
             "M-ibIQ1aTjGbVU4OK"
           )
@@ -138,10 +140,12 @@ function CommandeForm({ prixTotal }) {
             () =>
               toast("Email de confirmation envoyé avec succès !", {
                 autoClose: 3000,
+                position: "bottom-right"
               }),
             (error) =>
               toast.error("Erreur lors de l'envoi de l'email " + error, {
                 autoClose: 3000,
+                position: "bottom-right"
               })
           );
 
@@ -153,7 +157,10 @@ function CommandeForm({ prixTotal }) {
 
         mutate(`/api/paniers/${user.id}`);
         resetForm();
-        toast("Commande soumise avec succès !", { autoClose: 3000 });
+        toast("Commande soumise avec succès !", {
+          autoClose: 3000,
+          position: "bottom-right",
+        });
       } catch (error) {
         console.error(
           "Erreur lors du traitement de la commande :",
@@ -161,6 +168,7 @@ function CommandeForm({ prixTotal }) {
         );
         toast.error("Erreur lors du traitement de la commande.", {
           autoClose: 3000,
+          position: "bottom-right"
         });
       }
     }

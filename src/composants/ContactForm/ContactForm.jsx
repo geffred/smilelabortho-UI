@@ -30,7 +30,7 @@ function ContactForm() {
     emailjs
       .sendForm(
         "service_f2vyidp", // Service ID
-        "template_v5lnqrt", // Template ID
+        "template_blinghi", // Template ID
         form.current, // Référence du formulaire
         "M-ibIQ1aTjGbVU4OK" // User ID
       )

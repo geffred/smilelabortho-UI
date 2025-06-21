@@ -45,7 +45,10 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
       if (response.ok) {
         const responseData = await response.json(); // Extraire la réponse JSON du serveur
         onMutate()
-        toast("Données envoyées avec succès !");
+        toast("Données envoyées avec succès !",{
+          position: "bottom-right",
+          autoClose: 5000, // Notification se ferme après 5 secondes
+        });
         console.log('Données envoyées avec succès:', responseData);
       } else {
         console.error('Erreur lors de l\'envoi des données:', response.statusText);

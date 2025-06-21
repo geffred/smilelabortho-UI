@@ -69,9 +69,15 @@ function DetailsInput({ data }) {
       const data = await response.json();
       console.log(data)
       setUploadedFilePath(data.path);
-      toast("Fichier téléchargé avec succès !");
+      toast("Fichier téléchargé avec succès !", {
+        position: "bottom-right",
+        autoClose: 5000, // Notification se ferme après 5 secondes
+      });
     } catch (error) {
-      toast.error("Veillez entrer la reférence du patient ! ");
+      toast.error("Veillez entrer la reférence du patient ! ", {
+        position: "bottom-right",
+        autoClose: 5000, // Notification se ferme après 5 secondes
+      });
       setFileName("choisir un fichier .Stl ou .Zip");
       resetFileInput();
     } finally {
@@ -98,11 +104,17 @@ function DetailsInput({ data }) {
       console.log(responseData);
       setRefPatient("");
       setFileName("choisir un fichier .Stl ou .Zip");
-      toast("Produit ajouté au panier avec succès !");
+      toast("Produit ajouté au panier avec succès !", {
+        position: "bottom-right",
+        autoClose: 5000, // Notification se ferme après 5 secondes
+      });
       setUploadedFilePath(null);
       mutate(`/api/paniers/${user?.id}`);
     } catch (error) {
-      toast.error("Erreur réseau ou serveur : " + error.message);
+      toast.error("Erreur réseau ou serveur : " + error.message, {
+        position: "bottom-right",
+        autoClose: 5000, // Notification se ferme après 5 secondes
+      });
       setUploadedFilePath(null);
       setFileName("choisir un fichier .Stl ou .Zip");
     }

@@ -7,6 +7,7 @@ import edit from "/image/edit.svg";
 import trash from "/image/trash.svg";
 import { ToastContainer, toast } from "react-toastify"; // Toastify pour les notifications
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 function AllModelAppaeil() {
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -29,7 +30,7 @@ function AllModelAppaeil() {
 
         if (response.ok) {
           mutate(url);
-          toast("Model Appareil supprimé avec succès", {
+          toast("Modèle Appareil supprimé avec succès", {
             position: "bottom-right",
             autoClose: 5000,
           });
@@ -55,6 +56,9 @@ function AllModelAppaeil() {
     setDisplay(true);
     setEditData(data);
   }
+
+
+  
 
   if (error) return "Une erreur s'est produite.";
   if (isLoading) return <Spinner />;

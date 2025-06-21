@@ -152,6 +152,7 @@ function CertificatConformiteForm({
                       Identifiant du Dispositif
                     </label>
                     <Field
+                      disabled
                       type="text"
                       name="identifiantDispositif"
                       placeholder="Identifiant du dispositif"

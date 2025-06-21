@@ -3,6 +3,7 @@ import "./AllCommande.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import emailjs from "emailjs-com";
 
 const Commande = ({ data, handleClick, isDashboard }) => {
@@ -45,15 +46,15 @@ const Commande = ({ data, handleClick, isDashboard }) => {
 
       // Revalidation des données
       mutate("/api/commandes/");
-      toast.success(
+      toast(
         `Statut de la commande #${data.id} mis à jour : ${nouveauStatut}`,
         { position: "bottom-right", autoClose: 5000 }
       );
 
       // Envoi d'un email si le statut devient "EXPÉDIÉE"
-      if (nouveauStatut === "EXPEDIEE" && data.utilisateur?.email) {
+      /*if (nouveauStatut === "EXPEDIEE" && data.utilisateur?.email) {
         await sendEmailNotification(data.utilisateur.email);
-      }
+      }*/
     } catch (err) {
       console.error("Erreur lors de la mise à jour :", err);
       toast.error(
@@ -80,7 +81,7 @@ const Commande = ({ data, handleClick, isDashboard }) => {
         },
         "M-ibIQ1aTjGbVU4OK"
       );
-      toast.success("Email envoyé au client pour l'expédition.", {
+      toast("Email envoyé au client pour l'expédition.", {
         position: "bottom-right",
         autoClose: 5000,
       });
@@ -113,6 +114,7 @@ const Commande = ({ data, handleClick, isDashboard }) => {
 
   return (
     <>
+      <ToastContainer/>
       {confirmationVisible && (
         <div className="confirm-delete">
           <p>

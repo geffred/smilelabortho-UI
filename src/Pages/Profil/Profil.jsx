@@ -9,6 +9,7 @@ import AllCommande from "../../composants/AllCommande/AllCommande";
 import { UserContext } from "../../composants/UserContext";
 import Footer from "../../composants/Footer/Footer"
 import Messages from "../../composants/Messages/Messages";
+import PanierBtn from "../../composants/PanierBtn/PanierBtn";
 
 function Profil(){
     const [active,setActive] = useState("Profil");
@@ -19,6 +20,7 @@ function Profil(){
     console.log(active)
     return (
       <main className="profil">
+        <PanierBtn />
         <NavBar bgColor="rgba(0, 0, 0,0.8)" />
         <div className="container-fluid">
           <div className="row">
@@ -36,8 +38,7 @@ function Profil(){
               <Display label={"Commandes"} active={active}>
                 <AllCommande
                   url={
-                    "http://localhost:8080/api/commandes/utilisateur/" +
-                    user.id
+                    "http://localhost:8080/api/commandes/utilisateur/" + user.id
                   }
                   isDashboard={false}
                 />

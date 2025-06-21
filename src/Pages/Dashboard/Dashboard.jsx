@@ -11,6 +11,7 @@ import AllCommande from "../../composants/AllCommande/AllCommande";
 import Analytics from "../Analytics/Analytics";
 import Messages from "../../composants/Messages/Messages";
 import { UserContext } from "../../composants/UserContext";
+import PanierBtn from "../../composants/PanierBtn/PanierBtn";
 
 function Dashboard() {
   const [active, setActive] = useState("Messages");
@@ -82,6 +83,7 @@ function Dashboard() {
   return (
     <div>
       <NavBar bgColor="#262626" />
+      <PanierBtn />
       <div className="Dashboard container-fluid">
         <div className="row">
           <div className="col-lg-3 col-12 px-1" id="menu">
