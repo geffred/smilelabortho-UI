@@ -216,13 +216,13 @@
 
     
     .menu-toggle {
-      display: none;
+      display: block;
     }
   
     .navBar {
       flex-wrap: wrap;
       padding: 10px 15px;
-      background: rgb(29, 29, 29) !important;
+      background: rgba(29, 29, 29, 0.829) !important;
     }
   
     .mobile-header {
