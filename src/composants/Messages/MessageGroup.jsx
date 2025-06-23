@@ -37,7 +37,11 @@ const MessageGroup = ({
       </div>
     </div>
     <p className="message-content">
-      {latestMsg.messageText === "//" ? "" : latestMsg.messageText}
+      {latestMsg.messageText === "//"
+        ? ""
+        : latestMsg.messageText.length > 50
+        ? `${latestMsg.messageText.substring(0, 50)}...`
+        : latestMsg.messageText}
       {latestMsg.images?.length > 0 && (
         <img
           src="https://www.svgrepo.com/show/283318/attached-attach.svg"
@@ -48,7 +52,8 @@ const MessageGroup = ({
         />
       )}
     </p>
-    {user.roles.includes("ROLE_ADMIN") && (
+    {(user.roles.includes("ROLE_ADMIN") ||
+      user.roles.includes("ROLE_SUPER_ADMIN")) && (
       <button
         className="message-delete-btn"
         onClick={(e) => {
