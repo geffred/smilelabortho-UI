@@ -48,8 +48,17 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/Appareils" element={<Appareils />} />
         <Route path="/Shop" element={<Shop />} />
-        <Route path="/Appareils/:id" element={<AppareilDetails />} />
         <Route path="/shop/:id" element={<Shop />} />
+
+        <Route
+          path="/Appareils/:id"
+          element={
+            <PrivateRoutes user={user} requiredRoles={["ROLE_USER"]}>
+              <AppareilDetails />
+            </PrivateRoutes>
+          }
+        />
+
         <Route
           path="/panier"
           element={

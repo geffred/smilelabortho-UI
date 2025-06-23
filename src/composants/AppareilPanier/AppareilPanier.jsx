@@ -34,7 +34,7 @@ function AppareilPanier({ data, handleDelete, cancel = true, link=null }) {
           <span> {model && model.coutSupplementaire} € </span>
         </div>
         <div>
-          <span>Total TTC</span>
+          <span>Total HT</span>
           <span>
             {`( ${data.prixUnitaire}€ + ${
               model && model.coutSupplementaire
