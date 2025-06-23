@@ -42,8 +42,8 @@ function CommandeForm({ prixTotal }) {
         "La date de livraison souhaitée ne peut pas être aujourd'hui ou dans le passé."
       ),
     commentaire: Yup.string().max(
-      500,
-      "Le commentaire ne doit pas dépasser 500 caractères."
+      255,
+      "Le commentaire ne doit pas dépasser 255 caractères."
     ),
   });
 

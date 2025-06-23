@@ -115,7 +115,7 @@ const Utilisateur = ({ data, handleClick }) => {
       <div className="col-lg-1 col-12">{data.nom}</div>
       <div className="col-lg-1 col-12">{data.prenom}</div>
       <div className="col-lg-2 col-12 email">{data.email}</div>
-      <div className="col-lg-2 col-12">{data.dateInscription}</div>
+      <div className="col-lg-2 col-12 d-flex justify-content-center">{data.dateInscription}</div>
       <div className="col-lg-2 col-12 role">{data.roles.join(", ")}</div>
       <div className="col-lg-1 col-12">
         <button onClick={() => handleClick(data)} className="btn btn-primary">
@@ -214,7 +214,6 @@ function Utilisateurs({ handleClick }) {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-
       <section className="row commande" id="head-user">
         <div className="col-lg-1 col-1">
           <img
@@ -227,7 +226,9 @@ function Utilisateurs({ handleClick }) {
         <div className="col-lg-1 col-12">Nom</div>
         <div className="col-lg-1 col-12">Prenom</div>
         <div className="col-lg-2 col-12">Email</div>
-        <div className="col-lg-2 col-12">Date Inscription</div>
+        <div className="col-lg-2 col-12  d-flex justify-content-center">
+          Date Inscription
+        </div>
         <div className="col-lg-3 col-12">Role(s)</div>
       </section>
       {filteredData &&

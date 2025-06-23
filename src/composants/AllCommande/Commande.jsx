@@ -114,7 +114,7 @@ const Commande = ({ data, handleClick, isDashboard }) => {
 
   return (
     <>
-      <ToastContainer/>
+      {/* <ToastContainer/>*/}
       {confirmationVisible && (
         <div className="confirm-delete">
           <p>

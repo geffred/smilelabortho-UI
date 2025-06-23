@@ -106,7 +106,10 @@ function ProfilSettings() {
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          sendData({ ...values, roles: user.roles.map(r => r.replace("ROLE_", "")) }); // Envoi des données
+          sendData({
+            ...values,
+            roles: user.roles.map((r) => r.replace("ROLE_", "")),
+          }); // Envoi des données
           console.log({ ...values, roles: user.roles });
           mutate();
           setSubmitting(false); // Arrête le spinner de soumission
@@ -148,7 +151,7 @@ function ProfilSettings() {
               <div className="form-group col-lg-6 col-12">
                 <label htmlFor="email">Email</label>
                 <Field
-                disabled
+                  disabled
                   type="email"
                   name="email"
                   className={`form-control ${
@@ -169,7 +172,7 @@ function ProfilSettings() {
                     touched.tel && errors.tel ? "is-invalid" : ""
                   }`}
                   id="tel"
-                  placeholder="+32 2 374 XX XX"
+                  placeholder="+322374XXXX | 032374XXXX"
                 />
                 <ErrorMessage name="tel" component="div" className="error" />
               </div>

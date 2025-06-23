@@ -22,13 +22,17 @@ function AppareilInput({onMutate,isDashboard =false , display, setDisplay , edit
     thumbnail: Yup.string()
       .url("L'URL de l'image est invalide")
       .required("L'image de l' appareil est obligatoire"),
-    prixUnitaire:Yup.string()
-      .required("Le prix Unitaire est obligatoire"),
-      categorie: Yup.string()
-      .required("La categorie est obligatoire"),
+    prixUnitaire: Yup.string().required("Le prix Unitaire est obligatoire"),
+    categorie: Yup.string().required("La categorie est obligatoire"),
     description: Yup.string()
-    .min(20, "La description de l' appareil doit contenir au moins 20 caractères")
-   
+      .min(
+        20,
+        "La description de l' appareil doit contenir au moins 20 caractères"
+      )
+      .max(
+        255,
+        "La description de l' appareil ne doit pas dépasser 255 caractères"
+      ),
   });
 
   async function sendData(data) {

@@ -36,7 +36,8 @@ function CertificatConformiteForm({
       .min(
         10,
         "La description du dispositif doit contenir au moins 10 caractères"
-      )
+      ).max(
+        1000, "La description du dispositif ne doit pas dépasser 1000 caractères")
       .required("La description du dispositif est obligatoire"),
     refPatient: Yup.string().required(
       "La référence du patient est obligatoire"

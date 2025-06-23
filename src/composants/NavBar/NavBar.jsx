@@ -70,20 +70,16 @@ function NavBar({
             <li>
               <NavLink to="/services" onClick={() => setMobileMenuOpen(false)}>
                 <span>Services</span>
-              {  /*<img src={arrow} alt="arrow" width={15} />*/}
+                {/*<img src={arrow} alt="arrow" width={15} />*/}
               </NavLink>
             </li>
             <li>
               <NavLink to="/appareils" onClick={() => setMobileMenuOpen(false)}>
                 <span>Appareils</span>
-                { /*<img src={arrow} alt="arrow" width={15} />*/}
+                {/*<img src={arrow} alt="arrow" width={15} />*/}
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                Contact
-              </NavLink>
-            </li>
+
             <li>
               <NavLink
                 to="/shop"
@@ -92,6 +88,12 @@ function NavBar({
               >
                 <img src={shop} alt="shop" />
                 <span>Shop</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                Contact
               </NavLink>
             </li>
 

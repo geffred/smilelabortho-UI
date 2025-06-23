@@ -205,8 +205,7 @@
   /* Version desktop */
   @media screen and (min-width: 1025px) {
     /* Cache les liens d'authentification dans le menu principal en desktop */
-    .navBar .center-section ul li:last-child,
-    .navBar .center-section ul li:nth-last-child(2) {
+    .navBar .center-section ul li:last-child {
       display: none;
     }
   }

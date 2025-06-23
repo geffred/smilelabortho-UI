@@ -68,8 +68,8 @@ const CertificatPDF = ({ data }) => (
       <View style={styles.sectionEnd}>
         <Text style={styles.label}>Identifiant du Dispositif</Text>
         <Text style={styles.value}>{data.identifiantDispositif}</Text>
-        <Text style={styles.label}>Date de Livraison</Text>
-        <Text style={styles.value}>{data.dateDeclaration}</Text>
+        {/* <Text style={styles.label}>Date de Livraison</Text>
+        <Text style={styles.value}>{data.dateDeclaration}</Text> */}
       </View>
 
       <View style={styles.section}>
@@ -170,7 +170,6 @@ function CertificatConformiteDocument({ id, handleClickForm, handleEditForm }) {
 
   return (
     <div className="certificat-document-container">
-  
       <h1>Certificat de Conformité</h1>
 
       <section className="certificat-header-start">
@@ -204,10 +203,10 @@ function CertificatConformiteDocument({ id, handleClickForm, handleEditForm }) {
           <em>Identifiant du Dispositif</em> <br />
           <span>{data.identifiantDispositif}</span>
         </p>
-        <p>
+        {/*<p>
           <em>Date de Livraison</em> <br />
           <span>{data.dateDeclaration}</span>
-        </p>
+        </p> */}
       </section>
 
       <section className="certificat-body my-5">

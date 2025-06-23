@@ -81,7 +81,7 @@ function ImageDisplay({ dataImage }) {
                       <Field
                         type="text"
                         name="url"
-                        placeholder="http://url"
+                        placeholder="http://"
                         className={`form-control ${
                           touched.url && errors.url ? "is-invalid" : ""
                         }`}
